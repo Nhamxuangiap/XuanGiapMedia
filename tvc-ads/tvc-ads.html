@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>TVC &amp; Ads — Xuân Giáp Media</title>
-  <meta name="description" content="Sản xuất TVC quảng cáo ngang chuẩn điện ảnh 16:9 và TVC Dọc 9:16 tối ưu cho TikTok, Reels &amp; Shorts — Xuân Giáp Media.">
+  <meta name="description" content="Sản xuất TVC quảng cáo ngang chuẩn điện ảnh 16:9 và Video Ads dọc tối ưu 9:16 cho TikTok, Reels &amp; Shorts — Xuân Giáp Media.">
   <meta name="theme-color" content="#050505">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -45,45 +45,76 @@
           <div class="hero-meta">
             <p>
               Dịch vụ sản xuất phim quảng cáo chuyên nghiệp của Xuân Giáp Media gồm 2 định dạng chuyên biệt:
-              <strong>TVC Ngang (16:9)</strong> chuẩn phát sóng truyền hình và <strong>TVC Dọc (9:16)</strong> tối ưu hiển thị trên các nền tảng di động. Bấm vào từng nhánh để xem danh sách dự án.
+              <strong>TVC Ngang (16:9)</strong> chuẩn phát sóng truyền hình và <strong>ADS Dọc (9:16)</strong> tối ưu hiển thị trên các nền tảng di động.
             </p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 2 THẺ TVC NGANG VÀ TVC DỌC (DẠNG THẺ GIỐNG PHẦN TÀI NGUYÊN) -->
-    <section class="tvc-branches-section">
+    <!-- 2 THẺ CON NỔI BẬT: TVC NGANG & ADS DỌC -->
+    <section class="subcategories-section">
       <div class="container">
-        <div class="tvc-branches-grid">
+        <span class="subcat-label">HẠNG MỤC SẢN XUẤT</span>
 
-          <!-- THẺ 1: TVC NGANG -->
-          <article class="resource-card">
-            <a class="resource-cover" href="tvc-ngang.html" aria-label="TVC Quảng Cáo Ngang">
+        <div class="subcat-grid">
+          <!-- THẺ CON 1: TVC NGANG -->
+          <article class="subcat-card card-tvc" data-filter="landscape" id="tvc-ngang">
+            <div class="subcat-cover-wrap">
               <img src="../assets/zap 1.png" alt="TVC Quảng Cáo Ngang 16:9" loading="lazy">
-              <h3>TVC<br>NGANG</h3>
-            </a>
-            <div class="resource-body">
-              <h3><a href="tvc-ngang.html">TVC Quảng Cáo Ngang</a></h3>
-              <p>Phim quảng cáo thương hiệu 16:9 chuẩn phát sóng truyền hình, YouTube &amp; màn hình LED.</p>
-              <a class="resource-btn" href="tvc-ngang.html">Xem ngay <span aria-hidden="true">↗</span></a>
+              <span class="subcat-ratio-badge">16:9 NGANG</span>
+            </div>
+            <div class="subcat-body">
+              <span class="subcat-tag">COMMERCIAL · BROADCAST</span>
+              <h2 class="subcat-title">TVC Quảng Cáo Ngang</h2>
+              <p class="subcat-desc">
+                Định dạng chuẩn 16:9 phục vụ truyền hình, phim giới thiệu doanh nghiệp, màn hình LED và YouTube — tự động cập nhật trực tiếp từ Google Sheet giống thẻ wedding.
+              </p>
+              <div class="subcat-footer">
+                <span class="subcat-count" id="tvcSheetCount">6 DỰ ÁN TỪ SHEET</span>
+                <a class="subcat-btn" href="tvc-ngang.html">Xem chuyên trang TVC ↗</a>
+              </div>
             </div>
           </article>
 
-          <!-- THẺ 2: TVC DỌC -->
-          <article class="resource-card">
-            <a class="resource-cover" href="tvc-doc.html" aria-label="TVC Dọc">
+          <!-- THẺ CON 2: TVC DỌC (ẢNH BÌA TRỰC TIẾP TỪ VIDEO) -->
+          <article class="subcat-card card-ads" data-filter="vertical" id="tvc-doc">
+            <div class="subcat-cover-wrap">
               <img src="../assets/tvc-doc/thumb-11.jpg" alt="TVC Dọc 9:16" loading="lazy">
-              <h3>TVC<br>DỌC</h3>
-            </a>
-            <div class="resource-body">
-              <h3><a href="tvc-doc.html">TVC Dọc</a></h3>
-              <p>Video quảng cáo dọc 9:16 với ảnh bìa trực tiếp từ video, tối ưu cho TikTok Ads, Reels &amp; Shorts.</p>
-              <a class="resource-btn" href="tvc-doc.html">Xem ngay <span aria-hidden="true">↗</span></a>
+              <span class="subcat-ratio-badge">9:16 DỌC</span>
+            </div>
+            <div class="subcat-body">
+              <span class="subcat-tag">VERTICAL TVC · 9:16 MOBILE</span>
+              <h2 class="subcat-title">TVC Dọc</h2>
+              <p class="subcat-desc">
+                Video quảng cáo dọc 9:16 với ảnh bìa lấy trực tiếp từ video, tự động cập nhật từ Google Sheet trang tính 2 theo thứ tự từ cuối lên đầu.
+              </p>
+              <div class="subcat-footer">
+                <span class="subcat-count" id="tvcDocSheetCount">11 DỰ ÁN TỪ SHEET 2</span>
+                <a class="subcat-btn" href="tvc-doc.html">Xem chuyên trang TVC Dọc ↗</a>
+              </div>
             </div>
           </article>
-
         </div>
+      </div>
+    </section>
+
+    <!-- DANH SÁCH DỰ ÁN CHI TIẾT -->
+    <section class="projects" id="danh-sach-du-an">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">PORTFOLIO SHOWCASE</p>
+            <h2>CÁC DỰ ÁN TIÊU BIỂU</h2>
+          </div>
+          <div class="filter-bar">
+            <button class="filter-tab active" type="button" data-filter="all">Tất cả</button>
+            <button class="filter-tab" type="button" data-filter="landscape">TVC Ngang (16:9)</button>
+            <button class="filter-tab" type="button" data-filter="vertical">TVC Dọc (9:16)</button>
+          </div>
+        </div>
+
+        <div class="project-grid" id="projectGrid"></div>
       </div>
     </section>
 
@@ -109,6 +140,19 @@
       <a href="#">Lên đầu trang ↑</a>
     </div>
   </footer>
+
+  <!-- VIDEO MODAL -->
+  <dialog class="video-dialog" id="videoDialog" aria-label="Xem video dự án">
+    <button class="dialog-close" id="dialogClose" type="button" aria-label="Đóng">×</button>
+    <div class="dialog-video" id="dialogVideo"></div>
+    <div class="dialog-info">
+      <div>
+        <small id="dialogMeta"></small>
+        <h3 id="dialogTitle"></h3>
+      </div>
+      <a id="youtubeLink" href="#" target="_blank" rel="noopener">Mở YouTube ↗</a>
+    </div>
+  </dialog>
 
   <!-- FLOATING CTA -->
   <div class="floating-cta" aria-label="Liên hệ nhanh">
@@ -142,3 +186,4 @@
   <script src="tvc-ads.js"></script>
 </body>
 </html>
+
