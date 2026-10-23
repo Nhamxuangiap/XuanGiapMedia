@@ -75,14 +75,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const filterTabs = $$(".filter-tab");
   const subcatCards = $$(".subcat-card");
 
-  let currentFilter = "all";
+  let currentFilter = window.TVC_FORMAT_FILTER || "all";
 
-  // Check URL hash (#tvc-ngang hoặc #ads-doc)
-  const hash = window.location.hash.toLowerCase();
-  if (hash.includes("tvc")) {
-    currentFilter = "landscape";
-  } else if (hash.includes("ads")) {
-    currentFilter = "vertical";
+  // Check URL hash (#tvc-ngang hoặc #ads-doc) nếu chưa có FILTER cố định
+  if (!window.TVC_FORMAT_FILTER) {
+    const hash = window.location.hash.toLowerCase();
+    if (hash.includes("tvc")) {
+      currentFilter = "landscape";
+    } else if (hash.includes("ads")) {
+      currentFilter = "vertical";
+    }
   }
 
   const getYouTubeId = value => {
@@ -195,3 +197,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
   renderProjects();
 });
+
