@@ -18,5 +18,6 @@ Mở thư mục bằng VS Code, sau đó mở file index.html bằng Live Server
 
 - **Dự án nổi bật**: Video - Film (Brand Film, Wedding, Music Video, Event Recap, TVC, Phim tài liệu), Ảnh (Kỷ yếu Duy Hưng, Profile, Sản phẩm, Kiến trúc), Social Media (Reels, Podcast, Campaign). Hỗ trợ xem thêm / thu gọn linh hoạt.
 - **Tài nguyên Edit Video & Ảnh**: Preset, LUT CapCut, Hiệu ứng Film, Background Colorful, Lưới video dọc, SFX & Nhạc Epidemic.
-- **Trang chi tiết**: Kỷ yếu Duy Hưng, Brand Film, Wedding Film, Music Video, Event Recap.
+- **Trang chi tiết**: TVC & Ads (TVC Ngang & ADS Dọc), Kỷ yếu Duy Hưng, Brand Film, Wedding Film, Music Video, Event Recap.
 - **Form liên hệ**: Tích hợp gửi email tự động và liên hệ Zalo / Hotline.
+
