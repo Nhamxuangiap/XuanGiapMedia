@@ -199,3 +199,4 @@ document.addEventListener("DOMContentLoaded", async () => {
   const y = $("#currentYear");
   if (y) y.textContent = new Date().getFullYear();
 });
+
