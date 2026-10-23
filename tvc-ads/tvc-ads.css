@@ -209,8 +209,8 @@ button { font: inherit; color: inherit; cursor: pointer; }
 
 .project-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 28px 18px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 28px 16px;
 }
 .project-card {
   min-width: 0;
@@ -219,6 +219,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 }
 .project-preview {
   position: relative;
+  display: block;
   width: 100%;
   aspect-ratio: 16 / 9;
   border-radius: 8px;
@@ -226,6 +227,29 @@ button { font: inherit; color: inherit; cursor: pointer; }
   border: 1px solid var(--line);
   background: #111;
   cursor: pointer;
+}
+.project-no, .project-play {
+  position: absolute;
+  z-index: 3;
+  top: 14px;
+  font-size: .62rem;
+  font-weight: 700;
+  color: #fff;
+}
+.project-no { left: 14px; }
+.project-play { right: 14px; }
+.project-info h3 {
+  margin: 6px 0 4px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+.project-info h3 a {
+  color: inherit;
+  text-decoration: none;
+}
+.project-info h3 a:hover {
+  text-decoration: underline;
 }
 /* Với các video Ads Dọc */
 .project-card.is-vertical .project-preview {
@@ -361,7 +385,8 @@ footer { border-top: 1px solid var(--line); background: #080808; }
   .menu-toggle { display: block; }
   .main-nav { display: none; position: fixed; inset: var(--nav) 0 0; background: #050505; padding: 24px; flex-direction: column; gap: 16px; border-top: 1px solid var(--line); }
   .main-nav.open { display: flex; }
-  .project-grid { grid-template-columns: 1fr; }
+  .project-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 10px; }
+  .project-info h3 { font-size: .88rem; line-height: 1.35; }
   .floating-cta { bottom: 16px; right: 16px; }
   .float-label { display: none; }
   .float-btn { padding: 0; }

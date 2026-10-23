@@ -1,39 +1,26 @@
 "use strict";
 
 /* =========================================================
-   DANH SÁCH DỰ ÁN TVC & ADS
-   - format: 'landscape' (TVC Ngang 16:9) | 'vertical' (ADS Dọc 9:16)
-   - Dán link YouTube vào youtube hoặc link Drive/video
+   TVC & ADS — KẾT HỢP GOOGLE SHEET (CHO TVC NGANG) & ADS DỌC
+   Sheet: https://docs.google.com/spreadsheets/d/1E5dvnU3xtrNjf5P7B1nILpu2AIejsWlMT7RXQ5coikY/edit
 ========================================================= */
 
-const projects = [
-  // 1. TVC NGANG (16:9)
-  {
-    id: "tvc-1",
-    format: "landscape",
-    categoryLabel: "TVC Quảng Cáo Ngang",
-    ratioLabel: "16:9 NGANG",
-    title: "TVC Giới Thiệu Thương Hiệu Doanh Nghiệp",
-    client: "Xuân Giáp Media",
-    year: "2026",
-    image: "../assets/zap 1.png",
-    description: "Sản xuất TVC quảng cáo truyền hình chuẩn điện ảnh, góc quay ấn tượng và âm thanh trau chuốt.",
-    youtube: "https://youtu.be/HwXagQNv7bA"
-  },
-  {
-    id: "tvc-2",
-    format: "landscape",
-    categoryLabel: "TVC Sản Phẩm Ngang",
-    ratioLabel: "16:9 NGANG",
-    title: "Commercial Film — Ra Mắt Sản Phẩm Mới",
-    client: "Xuân Giáp Media",
-    year: "2026",
-    image: "../assets/BRANDFILM/BRAND FILM 1.png",
-    description: "TVC quảng cáo sản phẩm định dạng 16:9 sắc nét, truyền tải trọn vẹn thông điệp thương hiệu.",
-    youtube: "https://youtu.be/xG8-qqAaGdI"
-  },
+const SHEET_ID = "1E5dvnU3xtrNjf5P7B1nILpu2AIejsWlMT7RXQ5coikY";
+const SHEET_CSV_GVIZ = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&gid=0`;
+const SHEET_CSV_EXPORT = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=0`;
 
-  // 2. ADS DỌC (9:16)
+// Fallback 6 TVC Ngang từ Sheet
+const FALLBACK_TVC = [
+  { sheetTitle: "Quảng cáo đồng hồ tm", url: "https://youtu.be/xyZ-KslVIyg?si=n6fauan8dsJFtvuF" },
+  { sheetTitle: "JW mariot", url: "https://youtu.be/IUSfkf7l8l4?si=WMiXajgn8LF4Zb8V" },
+  { sheetTitle: "Unit Fitness", url: "https://youtu.be/NRkY1grW_PA?si=8WiBDLF7aFBMSxwB" },
+  { sheetTitle: "Unit Fitness 2", url: "https://youtu.be/_utaretIzKE?si=zVdPkVo8S9PEcCg3" },
+  { sheetTitle: "Bội Lam - TVC", url: "https://youtu.be/I15YV8AJw9U?si=ZGSnjpKK7GXGcH54" },
+  { sheetTitle: "T-Han Beauty", url: "https://youtu.be/hIlQM4WLjig?si=Jq2EalZP6DqxvTtj" }
+];
+
+// Danh sách video ADS Dọc (9:16)
+const ADS_VERTICAL_PROJECTS = [
   {
     id: "ads-1",
     format: "vertical",
@@ -43,7 +30,7 @@ const projects = [
     client: "Xuân Giáp Media",
     year: "2026",
     image: "../assets/zap-mobile.png",
-    description: "Video quảng cáo định dạng 9:16 thiết kế thumbnail dọc bắt mắt, giữ chân 3 giây đầu và đẩy mạnh chuyển đổi.",
+    description: "Video quảng cáo 9:16 thiết kế thumbnail dọc bắt mắt, giữ chân 3 giây đầu và đẩy mạnh chuyển đổi.",
     youtube: "https://youtu.be/nhzk1gaBHsY"
   },
   {
@@ -60,7 +47,7 @@ const projects = [
   }
 ];
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 
@@ -89,31 +76,158 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const getYouTubeId = value => {
     if (!value) return "";
-    const m = value.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w-]{11})/);
-    return m ? m[1] : "";
+    const v = String(value).trim().replace(/^"+|"+$/g, '').replace(/^'+|'+$/g, '');
+    if (/^[a-zA-Z0-9_-]{11}$/.test(v)) return v;
+    try {
+      const u = new URL(v);
+      if (u.hostname.includes("youtu.be")) return u.pathname.split("/").filter(Boolean)[0] || "";
+      if (u.pathname.startsWith("/shorts/")) return u.pathname.split("/")[2] || "";
+      if (u.pathname.startsWith("/embed/")) return u.pathname.split("/")[2] || "";
+      return u.searchParams.get("v") || "";
+    } catch { return ""; }
   };
 
+  const toWatchUrl = id => `https://www.youtube.com/watch?v=${id}`;
+  const thumb = id => `https://img.youtube.com/vi/${id}/maxresdefault.jpg`;
+  const esc = s => String(s).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;");
+
+  const suffix = " | XUÂN GIÁP MEDIA";
+  function finalTitle(raw) {
+    raw = (raw || "").trim();
+    if (!raw) return "TVC Ngang" + suffix;
+    if (raw.toUpperCase().includes("XUÂN GIÁP MEDIA")) {
+      raw = raw.replace(/\s*-\s*Xuân Giáp Media\s*$/i, "").replace(/\s*\|\s*Xuân Giáp Media\s*$/i, "");
+      return raw + suffix;
+    }
+    return raw + suffix;
+  }
+
+  // --- 1. Lấy dữ liệu TVC Ngang từ Google Sheet ---
+  async function fetchSheetData() {
+    const tryFetch = async (url) => {
+      const r = await fetch(url, { cache: "no-store" });
+      if (!r.ok) throw new Error("http " + r.status);
+      return await r.text();
+    };
+
+    let csv = "";
+    try { csv = await tryFetch(SHEET_CSV_GVIZ); }
+    catch (e1) {
+      try { csv = await tryFetch(SHEET_CSV_EXPORT); }
+      catch (e2) { throw e2; }
+    }
+
+    const lines = csv.split(/\r?\n/);
+    const list = [];
+    const seen = new Set();
+
+    for (let raw of lines) {
+      raw = raw.trim();
+      if (!raw) continue;
+
+      let sheetTitle = "";
+      let url = "";
+
+      const matchCols = raw.match(/^"(.*?)","(.*?)"$/);
+      if (matchCols) {
+        sheetTitle = matchCols[1].trim();
+        url = matchCols[2].trim();
+      } else {
+        const m = raw.match(/https?:\/\/[^"\s,]+/);
+        if (m) {
+          url = m[0].replace(/"+$/, '');
+          sheetTitle = raw.replace(m[0], '').replace(/["',]/g, '').trim();
+        }
+      }
+
+      const id = getYouTubeId(url);
+      if (id && !seen.has(id)) {
+        seen.add(id);
+        list.push({
+          id,
+          format: "landscape",
+          categoryLabel: "TVC Quảng Cáo Ngang",
+          ratioLabel: "16:9 NGANG",
+          url: toWatchUrl(id),
+          youtube: toWatchUrl(id),
+          sheetTitle: sheetTitle || "",
+          year: "2026"
+        });
+      }
+    }
+    return list;
+  }
+
+  let tvcProjects = [];
+  try {
+    const sheetData = await fetchSheetData();
+    if (sheetData.length) tvcProjects = sheetData;
+    else throw new Error("empty sheet");
+  } catch (e) {
+    console.warn("Sheet fetch failed, dùng fallback:", e);
+    tvcProjects = FALLBACK_TVC.map(item => {
+      const id = getYouTubeId(item.url);
+      return {
+        id,
+        format: "landscape",
+        categoryLabel: "TVC Quảng Cáo Ngang",
+        ratioLabel: "16:9 NGANG",
+        url: toWatchUrl(id),
+        youtube: toWatchUrl(id),
+        sheetTitle: item.sheetTitle,
+        year: "2026"
+      };
+    });
+  }
+
+  // Cập nhật số lượng trên thẻ con TVC
+  const tvcCountEl = $("#tvcSheetCount");
+  if (tvcCountEl) {
+    tvcCountEl.textContent = `${tvcProjects.length} DỰ ÁN TỪ SHEET`;
+  }
+
+  // Kết hợp TVC Ngang & ADS Dọc
+  const allProjects = [...tvcProjects, ...ADS_VERTICAL_PROJECTS];
+
   const renderProjects = () => {
-    const list = projects.filter(p => currentFilter === "all" || p.format === currentFilter);
-    grid.innerHTML = list.map(item => `
-      <article class="project-card ${item.format === 'vertical' ? 'is-vertical' : ''}" data-format="${item.format}">
-        <div class="project-preview" data-id="${item.id}">
-          <img src="${item.image}" alt="${item.title}" loading="lazy">
-          <span class="project-badge-tag">${item.ratioLabel}</span>
-          <div class="project-play-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-          </div>
-        </div>
-        <div class="project-info">
-          <div class="project-meta">
-            <span>${item.categoryLabel}</span>
-            <span>${item.year}</span>
-          </div>
-          <h3>${item.title}</h3>
-          <p>${item.description}</p>
-        </div>
-      </article>
-    `).join("");
+    const list = allProjects.filter(p => currentFilter === "all" || p.format === currentFilter);
+    grid.innerHTML = list.map((item, i) => {
+      const displayTitle = item.sheetTitle ? finalTitle(item.sheetTitle) : (item.title || "TVC Ngang");
+      const watchUrl = item.url || item.youtube;
+      const imgSrc = item.image || thumb(item.id);
+
+      if (item.format === "landscape") {
+        // Render thẻ TVC Ngang giống hệt thẻ wedding
+        return `
+          <article class="project-card">
+            <a class="project-preview" href="${esc(watchUrl)}" target="_blank" rel="noopener" aria-label="Xem ${esc(displayTitle)}">
+              <img src="${imgSrc}" alt="${esc(displayTitle)}" loading="lazy" onerror="if(!this.dataset.fb){this.dataset.fb=1;this.src='https://img.youtube.com/vi/${item.id}/hqdefault.jpg';}else if(this.dataset.fb==1){this.dataset.fb=2;this.src='https://img.youtube.com/vi/${item.id}/mqdefault.jpg';}">
+              <span class="project-no">${String(i + 1).padStart(2, "0")}</span>
+              <span class="project-play">PLAY ↗</span>
+            </a>
+            <div class="project-info">
+              <h3><a href="${esc(watchUrl)}" target="_blank" rel="noopener">${esc(displayTitle)}</a></h3>
+            </div>
+          </article>
+        `;
+      } else {
+        // Render thẻ ADS Dọc (với khung dọc 9:16)
+        return `
+          <article class="project-card is-vertical" data-format="vertical">
+            <a class="project-preview" href="${esc(watchUrl)}" target="_blank" rel="noopener" aria-label="Xem ${esc(displayTitle)}">
+              <img src="${imgSrc}" alt="${esc(displayTitle)}" loading="lazy">
+              <span class="project-badge-tag">${item.ratioLabel}</span>
+              <span class="project-no">${String(i + 1).padStart(2, "0")}</span>
+              <span class="project-play">PLAY ↗</span>
+            </a>
+            <div class="project-info">
+              <h3><a href="${esc(watchUrl)}" target="_blank" rel="noopener">${esc(displayTitle)}</a></h3>
+              <p>${esc(item.description || "")}</p>
+            </div>
+          </article>
+        `;
+      }
+    }).join("");
 
     // Cập nhật tab active
     filterTabs.forEach(tab => {
@@ -137,52 +251,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Click vào 2 thẻ con ở đầu trang
   subcatCards.forEach(card => {
-    card.addEventListener("click", () => {
+    card.addEventListener("click", (e) => {
+      // Nếu bấm vào nút "Mở chuyên trang ↗" thì để link tự điều hướng
+      if (e.target.closest("a.subcat-btn")) return;
       const targetFilter = card.dataset.filter;
       currentFilter = (currentFilter === targetFilter) ? "all" : targetFilter;
       renderProjects();
 
-      // Cuộn mượt xuống phần danh sách dự án
       const projSec = $("#danh-sach-du-an");
       if (projSec) {
         projSec.scrollIntoView({ behavior: "smooth", block: "start" });
       }
     });
-  });
-
-  // Mở video dialog
-  grid.addEventListener("click", e => {
-    const preview = e.target.closest(".project-preview");
-    if (!preview) return;
-    const item = projects.find(p => p.id === preview.dataset.id);
-    if (!item) return;
-
-    const yId = getYouTubeId(item.youtube);
-    if (yId && dialog) {
-      if (item.format === "vertical") {
-        dialog.classList.add("is-vertical-dialog");
-      } else {
-        dialog.classList.remove("is-vertical-dialog");
-      }
-      dialogVideo.innerHTML = `<iframe src="https://www.youtube.com/embed/${yId}?autoplay=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
-      dialogTitle.textContent = item.title;
-      dialogMeta.textContent = `${item.categoryLabel} · ${item.year}`;
-      youtubeLink.href = item.youtube;
-      dialog.showModal();
-      document.body.classList.add("dialog-open");
-    }
-  });
-
-  // Đóng dialog
-  const closeDialog = () => {
-    if (!dialog) return;
-    dialog.close();
-    dialogVideo.innerHTML = "";
-    document.body.classList.remove("dialog-open");
-  };
-  $("#dialogClose")?.addEventListener("click", closeDialog);
-  dialog?.addEventListener("click", e => {
-    if (e.target === dialog) closeDialog();
   });
 
   // Menu mobile
@@ -197,4 +277,3 @@ document.addEventListener("DOMContentLoaded", () => {
 
   renderProjects();
 });
-
