@@ -596,6 +596,82 @@ p {
     linear-gradient(145deg, #444, #151515 66%);
 }
 
+.cover-portrait::before,
+.cover-kyyeu::before {
+  background:
+    radial-gradient(circle at 68% 30%, rgba(255,255,255,.32), transparent 22%),
+    linear-gradient(145deg, #1d3557, #1a1a2e 55%, #0a0a0a);
+}
+
+.cover-product::before {
+  background:
+    radial-gradient(circle at 65% 35%, rgba(255,180,120,.35), transparent 25%),
+    linear-gradient(145deg, #4a3319, #23160a 55%, #080808);
+}
+
+.cover-space::before {
+  background:
+    radial-gradient(circle at 35% 25%, rgba(130,200,255,.3), transparent 24%),
+    linear-gradient(145deg, #1d3557, #0d1b2a 58%, #06090e);
+}
+
+.cover-tvc::before {
+  background:
+    radial-gradient(circle at 65% 30%, rgba(255,140,50,.35), transparent 22%),
+    linear-gradient(145deg, #4a2810, #1f1207 55%, #080808);
+}
+.cover-doc::before {
+  background:
+    radial-gradient(circle at 30% 30%, rgba(200,200,200,.3), transparent 20%),
+    linear-gradient(145deg, #2b2b2b, #151515 55%, #080808);
+}
+.cover-trailer::before {
+  background:
+    radial-gradient(circle at 75% 25%, rgba(0,210,255,.3), transparent 24%),
+    linear-gradient(145deg, #0b3c49, #061e24 55%, #050505);
+}
+.cover-fashionfilm::before,
+.cover-lookbook::before {
+  background:
+    radial-gradient(circle at 60% 40%, rgba(255,100,180,.32), transparent 24%),
+    linear-gradient(145deg, #4a1230, #220917 55%, #070707);
+}
+.cover-profile::before {
+  background:
+    radial-gradient(circle at 70% 30%, rgba(255,255,255,.3), transparent 22%),
+    linear-gradient(145deg, #333, #151515 55%, #080808);
+}
+.cover-food::before {
+  background:
+    radial-gradient(circle at 40% 30%, rgba(255,190,70,.35), transparent 22%),
+    linear-gradient(145deg, #523107, #241402 55%, #080808);
+}
+.cover-weddingphoto::before {
+  background:
+    radial-gradient(circle at 68% 34%, rgba(255,182,193,.35), transparent 22%),
+    linear-gradient(145deg, #603a48, #2a1820 55%, #090909);
+}
+.cover-reels::before {
+  background:
+    radial-gradient(circle at 30% 25%, rgba(254,44,85,.35), transparent 22%),
+    radial-gradient(circle at 75% 70%, rgba(37,244,238,.3), transparent 22%),
+    linear-gradient(145deg, #26101c, #0d0711 60%, #050505);
+}
+.cover-podcast::before {
+  background:
+    radial-gradient(circle at 70% 30%, rgba(168,85,247,.35), transparent 22%),
+    linear-gradient(145deg, #3b1261, #18072a 58%, #060606);
+}
+.cover-socialmedia::before {
+  background:
+    radial-gradient(circle at 50% 30%, rgba(59,130,246,.32), transparent 25%),
+    linear-gradient(145deg, #132a50, #091325 58%, #050505);
+}
+
+.project-filter-bar {
+  margin-bottom: 22px;
+}
+
 .featured-cover > * {
   position: relative;
   z-index: 2;
@@ -618,10 +694,37 @@ p {
 }
 
 .cover-music strong,
-.cover-event strong {
+.cover-event strong,
+.cover-space strong,
+.cover-kyyeu strong,
+.cover-tvc strong,
+.cover-doc strong,
+.cover-trailer strong,
+.cover-fashionfilm strong,
+.cover-lookbook strong,
+.cover-profile strong,
+.cover-food strong,
+.cover-weddingphoto strong,
+.cover-reels strong,
+.cover-podcast strong,
+.cover-socialmedia strong {
   white-space: nowrap;
   max-width: 100%;
-  font-size: clamp(1rem, 1.7vw, 1.65rem);
+  font-size: clamp(.85rem, 1.55vw, 1.45rem);
+}
+
+.featured-card.is-extra {
+  animation: fadeInCard .4s cubic-bezier(.2,.8,.2,1) forwards;
+}
+@keyframes fadeInCard {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .featured-cover b {
@@ -683,13 +786,15 @@ p {
 
 .filter-btn {
   min-height: 39px;
-  padding: 8px 13px;
+  padding: 8px 14px;
   border: 1px solid var(--line);
   border-radius: 999px;
   background: transparent;
   color: #b4b4b4;
   font-size: .72rem;
   font-weight: 600;
+  cursor: pointer;
+  transition: all var(--ease);
 }
 
 .filter-btn:hover,
@@ -749,7 +854,7 @@ p {
 .resource-cover {
   position: relative;
   width: 100%;
-  aspect-ratio: 1 / 1.05;
+  aspect-ratio: 1 / 1;
   overflow: hidden;
   display: flex;
   align-items: end;
@@ -787,6 +892,13 @@ p {
   line-height: .97;
   letter-spacing: -.045em;
   text-transform: uppercase;
+}
+
+.resource-card[data-category="sound"] .resource-cover h3,
+.resource-card[data-group="sound"] .resource-cover h3 {
+  white-space: nowrap;
+  max-width: 100%;
+  font-size: clamp(.72rem, 1.4vw, 1.25rem);
 }
 
 .resource-body {
@@ -1585,6 +1697,13 @@ p {
     font-size: clamp(.82rem, 4.4vw, 1.08rem);
   }
 
+  .resource-card[data-category="sound"] .resource-cover h3,
+  .resource-card[data-group="sound"] .resource-cover h3 {
+    white-space: nowrap;
+    max-width: 100%;
+    font-size: clamp(.62rem, 3.2vw, .95rem);
+  }
+
   .resource-body {
     padding: 8px;
   }
@@ -2174,6 +2293,9 @@ p {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  font-family: inherit;
   /* Thu gọn chiều ngang: Giảm padding từ 40px xuống 28px */
   padding: 12px 28px; 
   background-color: transparent;
@@ -2189,6 +2311,17 @@ p {
   
   /* Áp dụng animation lắc lư lặp lại mỗi 3 giây */
   animation: gentleWobble 3s infinite;
+}
+
+.btn-view-all .btn-arrow {
+  display: inline-block;
+  font-size: 0.95rem;
+  line-height: 1;
+  transition: transform 0.3s ease;
+}
+
+.btn-view-all.is-expanded .btn-arrow {
+  transform: rotate(180deg);
 }
 
 /* 3. Hiệu ứng khi người dùng chạm/đưa chuột vào */
@@ -2214,7 +2347,9 @@ p {
     width: auto; 
     padding: 12px 24px; /* Gọn hơn nữa trên màn hình nhỏ */
   }
-}.featured-cover img{
+}
+
+.featured-cover img{
   position:absolute;
   inset:0;
   width:100%;
@@ -2375,13 +2510,35 @@ p {
 .resource-card.is-group .resource-cover{cursor:pointer}
 .resource-card.is-child .resource-cover{cursor:pointer}
 .resource-card.is-child .resource-top{min-height:auto;flex-direction:row;justify-content:flex-end}
-/* ===== Resource only-cover cards (title on gradient) ===== */
-@media(max-width:600px){
-/* ===== Resource cover: image + bottom black gradient ===== */
-.resource-cover img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
-.resource-cover::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(0,0,0,0) 35%,rgba(0,0,0,.28) 58%,rgba(0,0,0,.82) 100%)}
-.resource-cover > span,.resource-cover > h3{position:relative;z-index:2}
-.resource-cover h3{color:#fff}
-.resource-card.is-group .resource-cover{cursor:pointer}
-.resource-body h3 a{color:inherit;text-decoration:none}
-.resource-body h3 a:hover{text-decoration:underline}
+
+/* ===== Resource cover: image + bottom black gradient (Global) ===== */
+.resource-cover img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+  z-index:0;
+}
+.resource-cover::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
+  background:linear-gradient(180deg, rgba(0,0,0,0) 25%, rgba(0,0,0,.35) 55%, rgba(0,0,0,.85) 100%);
+  pointer-events:none;
+}
+.resource-cover > span,
+.resource-cover > h3,
+.resource-cover > b{
+  position:relative;
+  z-index:2;
+}
+.resource-cover h3{
+  color:#fff;
+  text-shadow:0 2px 8px rgba(0,0,0,.6);
+}
+.resource-card.is-child .resource-body p{
+  margin-top:2px;
+}

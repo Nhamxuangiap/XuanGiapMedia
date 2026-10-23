@@ -33,9 +33,9 @@ const resourceGroups = {
     description: "Overlay, transition, background — bấm tên để mở Drive.",
     cover: "linear-gradient(145deg,#a8edea,#fed6e3 30%,#6b6b6b 58%,#111)",
     children: [
-      { id: "fx-bg", title: "BackGround Colorful", shortTitle: "BackGround\nColorful", image: "", driveUrl: "https://drive.google.com/drive/folders/1e8OkXH2hP8t-z6WkZKMcz5afuFtl9PVC", cover: "linear-gradient(145deg,#a8edea,#fed6e3 30%,#6b6b6b 58%,#111)", description: "Background màu chuyển động làm nền chữ và intro." },
-      { id: "fx-grid", title: "Grid Backgrounds", shortTitle: "Grid\nBackgrounds", image: "", driveUrl: "https://drive.google.com/drive/folders/1yqr0mXLY2y06_G9AsyVy9-hEVBRAooiB", cover: "linear-gradient(145deg,#89f7fe,#66a6ff 30%,#3a3a3a 60%,#111)", description: "Background lưới hiện đại cho video công nghệ và lyric." },
-      { id: "fx-doc", title: "LƯỚI EDIT VIDEO DỌC", shortTitle: "Lưới Edit\nVideo Dọc", image: "", driveUrl: "https://drive.google.com/drive/folders/14Pvzl8gNKtw6ZU108IXDmLN3910P_SyS", cover: "linear-gradient(145deg,#fddb92,#d1fdff 30%,#5b5b5b 60%,#111)", description: "Lưới căn khung video dọc 9:16 cho TikTok / Reels." }
+      { id: "fx-bg", title: "BackGround Colorful", shortTitle: "BackGround\nColorful", image: "assets/fx-bg/background-colorful.jpg", driveUrl: "https://drive.google.com/drive/folders/1e8OkXH2hP8t-z6WkZKMcz5afuFtl9PVC", cover: "linear-gradient(145deg,#a8edea,#fed6e3 30%,#6b6b6b 58%,#111)", description: "Background màu chuyển động làm nền chữ và intro." },
+      { id: "fx-film", title: "Hiệu ứng Film", shortTitle: "Hiệu ứng\nFilm", image: "assets/fx-film/hieu-ung-film.jpg", driveUrl: "https://drive.google.com/drive/folders/1yqr0mXLY2y06_G9AsyVy9-hEVBRAooiB", cover: "linear-gradient(145deg,#f6d365,#fda085 28%,#6b3a2a 55%,#111)", description: "Khung Super 8mm, film burn, hạt grain & texture bụi xước cổ điển." },
+      { id: "fx-doc", title: "LƯỚI EDIT VIDEO DỌC", shortTitle: "Lưới Edit\nVideo Dọc", image: "assets/fx-doc/luoi-edit-video-doc.jpg", driveUrl: "https://drive.google.com/drive/folders/14Pvzl8gNKtw6ZU108IXDmLN3910P_SyS", cover: "linear-gradient(145deg,#fddb92,#d1fdff 30%,#5b5b5b 60%,#111)", description: "Lưới căn khung video dọc 9:16 cho TikTok / Reels." }
     ]
   },
   sound: {
@@ -45,9 +45,9 @@ const resourceGroups = {
     description: "SFX, meme sound, nhạc nền — bấm tên để mở Drive.",
     cover: "linear-gradient(145deg,#cfd9df,#e2ebf0 28%,#5b5b5b 58%,#111)",
     children: [
-      { id: "snd-meme", title: "MEME SOUND Schannel", shortTitle: "Meme\nSound", image: "", driveUrl: "https://drive.google.com/drive/folders/1sxQe7oBMtK2aIr_NKCuj7U4C1pDY9ryd", cover: "linear-gradient(145deg,#fbc2eb,#a6c1ee 30%,#5b5b5b 60%,#111)", description: "Âm thanh meme vui nhộn cho video giải trí." },
-      { id: "snd-ef", title: "SOUND EF", shortTitle: "Sound\nEF", image: "", driveUrl: "https://drive.google.com/drive/folders/115YcOt73tuoKtPcwKWPiAUJI2ZbxkM2D", cover: "linear-gradient(145deg,#cfd9df,#e2ebf0 28%,#4a4a4a 60%,#111)", description: "Hiệu ứng whoosh, hit, riser cho chuyển cảnh." },
-      { id: "snd-epi", title: "Nhạc Epidemic", shortTitle: "Nhạc\nEpidemic", image: "", driveUrl: "https://drive.google.com/drive/folders/1fh5-xA1HHMRNSO-sCJFLOBoNqnOZEy6i", cover: "linear-gradient(145deg,#e0c3fc,#8ec5fc 30%,#5b5b5b 60%,#111)", description: "Nhạc nền bản quyền cho vlog và quảng cáo." }
+      { id: "snd-meme", title: "MEME SOUND Schannel", shortTitle: "Meme Sound", image: "", driveUrl: "https://drive.google.com/drive/folders/1sxQe7oBMtK2aIr_NKCuj7U4C1pDY9ryd", cover: "linear-gradient(145deg,#fbc2eb,#a6c1ee 30%,#5b5b5b 60%,#111)", description: "Âm thanh meme vui nhộn cho video giải trí." },
+      { id: "snd-ef", title: "SOUND EF", shortTitle: "Sound EF", image: "", driveUrl: "https://drive.google.com/drive/folders/1fh5-xA1HHMRNSO-sCJFLOBoNqnOZEy6i", cover: "linear-gradient(145deg,#cfd9df,#e2ebf0 28%,#4a4a4a 60%,#111)", description: "Hiệu ứng whoosh, hit, riser cho chuyển cảnh." },
+      { id: "snd-epi", title: "Nhạc Epidemic", shortTitle: "Nhạc Epidemic", image: "", driveUrl: "https://drive.google.com/drive/folders/115YcOt73tuoKtPcwKWPiAUJI2ZbxkM2D", cover: "linear-gradient(145deg,#e0c3fc,#8ec5fc 30%,#5b5b5b 60%,#111)", description: "Nhạc nền bản quyền cho vlog và quảng cáo." }
     ]
   }
 };
@@ -56,7 +56,7 @@ const resourceItems = [
   { id: 1, title: "Preset Ảnh", shortTitle: "Preset\nẢnh", category: "preset", categoryLabel: "Preset Ảnh", price: "3 thư mục", format: "LR · DNG · XMP", description: "Bấm để xem các thư mục Preset Lightroom tone film, wedding, du lịch.", cover: "linear-gradient(145deg,#ff9a9e,#fecfef 30%,#8a4b3a 55%,#111)", kind: "group", group: "preset", image: "" },
   { id: 2, title: "LUT Màu Video", shortTitle: "LUT\nMàu Video", category: "lut", categoryLabel: "LUT Màu Video", price: "2 thư mục", format: "CapCut · CUBE · LUT", description: "Bấm để xem 2 thư mục: LUT CapCut & LUT Màu Tổng Hợp (30+ bộ).", cover: "linear-gradient(145deg,#f6d365,#fda085 28%,#8a4b3a 55%,#111)", kind: "group", group: "lut", image: "" },
   { id: 3, title: "FX Video — Hiệu Ứng", shortTitle: "FX\nVideo", category: "fx", categoryLabel: "FX Video", price: "4 thư mục", format: "Overlay · Background · Lưới", description: "Bấm để xem các thư mục hiệu ứng & background.", cover: "linear-gradient(145deg,#a8edea,#fed6e3 30%,#6b6b6b 58%,#111)", kind: "group", group: "fx", image: "" },
-  { id: 4, title: "Âm Thanh", shortTitle: "Âm\nThanh", category: "sound", categoryLabel: "Âm Thanh", price: "3 thư mục", format: "WAV · MP3 · SFX", description: "Bấm để xem các thư mục âm thanh.", cover: "linear-gradient(145deg,#cfd9df,#e2ebf0 28%,#5b5b5b 58%,#111)", kind: "group", group: "sound", image: "" },
+  { id: 4, title: "Âm Thanh", shortTitle: "Âm Thanh", category: "sound", categoryLabel: "Âm Thanh", price: "3 thư mục", format: "WAV · MP3 · SFX", description: "Bấm để xem các thư mục âm thanh.", cover: "linear-gradient(145deg,#cfd9df,#e2ebf0 28%,#5b5b5b 58%,#111)", kind: "group", group: "sound", image: "" },
 ];
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -172,13 +172,12 @@ document.addEventListener("DOMContentLoaded", () => {
       const g = resourceGroups[currentGroup];
       const children = g.children.filter(c => !query || c.title.toLocaleLowerCase("vi").includes(query));
       grid.innerHTML = children.map(c => `
-        <article class="resource-card is-child">
+        <article class="resource-card is-child" data-category="${g.category}" data-group="${currentGroup}">
           <a class="resource-cover" href="${c.driveUrl}" target="_blank" rel="noopener" style="--cover:${c.cover}" aria-label="${c.title}">
             ${c.image ? `<img src="${c.image}" alt="${c.title}" loading="lazy">` : ""}
             <h3>${(c.shortTitle || c.title).replace("\n", "<br>")}</h3>
           </a>
           <div class="resource-body">
-            <h3><a href="${c.driveUrl}" target="_blank" rel="noopener">${c.title}</a></h3>
             <p>${c.description || ""}</p>
             <a class="resource-btn" href="${c.driveUrl}" target="_blank" rel="noopener">Tải ngay <span aria-hidden="true">↗</span></a>
           </div>
@@ -324,5 +323,96 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  // Bộ lọc dự án nổi bật (Video / Photo / Social) & Nút Xem thêm dự án
+  const projectFilterContainer = $("#projectFilterList");
+  const btnViewMore = $("#btnViewMoreProjects");
+  const viewMoreWrapper = $("#viewMoreProjectsWrapper");
+  const projectCards = document.querySelectorAll(".featured-card");
+
+  if (projectFilterContainer) {
+    const projectFilterBtns = projectFilterContainer.querySelectorAll(".filter-btn");
+    let currentFilter = "video";
+    let isExpanded = false;
+
+    const updateProjectsDisplay = () => {
+      let extraMatchingCount = 0;
+
+      projectCards.forEach(card => {
+        const cat = card.dataset.category;
+        const isExtra = card.classList.contains("is-extra");
+        const matchesFilter = (currentFilter === "all" || cat === currentFilter);
+
+        if (!matchesFilter) {
+          card.style.display = "none";
+          return;
+        }
+
+        if (isExtra) {
+          extraMatchingCount++;
+          if (isExpanded) {
+            card.style.display = "";
+          } else {
+            card.style.display = "none";
+          }
+        } else {
+          card.style.display = "";
+        }
+      });
+
+      // Ẩn nút nếu danh mục không có thẻ bổ sung nào
+      if (viewMoreWrapper) {
+        viewMoreWrapper.style.display = extraMatchingCount > 0 ? "" : "none";
+      }
+
+      // Cập nhật trạng thái và nhãn nút bấm
+      if (btnViewMore) {
+        btnViewMore.setAttribute("aria-expanded", String(isExpanded));
+        const btnText = btnViewMore.querySelector(".btn-text");
+        const btnArrow = btnViewMore.querySelector(".btn-arrow");
+        if (isExpanded) {
+          btnViewMore.classList.add("is-expanded");
+          if (btnText) btnText.textContent = "THU GỌN DỰ ÁN";
+          if (btnArrow) btnArrow.textContent = "↑";
+        } else {
+          btnViewMore.classList.remove("is-expanded");
+          if (btnText) btnText.textContent = "XEM THÊM DỰ ÁN";
+          if (btnArrow) btnArrow.textContent = "↓";
+        }
+      }
+    };
+
+    projectFilterBtns.forEach(btn => {
+      btn.addEventListener("click", () => {
+        projectFilterBtns.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        currentFilter = btn.dataset.filter || "video";
+        isExpanded = false; // Thu gọn về mặc định khi chuyển tab
+        updateProjectsDisplay();
+      });
+    });
+
+    if (btnViewMore) {
+      btnViewMore.addEventListener("click", () => {
+        isExpanded = !isExpanded;
+        updateProjectsDisplay();
+
+        // Khi bấm thu gọn, cuộn nhẹ về đầu mục Dự án để người dùng dễ theo dõi
+        if (!isExpanded) {
+          const featuredSection = document.getElementById("san-pham-noi-bat");
+          if (featuredSection) {
+            featuredSection.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        }
+      });
+    }
+
+    const activeBtn = projectFilterContainer.querySelector(".filter-btn.active") || projectFilterBtns[0];
+    if (activeBtn) {
+      currentFilter = activeBtn.dataset.filter || "video";
+    }
+    updateProjectsDisplay();
+  }
+
   $("#currentYear").textContent = new Date().getFullYear();
 });
+

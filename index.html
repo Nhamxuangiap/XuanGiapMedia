@@ -186,18 +186,23 @@
           </p>
         </div>
 
+        <div class="project-filter-bar">
+          <div class="filter-list" id="projectFilterList" role="tablist" aria-label="Bộ lọc dự án">
+            <button class="filter-btn active" type="button" data-filter="video">Video - Film</button>
+            <button class="filter-btn" type="button" data-filter="photo">Ảnh</button>
+            <button class="filter-btn" type="button" data-filter="social">Social Media</button>
+          </div>
+        </div>
 
         <div class="featured-grid">
 
-          <article class="featured-card">
+          <article class="featured-card" data-category="video">
             <a class="featured-cover cover-film" href="brand-film/brand-film.html">
-            <img src="assets/BRANDFILM/BRAND FILM 1.png" alt="Brand Film">
-              
+              <img src="assets/BRANDFILM/BRAND FILM 1.png" alt="Brand Film">
               <span>01</span>
               <strong>SHORT FILM</strong>
               <b>↗</b>
             </a>
-
             <div class="featured-body">
               <small>VIDEO PRODUCTION</small>
               <h3>Video thương hiệu</h3>
@@ -205,15 +210,13 @@
             </div>
           </article>
 
-
-          <article class="featured-card">
+          <article class="featured-card" data-category="video">
             <a class="featured-cover cover-photo" href="wedding/wedding.html">
               <img src="assets/wedding/wedding-cover.jpg" alt="Phóng sự cưới &amp; Phim cưới">
               <span>02</span>
               <strong>WEDDING</strong>
               <b>↗</b>
             </a>
-
             <div class="featured-body">
               <small>WEDDING FILM</small>
               <h3>Phóng sự cưới &amp; phim cưới</h3>
@@ -221,15 +224,13 @@
             </div>
           </article>
 
-
-          <article class="featured-card">
+          <article class="featured-card" data-category="video">
             <a class="featured-cover cover-music" href="music-video/music-video.html">
               <img src="assets/music-video/music-video-cover.jpg" alt="MV ca nhạc &amp; Video âm nhạc">
               <span>03</span>
               <strong>MUSIC&nbsp;VIDEO</strong>
               <b>↗</b>
             </a>
-
             <div class="featured-body">
               <small>MUSIC VIDEO</small>
               <h3>MV ca nhạc &amp; video âm nhạc</h3>
@@ -237,44 +238,230 @@
             </div>
           </article>
 
-
-          <article class="featured-card">
-            <a class="featured-cover cover-social" href="#lien-he">
-              <span>04</span>
-              <strong>SOCIAL<br>CONTENT</strong>
-              <b>↗</b>
-            </a>
-
-            <div class="featured-body">
-              <small>SOCIAL MEDIA</small>
-              <h3>Nội dung mạng xã hội</h3>
-              <p>TikTok, Reels, video dọc và hình ảnh tối ưu cho social.</p>
-            </div>
-          </article>
-
-
-          <article class="featured-card">
+          <article class="featured-card" data-category="video">
             <a class="featured-cover cover-event" href="event-recap/event-recap.html">
               <img src="assets/event-recap/event-recap-cover.jpg" alt="Ảnh &amp; Video sự kiện, Recap">
-              <span>05</span>
+              <span>04</span>
               <strong>EVENT, RECAP</strong>
               <b>↗</b>
             </a>
-
             <div class="featured-body">
               <small>EVENT MEDIA</small>
-              <h3>Ảnh & video sự kiện</h3>
+              <h3>Ảnh &amp; video sự kiện</h3>
               <p>5 recap sự kiện mới nhất — bấm để xem trên YouTube, tự động cập nhật từ Sheet.</p>
+            </div>
+          </article>
+
+          <article class="featured-card" data-category="photo">
+            <a class="featured-cover cover-kyyeu" href="ky-yeu/ky-yeu.html">
+              <img src="assets/ky-yeu/ky-yeu-cover.jpg" alt="Ảnh kỷ yếu &amp; Tốt nghiệp" loading="lazy">
+              <span>05</span>
+              <strong>KỶ YẾU</strong>
+              <b>↗</b>
+            </a>
+            <div class="featured-body">
+              <small>PHOTOGRAPHY</small>
+              <h3>Ảnh kỷ yếu &amp; tốt nghiệp</h3>
+              <p>Thư mục: <strong>Duy Hưng</strong> <span style="opacity: .7; font-weight: 400;">(THPT Nguyễn Thị Giang)</span> — 50 ảnh.</p>
+            </div>
+          </article>
+
+          <article class="featured-card" data-category="photo">
+            <a class="featured-cover cover-product" href="#lien-he">
+              <span>06</span>
+              <strong>PRODUCT</strong>
+              <b>↗</b>
+            </a>
+            <div class="featured-body">
+              <small>COMMERCIAL PHOTO</small>
+              <h3>Ảnh chụp sản phẩm</h3>
+              <p>Hình ảnh sản phẩm thương mại, ẩm thực F&B, bao bì và catalog bán hàng.</p>
+            </div>
+          </article>
+
+          <article class="featured-card" data-category="photo">
+            <a class="featured-cover cover-space" href="#lien-he">
+              <span>07</span>
+              <strong>SPACE &amp; ARCH</strong>
+              <b>↗</b>
+            </a>
+            <div class="featured-body">
+              <small>ARCHITECTURE</small>
+              <h3>Không gian &amp; kiến trúc</h3>
+              <p>Chụp ảnh resort, khách sạn, quán cafe, showroom và nội thất công trình.</p>
+            </div>
+          </article>
+
+          <article class="featured-card" data-category="social">
+            <a class="featured-cover cover-social" href="#lien-he">
+              <span>08</span>
+              <strong>SOCIAL<br>CONTENT</strong>
+              <b>↗</b>
+            </a>
+            <div class="featured-body">
+              <small>SOCIAL MEDIA</small>
+              <h3>Nội dung mạng xã hội</h3>
+              <p>TikTok, Reels, video dọc và bộ hình ảnh tối ưu đa nền tảng.</p>
+            </div>
+          </article>
+
+          <!-- Thẻ bổ sung Video (Ẩn mặc định, hiện khi ấn Xem thêm) -->
+          <article class="featured-card is-extra" data-category="video">
+            <a class="featured-cover cover-tvc" href="#lien-he">
+              <span>09</span>
+              <strong>TVC &amp; ADS</strong>
+              <b>↗</b>
+            </a>
+            <div class="featured-body">
+              <small>COMMERCIAL</small>
+              <h3>TVC &amp; Phim quảng cáo</h3>
+              <p>Sản xuất TVC truyền hình, quảng cáo số chất lượng điện ảnh cho nhãn hàng.</p>
+            </div>
+          </article>
+
+          <article class="featured-card is-extra" data-category="video">
+            <a class="featured-cover cover-doc" href="#lien-he">
+              <span>10</span>
+              <strong>DOCUMENTARY</strong>
+              <b>↗</b>
+            </a>
+            <div class="featured-body">
+              <small>DOCUMENTARY</small>
+              <h3>Phim tài liệu &amp; Ký sự</h3>
+              <p>Ghi lại hành trình thương hiệu, câu chuyện nhân vật chân thực và giàu cảm xúc.</p>
+            </div>
+          </article>
+
+          <article class="featured-card is-extra" data-category="video">
+            <a class="featured-cover cover-trailer" href="#lien-he">
+              <span>11</span>
+              <strong>TRAILER</strong>
+              <b>↗</b>
+            </a>
+            <div class="featured-body">
+              <small>TRAILER &amp; TEASER</small>
+              <h3>Teaser &amp; Trailer giới thiệu</h3>
+              <p>Cắt ghép nhịp điệu nhanh, âm thanh kịch tính tạo sức hút truyền thông mạnh mẽ.</p>
+            </div>
+          </article>
+
+          <article class="featured-card is-extra" data-category="video">
+            <a class="featured-cover cover-fashionfilm" href="#lien-he">
+              <span>12</span>
+              <strong>FASHION&nbsp;FILM</strong>
+              <b>↗</b>
+            </a>
+            <div class="featured-body">
+              <small>FASHION FILM</small>
+              <h3>Fashion Film &amp; Visual</h3>
+              <p>Video thời trang nghệ thuật, tôn vinh bộ sưu tập và câu chuyện nhà thiết kế.</p>
+            </div>
+          </article>
+
+          <!-- Thẻ bổ sung Photo (Ẩn mặc định, hiện khi ấn Xem thêm) -->
+          <article class="featured-card is-extra" data-category="photo">
+            <a class="featured-cover cover-lookbook" href="#lien-he">
+              <span>13</span>
+              <strong>LOOKBOOK</strong>
+              <b>↗</b>
+            </a>
+            <div class="featured-body">
+              <small>FASHION LOOKBOOK</small>
+              <h3>Thời trang &amp; Lookbook</h3>
+              <p>Chụp lookbook studio, ngoại cảnh tôn dáng trang phục và phong cách thương hiệu.</p>
+            </div>
+          </article>
+
+          <article class="featured-card is-extra" data-category="photo">
+            <a class="featured-cover cover-profile" href="#lien-he">
+              <img src="assets/portrait/portrait-cover.jpg" alt="Chân dung &amp; Profile Doanh Nghiệp">
+              <span>14</span>
+              <strong>PROFILE&nbsp;BIZ</strong>
+              <b>↗</b>
+            </a>
+            <div class="featured-body">
+              <small>BUSINESS PROFILE</small>
+              <h3>Chân dung &amp; Profile</h3>
+              <p>Ảnh chân dung lãnh đạo, đội ngũ nhân sự và profile doanh nghiệp chuyên nghiệp.</p>
+            </div>
+          </article>
+
+          <article class="featured-card is-extra" data-category="photo">
+            <a class="featured-cover cover-food" href="#lien-he">
+              <span>15</span>
+              <strong>CULINARY</strong>
+              <b>↗</b>
+            </a>
+            <div class="featured-body">
+              <small>FOOD &amp; BEVERAGE</small>
+              <h3>Nhiếp ảnh ẩm thực &amp; F&amp;B</h3>
+              <p>Chụp ảnh món ăn, menu nhà hàng và thức uống hấp dẫn, khơi gợi vị giác.</p>
+            </div>
+          </article>
+
+          <article class="featured-card is-extra" data-category="photo">
+            <a class="featured-cover cover-weddingphoto" href="#lien-he">
+              <img src="assets/wedding/raw/nHWtAEsqxWg.jpg" alt="Ảnh cưới &amp; Pre-Wedding">
+              <span>16</span>
+              <strong>WEDDING&nbsp;PHOTO</strong>
+              <b>↗</b>
+            </a>
+            <div class="featured-body">
+              <small>WEDDING PHOTOGRAPHY</small>
+              <h3>Ảnh cưới &amp; Pre-Wedding</h3>
+              <p>Bộ ảnh cưới lãng mạn, phóng sự cưới bắt trọn khoảnh khắc hạnh phúc lứa đôi.</p>
+            </div>
+          </article>
+
+          <!-- Thẻ bổ sung Social (Ẩn mặc định, hiện khi ấn Xem thêm) -->
+          <article class="featured-card is-extra" data-category="social">
+            <a class="featured-cover cover-reels" href="#lien-he">
+              <span>17</span>
+              <strong>TIKTOK&nbsp;&amp;&nbsp;REELS</strong>
+              <b>↗</b>
+            </a>
+            <div class="featured-body">
+              <small>SHORT-FORM VIDEO</small>
+              <h3>TikTok &amp; Reels Viral</h3>
+              <p>Sản xuất video ngắn bắt trend, giữ chân người xem và tăng tương tác tự nhiên.</p>
+            </div>
+          </article>
+
+          <article class="featured-card is-extra" data-category="social">
+            <a class="featured-cover cover-podcast" href="#lien-he">
+              <span>18</span>
+              <strong>PODCAST</strong>
+              <b>↗</b>
+            </a>
+            <div class="featured-body">
+              <small>PODCAST &amp; TALKSHOW</small>
+              <h3>Podcast &amp; Phỏng vấn</h3>
+              <p>Set-up studio ghi hình nhiều góc máy, thu âm tiêu chuẩn phát sóng đa kênh.</p>
+            </div>
+          </article>
+
+          <article class="featured-card is-extra" data-category="social">
+            <a class="featured-cover cover-socialmedia" href="#lien-he">
+              <span>19</span>
+              <strong>CAMPAIGN</strong>
+              <b>↗</b>
+            </a>
+            <div class="featured-body">
+              <small>DIGITAL CAMPAIGN</small>
+              <h3>Chiến dịch truyền thông số</h3>
+              <p>Thiết kế hình ảnh và nội dung tương tác bài bản cho Fanpage &amp; Instagram.</p>
             </div>
           </article>
 
         </div>
 
         <!-- Khối bọc ngoài dùng để căn giữa nút -->
-<div class="view-all-projects-wrapper">
-  <!-- Sửa "projects.html" thành tên file trang con thực tế của bạn -->
-  <a href="projects.html" class="btn-view-all">XEM TẤT CẢ DỰ ÁN</a>
-</div>
+        <div class="view-all-projects-wrapper" id="viewMoreProjectsWrapper">
+          <button type="button" class="btn-view-all" id="btnViewMoreProjects" aria-expanded="false">
+            <span class="btn-text">XEM THÊM DỰ ÁN</span>
+            <span class="btn-arrow" aria-hidden="true">↓</span>
+          </button>
+        </div>
 
       </div>
     </section>
