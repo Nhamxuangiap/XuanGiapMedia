@@ -1,16 +1,19 @@
 "use strict";
 
 /* =========================================================
-   TVC & ADS — KẾT HỢP GOOGLE SHEET (CHO TVC NGANG) & ADS DỌC
-   Sheet: https://docs.google.com/spreadsheets/d/1E5dvnU3xtrNjf5P7B1nILpu2AIejsWlMT7RXQ5coikY/edit
+   TVC & ADS — KẾT HỢP GOOGLE SHEET (TRANG TÍNH 1 & TRANG TÍNH 2)
+   - Sheet 1: TVC Ngang (16:9)
+   - Sheet 2: TVC Dọc (9:16, sắp xếp từ cuối lên đầu)
+   - Phong cách hiển thị chuẩn thẻ wedding
 ========================================================= */
 
 const SHEET_ID = "1E5dvnU3xtrNjf5P7B1nILpu2AIejsWlMT7RXQ5coikY";
-const SHEET_CSV_GVIZ = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&gid=0`;
-const SHEET_CSV_EXPORT = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=0`;
+const SHEET1_CSV = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&gid=0`;
+const SHEET2_CSV = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&gid=56054377`;
+const SHEET2_CSV_NAME = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=Trang%20t%C3%ADnh2`;
 
-// Fallback 6 TVC Ngang từ Sheet
-const FALLBACK_TVC = [
+// Fallback TVC Ngang (Trang tính 1)
+const FALLBACK_TVC_NGANG = [
   { sheetTitle: "Quảng cáo đồng hồ tm", url: "https://youtu.be/xyZ-KslVIyg?si=n6fauan8dsJFtvuF" },
   { sheetTitle: "JW mariot", url: "https://youtu.be/IUSfkf7l8l4?si=WMiXajgn8LF4Zb8V" },
   { sheetTitle: "Unit Fitness", url: "https://youtu.be/NRkY1grW_PA?si=8WiBDLF7aFBMSxwB" },
@@ -19,32 +22,19 @@ const FALLBACK_TVC = [
   { sheetTitle: "T-Han Beauty", url: "https://youtu.be/hIlQM4WLjig?si=Jq2EalZP6DqxvTtj" }
 ];
 
-// Danh sách video ADS Dọc (9:16)
-const ADS_VERTICAL_PROJECTS = [
-  {
-    id: "ads-1",
-    format: "vertical",
-    categoryLabel: "Video Ads Dọc",
-    ratioLabel: "9:16 DỌC",
-    title: "Video Ads TikTok / Reels — Chuyển Đổi Nhanh",
-    client: "Xuân Giáp Media",
-    year: "2026",
-    image: "../assets/zap-mobile.png",
-    description: "Video quảng cáo 9:16 thiết kế thumbnail dọc bắt mắt, giữ chân 3 giây đầu và đẩy mạnh chuyển đổi.",
-    youtube: "https://youtu.be/nhzk1gaBHsY"
-  },
-  {
-    id: "ads-2",
-    format: "vertical",
-    categoryLabel: "Short-Form Ads",
-    ratioLabel: "9:16 DỌC",
-    title: "Campaign Ads Dọc — Bắt Trend Nền Tảng",
-    client: "Xuân Giáp Media",
-    year: "2026",
-    image: "../assets/chan dung.png",
-    description: "Video Ads dạng dọc tối ưu hiển thị 100% full màn hình điện thoại cho chiến dịch Facebook Reels và TikTok.",
-    youtube: "https://youtu.be/-LjA282FEZE"
-  }
+// Fallback TVC Dọc (Trang tính 2)
+const RAW_FALLBACK_TVC_DOC = [
+  { rawIndex: 1, sheetTitle: "Quảng Cáo Độ Đèn", url: "https://drive.google.com/file/d/1lsxwkSIkUZlQhcEYuXqTBDg8AqHHWOPL/view?usp=sharing", localThumb: "../assets/tvc-doc/thumb-1.jpg" },
+  { rawIndex: 2, sheetTitle: "Quán Nhậu Bất Tử", url: "https://drive.google.com/file/d/1t6gVbMVpkVfMIZwAryj_AnHaOvjSMqeF/view?usp=drive_link", localThumb: "../assets/tvc-doc/thumb-2.jpg" },
+  { rawIndex: 3, sheetTitle: "Quảng Cáo PPF", url: "https://drive.google.com/file/d/1COV1YkmrtePmb8GysJ484DHSpcnV7laf/view?usp=sharing", localThumb: "../assets/tvc-doc/thumb-3.jpg" },
+  { rawIndex: 4, sheetTitle: "Quảng Cáo Loa I-so ", url: "https://drive.google.com/file/d/1pOClxLUmfhAUMivVHp39oNCGxBz7-ZIh/view?usp=sharing", localThumb: "../assets/tvc-doc/thumb-4.jpg" },
+  { rawIndex: 5, sheetTitle: "Quảng Cáo Limo Green Độ Full Combo", url: "https://drive.google.com/file/d/1InawfsqeikWkAeH9Ftzv2ocr7ibtkjNR/view?usp=drive_link", localThumb: "../assets/tvc-doc/thumb-5.jpg" },
+  { rawIndex: 6, sheetTitle: "Quảng Cáo Combo Loa Kenner", url: "https://drive.google.com/file/d/1qlre20Mge5O6mxt__5Y_gUd0hsXh0HfF/view?usp=sharing", localThumb: "../assets/tvc-doc/thumb-6.jpg" },
+  { rawIndex: 7, sheetTitle: "Quảng Cáo Khóa Điện Limo Greend", url: "https://www.facebook.com/share/r/19kmcqYRxz/", localThumb: "../assets/tvc-doc/thumb-7.jpg" },
+  { rawIndex: 8, sheetTitle: "Quảng Cáo Combo 18 Triệu tặng Chống Ồn", url: "https://www.facebook.com/share/r/1MHBotssdn/", localThumb: "../assets/tvc-doc/thumb-8.jpg" },
+  { rawIndex: 9, sheetTitle: "Quảng Cáo Loa I-so - Chung Tũn", url: "https://www.facebook.com/share/r/1CQxR1MKry/", localThumb: "../assets/tvc-doc/thumb-9.jpg" },
+  { rawIndex: 10, sheetTitle: "Quảng Cáo Loa Vinsub V8 Pro ", url: "https://www.facebook.com/share/r/1ETK7AXrvY/", localThumb: "../assets/tvc-doc/thumb-10.jpg" },
+  { rawIndex: 11, sheetTitle: "Lời Cảm Ơn Của Văn Long Auto Tới Anh Vũ Master Tune", url: "https://www.facebook.com/share/r/1KLiLuc2gg/", localThumb: "../assets/tvc-doc/thumb-11.jpg" }
 ];
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -52,11 +42,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 
   const grid = $("#projectGrid");
-  const dialog = $("#videoDialog");
-  const dialogVideo = $("#dialogVideo");
-  const dialogTitle = $("#dialogTitle");
-  const dialogMeta = $("#dialogMeta");
-  const youtubeLink = $("#youtubeLink");
   const menu = $("#mainNav");
   const menuBtn = $("#menuToggle");
   const filterTabs = $$(".filter-tab");
@@ -64,12 +49,12 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   let currentFilter = window.TVC_FORMAT_FILTER || "all";
 
-  // Check URL hash (#tvc-ngang hoặc #ads-doc) nếu chưa có FILTER cố định
+  // Check URL hash (#tvc-ngang hoặc #tvc-doc) nếu chưa có FILTER cố định
   if (!window.TVC_FORMAT_FILTER) {
     const hash = window.location.hash.toLowerCase();
-    if (hash.includes("tvc")) {
+    if (hash.includes("ngang") || hash.includes("landscape")) {
       currentFilter = "landscape";
-    } else if (hash.includes("ads")) {
+    } else if (hash.includes("doc") || hash.includes("vertical") || hash.includes("ads")) {
       currentFilter = "vertical";
     }
   }
@@ -87,6 +72,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     } catch { return ""; }
   };
 
+  const getDriveId = (url) => {
+    if (!url) return "";
+    const m = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
+    return m ? m[1] : "";
+  };
+
   const toWatchUrl = id => `https://www.youtube.com/watch?v=${id}`;
   const thumb = id => `https://img.youtube.com/vi/${id}/maxresdefault.jpg`;
   const esc = s => String(s).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;");
@@ -94,7 +85,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const suffix = " | XUÂN GIÁP MEDIA";
   function finalTitle(raw) {
     raw = (raw || "").trim();
-    if (!raw) return "TVC Ngang" + suffix;
+    if (!raw) return "TVC" + suffix;
     if (raw.toUpperCase().includes("XUÂN GIÁP MEDIA")) {
       raw = raw.replace(/\s*-\s*Xuân Giáp Media\s*$/i, "").replace(/\s*\|\s*Xuân Giáp Media\s*$/i, "");
       return raw + suffix;
@@ -102,131 +93,136 @@ document.addEventListener("DOMContentLoaded", async () => {
     return raw + suffix;
   }
 
-  // --- 1. Lấy dữ liệu TVC Ngang từ Google Sheet ---
-  async function fetchSheetData() {
-    const tryFetch = async (url) => {
-      const r = await fetch(url, { cache: "no-store" });
-      if (!r.ok) throw new Error("http " + r.status);
-      return await r.text();
-    };
-
-    let csv = "";
-    try { csv = await tryFetch(SHEET_CSV_GVIZ); }
-    catch (e1) {
-      try { csv = await tryFetch(SHEET_CSV_EXPORT); }
-      catch (e2) { throw e2; }
-    }
-
-    const lines = csv.split(/\r?\n/);
-    const list = [];
-    const seen = new Set();
-
-    for (let raw of lines) {
-      raw = raw.trim();
-      if (!raw) continue;
-
-      let sheetTitle = "";
-      let url = "";
-
-      const matchCols = raw.match(/^"(.*?)","(.*?)"$/);
-      if (matchCols) {
-        sheetTitle = matchCols[1].trim();
-        url = matchCols[2].trim();
-      } else {
-        const m = raw.match(/https?:\/\/[^"\s,]+/);
-        if (m) {
-          url = m[0].replace(/"+$/, '');
-          sheetTitle = raw.replace(m[0], '').replace(/["',]/g, '').trim();
+  // --- 1. Tải TVC Ngang (Trang tính 1) ---
+  async function fetchTvcNgang() {
+    try {
+      const r = await fetch(SHEET1_CSV, { cache: "no-store" });
+      if (!r.ok) throw new Error();
+      const csv = await r.text();
+      const lines = csv.split(/\r?\n/);
+      const list = [];
+      const seen = new Set();
+      for (let raw of lines) {
+        raw = raw.trim();
+        if (!raw) continue;
+        const matchCols = raw.match(/^"(.*?)","(.*?)"$/);
+        let title = matchCols ? matchCols[1].trim() : "";
+        let url = matchCols ? matchCols[2].trim() : "";
+        if (!url) {
+          const m = raw.match(/https?:\/\/[^"\s,]+/);
+          if (m) { url = m[0].replace(/"+$/, ''); title = raw.replace(m[0], '').replace(/["',]/g, '').trim(); }
+        }
+        const id = getYouTubeId(url);
+        if (id && !seen.has(id)) {
+          seen.add(id);
+          list.push({
+            format: "landscape",
+            sheetTitle: title || "TVC Ngang",
+            url: toWatchUrl(id),
+            thumbUrl: thumb(id)
+          });
         }
       }
+      return list.length ? list : null;
+    } catch { return null; }
+  }
 
-      const id = getYouTubeId(url);
-      if (id && !seen.has(id)) {
-        seen.add(id);
-        list.push({
-          id,
-          format: "landscape",
-          categoryLabel: "TVC Quảng Cáo Ngang",
-          ratioLabel: "16:9 NGANG",
-          url: toWatchUrl(id),
-          youtube: toWatchUrl(id),
-          sheetTitle: sheetTitle || "",
-          year: "2026"
-        });
+  // --- 2. Tải TVC Dọc (Trang tính 2 — Sắp xếp TỪ CUỐI LÊN ĐẦU) ---
+  async function fetchTvcDoc() {
+    try {
+      let r = await fetch(SHEET2_CSV, { cache: "no-store" });
+      if (!r.ok) r = await fetch(SHEET2_CSV_NAME, { cache: "no-store" });
+      if (!r.ok) throw new Error();
+      const csv = await r.text();
+      const lines = csv.split(/\r?\n/);
+      const list = [];
+      let idx = 0;
+      for (let raw of lines) {
+        raw = raw.trim();
+        if (!raw) continue;
+        const matchCols = raw.match(/^"(.*?)","(.*?)"$/);
+        let title = matchCols ? matchCols[1].trim() : "";
+        let url = matchCols ? matchCols[2].trim() : "";
+        if (!url) {
+          const m = raw.match(/https?:\/\/[^"\s,]+/);
+          if (m) { url = m[0].replace(/"+$/, ''); title = raw.replace(m[0], '').replace(/["',]/g, '').trim(); }
+        }
+        if (url) {
+          idx++;
+          const fbMatch = RAW_FALLBACK_TVC_DOC.find(f => f.url.includes(url.split("?")[0]) || url.includes(f.url.split("?")[0]));
+          let thumbUrl = fbMatch ? fbMatch.localThumb : "";
+          const driveId = getDriveId(url);
+          if (!thumbUrl && driveId) {
+            thumbUrl = `https://drive.google.com/thumbnail?id=${driveId}&sz=w1000`;
+          }
+          list.push({
+            format: "vertical",
+            sheetTitle: title || `TVC Dọc ${idx}`,
+            url,
+            thumbUrl: thumbUrl || "../assets/zap-mobile.png"
+          });
+        }
       }
-    }
-    return list;
+      if (list.length) {
+        // Sắp xếp TỪ CUỐI LÊN ĐẦU
+        return list.reverse();
+      }
+      return null;
+    } catch { return null; }
   }
 
-  let tvcProjects = [];
-  try {
-    const sheetData = await fetchSheetData();
-    if (sheetData.length) tvcProjects = sheetData;
-    else throw new Error("empty sheet");
-  } catch (e) {
-    console.warn("Sheet fetch failed, dùng fallback:", e);
-    tvcProjects = FALLBACK_TVC.map(item => {
-      const id = getYouTubeId(item.url);
-      return {
-        id,
-        format: "landscape",
-        categoryLabel: "TVC Quảng Cáo Ngang",
-        ratioLabel: "16:9 NGANG",
-        url: toWatchUrl(id),
-        youtube: toWatchUrl(id),
-        sheetTitle: item.sheetTitle,
-        year: "2026"
-      };
-    });
-  }
+  // Load cả 2 trang tính song song
+  const [ngangData, docData] = await Promise.all([fetchTvcNgang(), fetchTvcDoc()]);
 
-  // Cập nhật số lượng trên thẻ con TVC
+  const tvcNgangList = ngangData || FALLBACK_TVC_NGANG.map(it => {
+    const id = getYouTubeId(it.url);
+    return { format: "landscape", sheetTitle: it.sheetTitle, url: toWatchUrl(id), thumbUrl: thumb(id) };
+  });
+
+  const tvcDocList = docData || [...RAW_FALLBACK_TVC_DOC].reverse().map(it => ({
+    format: "vertical",
+    sheetTitle: it.sheetTitle,
+    url: it.url,
+    thumbUrl: it.localThumb
+  }));
+
+  // Cập nhật số lượng trên các thẻ con
   const tvcCountEl = $("#tvcSheetCount");
-  if (tvcCountEl) {
-    tvcCountEl.textContent = `${tvcProjects.length} DỰ ÁN TỪ SHEET`;
-  }
+  if (tvcCountEl) tvcCountEl.textContent = `${tvcNgangList.length} DỰ ÁN TỪ SHEET 1`;
 
-  // Kết hợp TVC Ngang & ADS Dọc
-  const allProjects = [...tvcProjects, ...ADS_VERTICAL_PROJECTS];
+  const docCountEl = $("#tvcDocSheetCount");
+  if (docCountEl) docCountEl.textContent = `${tvcDocList.length} DỰ ÁN TỪ SHEET 2`;
+
+  const allProjects = [...tvcNgangList, ...tvcDocList];
 
   const renderProjects = () => {
-    const list = allProjects.filter(p => currentFilter === "all" || p.format === currentFilter);
-    grid.innerHTML = list.map((item, i) => {
-      const displayTitle = item.sheetTitle ? finalTitle(item.sheetTitle) : (item.title || "TVC Ngang");
-      const watchUrl = item.url || item.youtube;
-      const imgSrc = item.image || thumb(item.id);
+    let list = [];
+    if (currentFilter === "landscape") {
+      list = tvcNgangList;
+    } else if (currentFilter === "vertical") {
+      list = tvcDocList;
+    } else {
+      list = allProjects;
+    }
 
-      if (item.format === "landscape") {
-        // Render thẻ TVC Ngang giống hệt thẻ wedding
-        return `
-          <article class="project-card">
-            <a class="project-preview" href="${esc(watchUrl)}" target="_blank" rel="noopener" aria-label="Xem ${esc(displayTitle)}">
-              <img src="${imgSrc}" alt="${esc(displayTitle)}" loading="lazy" onerror="if(!this.dataset.fb){this.dataset.fb=1;this.src='https://img.youtube.com/vi/${item.id}/hqdefault.jpg';}else if(this.dataset.fb==1){this.dataset.fb=2;this.src='https://img.youtube.com/vi/${item.id}/mqdefault.jpg';}">
-              <span class="project-no">${String(i + 1).padStart(2, "0")}</span>
-              <span class="project-play">PLAY ↗</span>
-            </a>
-            <div class="project-info">
-              <h3><a href="${esc(watchUrl)}" target="_blank" rel="noopener">${esc(displayTitle)}</a></h3>
-            </div>
-          </article>
-        `;
-      } else {
-        // Render thẻ ADS Dọc (với khung dọc 9:16)
-        return `
-          <article class="project-card is-vertical" data-format="vertical">
-            <a class="project-preview" href="${esc(watchUrl)}" target="_blank" rel="noopener" aria-label="Xem ${esc(displayTitle)}">
-              <img src="${imgSrc}" alt="${esc(displayTitle)}" loading="lazy">
-              <span class="project-badge-tag">${item.ratioLabel}</span>
-              <span class="project-no">${String(i + 1).padStart(2, "0")}</span>
-              <span class="project-play">PLAY ↗</span>
-            </a>
-            <div class="project-info">
-              <h3><a href="${esc(watchUrl)}" target="_blank" rel="noopener">${esc(displayTitle)}</a></h3>
-              <p>${esc(item.description || "")}</p>
-            </div>
-          </article>
-        `;
-      }
+    grid.innerHTML = list.map((item, i) => {
+      const displayTitle = finalTitle(item.sheetTitle);
+      const isVert = item.format === "vertical";
+      const driveId = getDriveId(item.url);
+      const fbFallback = driveId ? `https://drive.google.com/thumbnail?id=${driveId}&sz=w800` : "../assets/zap-mobile.png";
+
+      return `
+        <article class="project-card ${isVert ? 'is-vertical' : ''}">
+          <a class="project-preview ${isVert ? 'vertical-preview' : ''}" href="${esc(item.url)}" target="_blank" rel="noopener" aria-label="Xem ${esc(displayTitle)}">
+            <img src="${esc(item.thumbUrl)}" alt="${esc(displayTitle)}" loading="lazy" onerror="if(!this.dataset.fb){this.dataset.fb=1;this.src='${fbFallback}';}">
+            <span class="project-no">${String(i + 1).padStart(2, "0")}</span>
+            <span class="project-play">PLAY ↗</span>
+          </a>
+          <div class="project-info">
+            <h3><a href="${esc(item.url)}" target="_blank" rel="noopener">${esc(displayTitle)}</a></h3>
+          </div>
+        </article>
+      `;
     }).join("");
 
     // Cập nhật tab active
@@ -252,7 +248,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   // Click vào 2 thẻ con ở đầu trang
   subcatCards.forEach(card => {
     card.addEventListener("click", (e) => {
-      // Nếu bấm vào nút "Mở chuyên trang ↗" thì để link tự điều hướng
       if (e.target.closest("a.subcat-btn")) return;
       const targetFilter = card.dataset.filter;
       currentFilter = (currentFilter === targetFilter) ? "all" : targetFilter;
