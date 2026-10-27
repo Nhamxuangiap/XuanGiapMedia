@@ -212,6 +212,52 @@ button { font: inherit; color: inherit; cursor: pointer; }
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 28px 16px;
 }
+/* PHÂN NHÓM DỰ ÁN KHI HIỂN THỊ "TẤT CẢ" (BAO GỒM CẢ NGANG VÀ DỌC) */
+.project-container {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+.project-group {
+  position: relative;
+}
+.group-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line);
+}
+.group-tag {
+  display: block;
+  font-size: .64rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.group-heading {
+  margin: 0;
+  font-size: clamp(1.3rem, 2.8vw, 1.8rem);
+  font-weight: 900;
+  letter-spacing: -.02em;
+}
+.group-link {
+  font-size: .76rem;
+  font-weight: 700;
+  color: var(--muted);
+  transition: color .2s;
+  white-space: nowrap;
+}
+.group-link:hover {
+  color: #fff;
+}
+.project-grid.vertical-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px 16px;
+}
 .project-card {
   min-width: 0;
   display: flex;
@@ -444,13 +490,16 @@ footer { border-top: 1px solid var(--line); background: #080808; }
   .hero-head, .cta-inner { flex-direction: column; align-items: flex-start; gap: 20px; }
   .subcat-grid { grid-template-columns: 1fr; }
   .project-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .project-grid.vertical-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 @media (max-width: 600px) {
   :root { --wrap: min(100% - 32px); }
   .menu-toggle { display: block; }
   .main-nav { display: none; position: fixed; inset: var(--nav) 0 0; background: #050505; padding: 24px; flex-direction: column; gap: 16px; border-top: 1px solid var(--line); }
   .main-nav.open { display: flex; }
+  .group-header { flex-direction: column; align-items: flex-start; gap: 8px; }
   .project-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 10px; }
+  .project-grid.vertical-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 10px; }
   .project-info h3 { font-size: .88rem; line-height: 1.35; }
   .cta { padding: 58px 0; }
   .cta-inner { align-items: stretch; flex-direction: column; }

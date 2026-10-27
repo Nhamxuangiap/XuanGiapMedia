@@ -52,10 +52,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   // Check URL hash (#tvc-ngang hoặc #tvc-doc) nếu chưa có FILTER cố định
   if (!window.TVC_FORMAT_FILTER) {
     const hash = window.location.hash.toLowerCase();
-    if (hash.includes("ngang") || hash.includes("landscape")) {
+    if (hash === "#tvc-ngang" || hash === "#landscape") {
       currentFilter = "landscape";
-    } else if (hash.includes("doc") || hash.includes("vertical") || hash.includes("ads")) {
+    } else if (hash === "#tvc-doc" || hash === "#vertical") {
       currentFilter = "vertical";
+    } else {
+      currentFilter = "all";
     }
   }
 
@@ -193,37 +195,74 @@ document.addEventListener("DOMContentLoaded", async () => {
   const docCountEl = $("#tvcDocSheetCount");
   if (docCountEl) docCountEl.textContent = `${tvcDocList.length} DỰ ÁN TỪ SHEET 2`;
 
-  const allProjects = [...tvcNgangList, ...tvcDocList];
+  // Cập nhật số lượng trên các nút filter
+  filterTabs.forEach(tab => {
+    const f = tab.dataset.filter;
+    if (f === "all") tab.textContent = `Tất cả (${tvcNgangList.length + tvcDocList.length})`;
+    else if (f === "landscape") tab.textContent = `TVC Ngang 16:9 (${tvcNgangList.length})`;
+    else if (f === "vertical") tab.textContent = `TVC Dọc 9:16 (${tvcDocList.length})`;
+  });
+
+  const buildCard = (item, i) => {
+    const displayTitle = finalTitle(item.sheetTitle);
+    const isVert = item.format === "vertical";
+    const driveId = getDriveId(item.url);
+    const fbFallback = driveId ? `https://drive.google.com/thumbnail?id=${driveId}&sz=w800` : "../assets/zap-mobile.png";
+    const badgeText = isVert ? "9:16 DỌC" : "16:9 NGANG";
+
+    return `
+      <article class="project-card ${isVert ? 'is-vertical' : ''}">
+        <a class="project-preview ${isVert ? 'vertical-preview' : ''}" href="${esc(item.url)}" target="_blank" rel="noopener" aria-label="Xem ${esc(displayTitle)}">
+          <img src="${esc(item.thumbUrl)}" alt="${esc(displayTitle)}" loading="lazy" onerror="if(!this.dataset.fb){this.dataset.fb=1;this.src='${fbFallback}';}">
+          <span class="project-badge-tag">${badgeText}</span>
+          <span class="project-no">${String(i + 1).padStart(2, "0")}</span>
+          <span class="project-play">PLAY ↗</span>
+        </a>
+        <div class="project-info">
+          <h3><a href="${esc(item.url)}" target="_blank" rel="noopener">${esc(displayTitle)}</a></h3>
+        </div>
+      </article>
+    `;
+  };
 
   const renderProjects = () => {
-    let list = [];
-    if (currentFilter === "landscape") {
-      list = tvcNgangList;
-    } else if (currentFilter === "vertical") {
-      list = tvcDocList;
-    } else {
-      list = allProjects;
-    }
-
-    grid.innerHTML = list.map((item, i) => {
-      const displayTitle = finalTitle(item.sheetTitle);
-      const isVert = item.format === "vertical";
-      const driveId = getDriveId(item.url);
-      const fbFallback = driveId ? `https://drive.google.com/thumbnail?id=${driveId}&sz=w800` : "../assets/zap-mobile.png";
-
-      return `
-        <article class="project-card ${isVert ? 'is-vertical' : ''}">
-          <a class="project-preview ${isVert ? 'vertical-preview' : ''}" href="${esc(item.url)}" target="_blank" rel="noopener" aria-label="Xem ${esc(displayTitle)}">
-            <img src="${esc(item.thumbUrl)}" alt="${esc(displayTitle)}" loading="lazy" onerror="if(!this.dataset.fb){this.dataset.fb=1;this.src='${fbFallback}';}">
-            <span class="project-no">${String(i + 1).padStart(2, "0")}</span>
-            <span class="project-play">PLAY ↗</span>
-          </a>
-          <div class="project-info">
-            <h3><a href="${esc(item.url)}" target="_blank" rel="noopener">${esc(displayTitle)}</a></h3>
+    if (currentFilter === "all") {
+      // Khi chọn "Tất cả": Hiển thị đồng thời CẢ HAI NHÓM (Ngang 16:9 và Dọc 9:16) phân khu rõ ràng
+      grid.className = "project-container";
+      grid.innerHTML = `
+        <div class="project-group" id="group-tvc-ngang">
+          <div class="group-header">
+            <div class="group-title-wrap">
+              <span class="group-tag">COMMERCIAL · 16:9 CHUẨN TRUYỀN HÌNH</span>
+              <h3 class="group-heading">TVC Quảng Cáo Ngang (${tvcNgangList.length} dự án)</h3>
+            </div>
+            <a class="group-link" href="tvc-ngang.html">Xem chuyên trang TVC Ngang ↗</a>
           </div>
-        </article>
+          <div class="project-grid landscape-grid">
+            ${tvcNgangList.map((item, i) => buildCard(item, i)).join("")}
+          </div>
+        </div>
+
+        <div class="project-group" id="group-tvc-doc">
+          <div class="group-header">
+            <div class="group-title-wrap">
+              <span class="group-tag">VERTICAL TVC · 9:16 TIKTOK / REELS / SHORTS</span>
+              <h3 class="group-heading">TVC Dọc &amp; Video Ads (${tvcDocList.length} dự án)</h3>
+            </div>
+            <a class="group-link" href="tvc-doc.html">Xem chuyên trang TVC Dọc ↗</a>
+          </div>
+          <div class="project-grid vertical-grid">
+            ${tvcDocList.map((item, i) => buildCard(item, i)).join("")}
+          </div>
+        </div>
       `;
-    }).join("");
+    } else if (currentFilter === "landscape") {
+      grid.className = "project-grid landscape-grid";
+      grid.innerHTML = tvcNgangList.map((item, i) => buildCard(item, i)).join("");
+    } else if (currentFilter === "vertical") {
+      grid.className = "project-grid vertical-grid";
+      grid.innerHTML = tvcDocList.map((item, i) => buildCard(item, i)).join("");
+    }
 
     // Cập nhật tab active
     filterTabs.forEach(tab => {
