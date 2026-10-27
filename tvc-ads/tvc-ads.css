@@ -364,15 +364,80 @@ footer { border-top: 1px solid var(--line); background: #080808; }
 .dialog-info h3 { margin: 4px 0 0; font-size: 1.15rem; }
 .dialog-info > a { font-size: .72rem; font-weight: 700; white-space: nowrap; color: #fff; border: 1px solid var(--line2); padding: 8px 14px; border-radius: 6px; }
 
-/* FLOATING CTA */
-.floating-cta { position: fixed; bottom: 24px; right: 24px; z-index: 999; display: flex; flex-direction: column; gap: 10px; }
-.float-btn { display: flex; align-items: center; gap: 10px; padding: 6px 14px 6px 6px; border-radius: 999px; background: rgba(18, 18, 18, 0.85); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.15); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5); transition: transform .2s, border-color .2s; }
-.float-btn:hover { transform: scale(1.05); border-color: rgba(255, 255, 255, 0.4); }
-.float-icon { width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; }
-.float-call .float-icon { background: #22c55e; color: #fff; }
-.float-messenger .float-icon { background: #0084ff; color: #fff; }
-.float-zalo .float-icon { background: #0068ff; }
-.float-label { font-size: .72rem; font-weight: 700; color: #fff; }
+/* ===== Floating CTA: Call / Messenger / Zalo (Đồng bộ index.html) ===== */
+.floating-cta {
+  position: fixed;
+  right: 18px;
+  bottom: 88px;
+  z-index: 1200;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-end;
+}
+.float-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  text-decoration: none;
+  background: rgba(10, 10, 10, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 50%;
+  padding: 0;
+  width: 52px;
+  height: 52px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
+  transition: transform .25s ease, border-color .25s ease, background .25s ease;
+}
+.float-btn:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.45);
+  background: #111;
+}
+.float-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  flex-shrink: 0;
+}
+.float-icon svg {
+  width: 22px;
+  height: 22px;
+  display: block;
+}
+.float-icon b {
+  font-size: 1.15rem;
+  font-weight: 900;
+  font-style: normal;
+}
+.float-call .float-icon {
+  background: #22c55e;
+  animation: callPulse 2.4s infinite;
+}
+.float-messenger .float-icon {
+  background: linear-gradient(135deg, #00B2FF, #006AFF);
+}
+.float-messenger .float-icon svg {
+  fill: #fff;
+}
+.float-zalo .float-icon {
+  background: #0068FF;
+}
+.float-label {
+  display: none !important;
+}
+
+/* hiệu ứng rung nhẹ cho nút Call */
+@keyframes callPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.55); }
+  50% { box-shadow: 0 0 0 10px rgba(34, 197, 94, 0); }
+}
 
 /* RESPONSIVE */
 @media (max-width: 900px) {
@@ -387,9 +452,13 @@ footer { border-top: 1px solid var(--line); background: #080808; }
   .main-nav.open { display: flex; }
   .project-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 10px; }
   .project-info h3 { font-size: .88rem; line-height: 1.35; }
-  .floating-cta { bottom: 16px; right: 16px; }
-  .float-label { display: none; }
-  .float-btn { padding: 0; }
-  .float-icon { width: 44px; height: 44px; }
+  .cta { padding: 58px 0; }
+  .cta-inner { align-items: stretch; flex-direction: column; }
+  .cta-btn { width: 100%; }
+  .floating-cta { bottom: 78px; right: 12px; gap: 10px; }
+  .float-label { display: none !important; }
+  .float-btn { width: 48px; height: 48px; padding: 0; }
+  .float-icon { width: 48px; height: 48px; }
+  .float-icon svg { width: 20px; height: 20px; }
 }
 
