@@ -133,8 +133,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       <article class="project-card">
         <a class="project-preview" href="${esc(p.url)}" target="_blank" rel="noopener" aria-label="Xem ${esc(p.title || 'Bài dự thi ' + p.index)}">
           ${p.id ? `<img src="${thumb(p.id)}" alt="${esc(p.title || 'Bài dự thi')}" loading="lazy" onerror="if(!this.dataset.fb){this.dataset.fb=1;this.src='https://img.youtube.com/vi/${p.id}/hqdefault.jpg';}else if(this.dataset.fb==1){this.dataset.fb=2;this.src='https://img.youtube.com/vi/${p.id}/mqdefault.jpg';}">` : `<div style="position:absolute;inset:0;display:grid;place-items:center;color:#777;font-size:.75rem">LINK LỖI</div>`}
-          <span class="project-no">${String(p.index).padStart(2, "0")}</span>
-          <span class="project-play">PLAY ↗</span>
         </a>
         <div class="project-info">
           <h3><a href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.title || "Đang tải tiêu đề...")}</a></h3>
