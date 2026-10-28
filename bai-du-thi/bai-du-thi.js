@@ -1,25 +1,22 @@
 "use strict";
 /* =========================================================
    BÀI DỰ THI — TỰ ĐỘNG THEO GOOGLE SHEET (GIỐNG THẺ WEDDING)
-   - Tự lấy link cột A của Sheet, thumbnail khi mở trang
-   - Tiêu đề = tiêu đề YouTube (noembed/oembed) + " | XUÂN GIÁP MEDIA"
-   - Bấm ảnh/tiêu đề = mở YouTube tab mới
-   - Bạn chỉ cần dán ID/link Google Sheet vào hằng số SHEET_ID bên dưới
+   Sheet: https://docs.google.com/spreadsheets/d/1GEOF8EVlnxQrzoLPa272Ed-OcjCL_aSYggetd3FT6uI/edit?usp=sharing
+   - Cột A: Tiêu đề bài dự thi
+   - Cột B: Link video YouTube
+   - Tự động lấy dữ liệu từ Google Sheet, tải ảnh thumbnail & tiêu đề chuẩn
+   - Tự động cập nhật khi bạn thêm / sửa / xóa link trong Google Sheet
 ========================================================= */
 
-// Thay ID Google Sheet của bạn vào đây khi có Sheet riêng
-const SHEET_ID = ""; // Ví dụ: "19r3mUZXa0hfIoS8gpPqFswLuvTFDJBex7fExUP8OZn0"
-const SHEET_CSV_GVIZ = SHEET_ID ? `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv` : "";
-const SHEET_CSV_EXPORT = SHEET_ID ? `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv` : "";
+const SHEET_ID = "1GEOF8EVlnxQrzoLPa272Ed-OcjCL_aSYggetd3FT6uI";
+const SHEET_CSV_GVIZ = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv`;
+const SHEET_CSV_EXPORT = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv`;
 
-// Danh sách video bài dự thi mẫu (sẽ tự động thay thế khi có Google Sheet)
-const FALLBACK_LINKS = [
-  "https://youtu.be/IUSfkf7l8l4",
-  "https://youtu.be/NRkY1grW_PA",
-  "https://youtu.be/xyZ-KslVIyg",
-  "https://youtu.be/_utaretIzKE",
-  "https://youtu.be/I15YV8AJw9U",
-  "https://youtu.be/hIlQM4WLjig"
+// Dữ liệu dự phòng từ Google Sheet (khi offline hoặc mạng chậm)
+const FALLBACK_CONTEST_FILMS = [
+  { sheetTitle: "Đại Sứ Văn Hóa Đọc - Tiểu Thuyết Mưa Đỏ (Chu Lai)", url: "https://youtu.be/HCUSyUoNSPI" },
+  { sheetTitle: "Thầy Cô Trong Mắt Em 2024", url: "https://youtu.be/s_0LBJP5ddQ" },
+  { sheetTitle: 'Tiết mục dự thi "88Hz" Vĩnh Phúc (CLB Dance NTG)', url: "https://youtu.be/eDuFDIiD63s" }
 ];
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -41,61 +38,94 @@ document.addEventListener("DOMContentLoaded", async () => {
       return u.searchParams.get("v") || "";
     } catch { return ""; }
   };
+
   const toWatchUrl = id => `https://www.youtube.com/watch?v=${id}`;
   const thumb = id => `https://img.youtube.com/vi/${id}/maxresdefault.jpg`;
   const esc = s => String(s).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;");
 
-  // --- 1. Lấy links từ Google Sheet ---
-  async function fetchSheetLinks() {
-    if (!SHEET_CSV_GVIZ) return [];
+  const suffix = " | XUÂN GIÁP MEDIA";
+  function finalTitle(raw) {
+    raw = (raw || "").trim();
+    if (!raw) return "Bài Dự Thi" + suffix;
+    if (raw.toUpperCase().includes("XUÂN GIÁP MEDIA")) {
+      raw = raw.replace(/\s*-\s*Xuân Giáp Media\s*$/i, "").replace(/\s*\|\s*Xuân Giáp Media\s*$/i, "");
+      return raw + suffix;
+    }
+    return raw + suffix;
+  }
+
+  // --- 1. Lấy dữ liệu từ Google Sheet (Cột A: Tên bài thi, Cột B: Link YouTube) ---
+  async function fetchSheetData() {
     const tryFetch = async (url) => {
       const r = await fetch(url, { cache: "no-store" });
       if (!r.ok) throw new Error("http " + r.status);
       return await r.text();
     };
+
     let csv = "";
     try { csv = await tryFetch(SHEET_CSV_GVIZ); }
     catch (e1) {
       try { csv = await tryFetch(SHEET_CSV_EXPORT); }
       catch (e2) { throw e2; }
     }
+
     const lines = csv.split(/\r?\n/);
-    const links = [];
+    const list = [];
+    const seen = new Set();
+
     for (let raw of lines) {
       raw = raw.trim();
       if (!raw) continue;
-      const m = raw.match(/https?:\/\/[^"\s,]+/);
-      if (m) {
-        const url = m[0].replace(/"+$/, '');
-        if (getYouTubeId(url)) links.push(url);
+
+      let sheetTitle = "";
+      let url = "";
+
+      // Tách dạng CSV: "Cột A (Tiêu đề)","Cột B (Link)"
+      const matchCols = raw.match(/^"(.*?)","(.*?)"$/);
+      if (matchCols) {
+        sheetTitle = matchCols[1].trim().replace(/""/g, '"');
+        url = matchCols[2].trim();
+      } else {
+        const m = raw.match(/https?:\/\/[^"\s,]+/);
+        if (m) {
+          url = m[0].replace(/"+$/, '');
+          sheetTitle = raw.replace(m[0], '').replace(/["',]/g, '').trim();
+        }
       }
-    }
-    const seen = new Set();
-    const out = [];
-    for (const u of links) {
-      const id = getYouTubeId(u);
-      if (!seen.has(id)) {
+
+      const id = getYouTubeId(url);
+      if (id && !seen.has(id)) {
         seen.add(id);
-        out.push(toWatchUrl(id));
+        list.push({
+          id,
+          url: toWatchUrl(id),
+          sheetTitle: sheetTitle || ""
+        });
       }
     }
-    return out;
+    return list;
   }
 
-  let youtubeUrls = [];
+  let projectList = [];
   try {
-    const sheetLinks = await fetchSheetLinks();
-    if (sheetLinks.length) youtubeUrls = sheetLinks;
+    const sheetData = await fetchSheetData();
+    if (sheetData.length) projectList = sheetData;
     else throw new Error("empty sheet");
   } catch (e) {
-    youtubeUrls = FALLBACK_LINKS.map(u => toWatchUrl(getYouTubeId(u)));
+    console.warn("Sheet fetch failed, dùng dữ liệu dự phòng:", e);
+    projectList = FALLBACK_CONTEST_FILMS.map(item => {
+      const id = getYouTubeId(item.url);
+      return { id, url: toWatchUrl(id), sheetTitle: item.sheetTitle };
+    });
   }
 
-  // Khởi tạo danh sách dự án
-  const skel = youtubeUrls.map((url, i) => {
-    const id = getYouTubeId(url);
-    return { index: i + 1, id, url, title: null };
-  });
+  // Build danh sách dự án
+  const skel = projectList.map((p, i) => ({
+    index: i + 1,
+    id: p.id,
+    url: p.url,
+    title: p.sheetTitle ? finalTitle(p.sheetTitle) : null
+  }));
 
   // Render danh sách dự án
   function render(list) {
@@ -114,7 +144,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
   render(skel);
 
-  // --- 2. Lấy tiêu đề YouTube qua noembed (CORS open), fallback oembed ---
+  // --- 2. Lấy tiêu đề YouTube tự động (nếu Sheet chưa có tên) ---
   async function fetchTitle(id, watchUrl) {
     try {
       const r = await fetch(`https://noembed.com/embed?url=${encodeURIComponent(watchUrl)}`, { cache: "force-cache" });
@@ -133,20 +163,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     return null;
   }
 
-  const suffix = " | XUÂN GIÁP MEDIA";
-  function finalTitle(raw) {
-    raw = (raw || "").trim();
-    if (!raw) return "Bài Dự Thi" + suffix;
-    if (raw.toUpperCase().includes("XUÂN GIÁP MEDIA")) {
-      raw = raw.replace(/\s*-\s*Xuân Giáp Media\s*$/i, "").replace(/\s*\|\s*Xuân Giáp Media\s*$/i, "");
-      return raw + suffix;
-    }
-    return raw + suffix;
-  }
-
-  // Tải tiêu đề song song và cập nhật DOM
+  // Tải tiêu đề song song và cập nhật DOM nếu còn thiếu
   const cards = [...grid.querySelectorAll(".project-card")];
   await Promise.all(skel.map(async (p, idx) => {
+    if (p.title) return; // Đã có tiêu đề từ Sheet
     const raw = await fetchTitle(p.id, p.url);
     const title = finalTitle(raw || `Bài Dự Thi ${p.index}`);
     p.title = title;
