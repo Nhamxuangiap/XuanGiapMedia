@@ -1,0 +1,150 @@
+/* XUÂN GIÁP MEDIA — BÀI DỰ THI */
+:root{
+  --bg:#050505;--bg2:#0b0b0b;--surface:#111;--text:#f5f5f5;--muted:#929292;
+  --line:#ffffff1f;--line2:#ffffff3b;--font:"Montserrat",Arial,sans-serif;
+  --nav:72px;--wrap:min(1180px,calc(100% - 48px))
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;overflow-x:hidden;background:var(--bg);color:var(--text);font:400 16px/1.65 var(--font)}
+body.menu-open,body.dialog-open{overflow:hidden}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;cursor:pointer}
+.container{width:var(--wrap);margin:auto}
+.eyebrow{margin:0 0 14px;font-size:.68rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase}
+
+/* HEADER */
+.site-header{position:fixed;inset:0 0 auto;z-index:1000;height:var(--nav);background:#050505e8;border-bottom:1px solid var(--line);backdrop-filter:blur(14px)}
+.nav-wrap{height:100%;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:18px 0}
+.brand{display:inline-flex;align-items:center;gap:10px;font-size:.88rem;font-weight:800}
+.brand-mark{width:40px;height:40px;display:grid;place-items:center;border-radius:50%;background:#fff;color:#000;font-weight:900}
+.main-nav{display:flex;align-items:center;gap:28px}
+.main-nav a{color:#ffffffad;font-size:.78rem;font-weight:600;transition:color .2s}
+.main-nav a:hover{color:#fff}
+.menu-toggle{display:none;width:44px;height:44px;padding:10px;border:1px solid var(--line);border-radius:50%;background:#0a0a0a}
+.menu-toggle span{display:block;height:1px;margin:5px 0;background:#fff;transition:.25s}
+.menu-toggle.open span:first-child{transform:translateY(6px) rotate(45deg)}
+.menu-toggle.open span:nth-child(2){opacity:0}
+.menu-toggle.open span:last-child{transform:translateY(-6px) rotate(-45deg)}
+
+/* PROJECTS */
+.projects{padding:60px 0 100px}
+.section-head{margin-bottom:40px;display:flex;align-items:end;justify-content:space-between;gap:40px}
+.section-head h2{margin:0;font-size:clamp(2.4rem,5vw,4.8rem);font-weight:900;line-height:.95;letter-spacing:-.05em}
+.section-head>p{max-width:460px;margin:0;color:var(--muted);font-size:.82rem;line-height:1.6}
+.project-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px 16px}
+.project-card{min-width:0}
+.project-preview{position:relative;display:block;width:100%;aspect-ratio:16/9;overflow:hidden;border:1px solid var(--line);background:#111;cursor:pointer;border-radius:8px}
+.project-preview img{position:absolute;inset:0;width:100%;height:100%;border:0;object-fit:cover;transition:transform .45s ease}
+.project-preview:hover img{transform:scale(1.04)}
+.project-preview::after{content:"";position:absolute;inset:0;z-index:2;background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,.75));pointer-events:none}
+.project-no,.project-play{position:absolute;z-index:3;top:14px;font-size:.62rem;font-weight:700}
+.project-no{left:14px}
+.project-play{right:14px}
+.project-info{padding-top:13px}
+.project-info h3{margin:6px 0 4px;font-size:1.05rem;font-weight:700;line-height:1.35}
+.project-info h3 a{color:inherit;text-decoration:none}
+.project-info h3 a:hover{text-decoration:underline}
+
+/* FOOTER */
+footer{border-top:1px solid var(--line);background:#080808}
+.footer-inner{min-height:90px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.footer-inner span,.footer-inner a{color:var(--muted);font-size:.66rem}
+
+/* RESPONSIVE */
+@media(max-width:800px){
+  :root{--nav:68px;--wrap:calc(100% - 32px)}
+  .menu-toggle{display:block}
+  .main-nav{position:absolute;top:100%;left:0;right:0;height:calc(100dvh - var(--nav));padding:14px 16px;display:grid;align-content:start;background:#070707;transform:translateX(100%);opacity:0;pointer-events:none;transition:.25s}
+  .main-nav.open{transform:none;opacity:1;pointer-events:auto}
+  .main-nav a{min-height:52px;display:flex;align-items:center;border-bottom:1px solid var(--line)}
+  .section-head{align-items:start;flex-direction:column;gap:14px}
+  .project-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 14px}
+}
+@media(max-width:600px){
+  :root{--wrap:calc(100% - 24px)}
+  .projects{padding:40px 0 70px}
+  .project-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 10px}
+  .project-info{padding-top:8px}
+  .project-info h3{font-size:.68rem;line-height:1.4}
+  .project-no,.project-play{font-size:.5rem}
+  .project-no{left:8px}.project-play{right:8px}
+  .section-head h2{font-size:clamp(2.2rem,12vw,3.4rem)}
+  .footer-inner{padding:24px 0;align-items:flex-start;flex-direction:column;gap:7px}
+}
+
+/* ===== Floating CTA: Call / Messenger / Zalo ===== */
+.floating-cta{
+  position:fixed;
+  right:18px;
+  bottom:88px;
+  z-index:1200;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  align-items:flex-end;
+}
+.float-btn{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:0;
+  text-decoration:none;
+  background:rgba(10,10,10,.92);
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:50%;
+  padding:0;
+  width:52px;
+  height:52px;
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  box-shadow:0 8px 28px rgba(0,0,0,.45);
+  transition:transform .25s ease, border-color .25s ease, background .25s ease;
+}
+.float-btn:hover{
+  transform:translateY(-2px);
+  border-color:rgba(255,255,255,.45);
+  background:#111;
+}
+.float-icon{
+  width:52px;
+  height:52px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  color:#fff;
+  flex-shrink:0;
+}
+.float-icon svg{
+  width:22px;
+  height:22px;
+  display:block;
+}
+.float-call .float-icon{
+  background:#22c55e;
+  animation:callPulse 2.4s infinite;
+}
+.float-messenger .float-icon{
+  background:linear-gradient(135deg,#00B2FF,#006AFF);
+}
+.float-messenger .float-icon svg{
+  fill:#fff;
+}
+.float-zalo .float-icon{
+  background:#0068FF;
+}
+.float-label{
+  display:none !important;
+}
+
+@keyframes callPulse{
+  0%,100%{ box-shadow:0 0 0 0 rgba(34,197,94,.55); }
+  50%{ box-shadow:0 0 0 10px rgba(34,197,94,0); }
+}
+
+@media(max-width:600px){
+  .floating-cta{ bottom:78px; right:12px; gap:10px; }
+  .float-btn{ width:48px; height:48px; padding:0; }
+  .float-icon{ width:48px; height:48px; }
+  .float-icon svg{ width:20px; height:20px; }
+}
