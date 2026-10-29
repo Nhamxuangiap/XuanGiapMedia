@@ -35,7 +35,8 @@ const resourceGroups = {
     children: [
       { id: "fx-bg", title: "BackGround Colorful", shortTitle: "BackGround\nColorful", image: "assets/fx-bg/background-colorful.jpg", driveUrl: "https://drive.google.com/drive/folders/1e8OkXH2hP8t-z6WkZKMcz5afuFtl9PVC", cover: "linear-gradient(145deg,#a8edea,#fed6e3 30%,#6b6b6b 58%,#111)", description: "Background màu chuyển động làm nền chữ và intro." },
       { id: "fx-film", title: "Hiệu ứng Film", shortTitle: "Hiệu ứng\nFilm", image: "assets/fx-film/hieu-ung-film.jpg", driveUrl: "https://drive.google.com/drive/folders/1yqr0mXLY2y06_G9AsyVy9-hEVBRAooiB", cover: "linear-gradient(145deg,#f6d365,#fda085 28%,#6b3a2a 55%,#111)", description: "Khung Super 8mm, film burn, hạt grain & texture bụi xước cổ điển." },
-      { id: "fx-doc", title: "LƯỚI EDIT VIDEO DỌC", shortTitle: "Lưới Edit\nVideo Dọc", image: "assets/fx-doc/luoi-edit-video-doc.jpg", driveUrl: "https://drive.google.com/drive/folders/14Pvzl8gNKtw6ZU108IXDmLN3910P_SyS", cover: "linear-gradient(145deg,#fddb92,#d1fdff 30%,#5b5b5b 60%,#111)", description: "Lưới căn khung video dọc 9:16 cho TikTok / Reels." }
+      { id: "fx-doc", title: "LƯỚI EDIT VIDEO DỌC", shortTitle: "Lưới Edit\nVideo Dọc", image: "assets/fx-doc/luoi-edit-video-doc.jpg", driveUrl: "https://drive.google.com/drive/folders/14Pvzl8gNKtw6ZU108IXDmLN3910P_SyS", cover: "linear-gradient(145deg,#fddb92,#d1fdff 30%,#5b5b5b 60%,#111)", description: "Lưới căn khung video dọc 9:16 cho TikTok / Reels." },
+      { id: "fx-text-capcut", title: "Text FX CapCut", shortTitle: "Text FX CapCut", image: "", driveUrl: "https://drive.google.com/drive/folders/1A6h-5iVi0T0noG9tiZmNdNGvIq9OjYLW?usp=sharing", cover: "linear-gradient(145deg,#e0c3fc,#8ec5fc 30%,#5b5b5b 60%,#111)", description: "Bộ hiệu ứng chữ cho CapCut — font, animation xuất hiện và biến mất, dùng làm tiêu đề video." }
     ]
   },
   sound: {
@@ -45,9 +46,10 @@ const resourceGroups = {
     description: "SFX, meme sound, nhạc nền — bấm tên để mở Drive.",
     cover: "linear-gradient(145deg,#cfd9df,#e2ebf0 28%,#5b5b5b 58%,#111)",
     children: [
-      { id: "snd-meme", title: "MEME SOUND Schannel", shortTitle: "Meme Sound", image: "", driveUrl: "https://drive.google.com/drive/folders/1sxQe7oBMtK2aIr_NKCuj7U4C1pDY9ryd", cover: "linear-gradient(145deg,#fbc2eb,#a6c1ee 30%,#5b5b5b 60%,#111)", description: "Âm thanh meme vui nhộn cho video giải trí." },
+      { id: "snd-meme", title: "MEME SOUND Schannel", shortTitle: "Meme Sound", image: "assets/meme-sound/meme-sound.jpg", driveUrl: "https://drive.google.com/drive/folders/1sxQe7oBMtK2aIr_NKCuj7U4C1pDY9ryd", cover: "linear-gradient(145deg,#fbc2eb,#a6c1ee 30%,#5b5b5b 60%,#111)", description: "Âm thanh meme vui nhộn cho video giải trí." },
       { id: "snd-ef", title: "SOUND EF", shortTitle: "Sound EF", image: "", driveUrl: "https://drive.google.com/drive/folders/1fh5-xA1HHMRNSO-sCJFLOBoNqnOZEy6i", cover: "linear-gradient(145deg,#cfd9df,#e2ebf0 28%,#4a4a4a 60%,#111)", description: "Hiệu ứng whoosh, hit, riser cho chuyển cảnh." },
-      { id: "snd-epi", title: "Nhạc Epidemic", shortTitle: "Nhạc Epidemic", image: "", driveUrl: "https://drive.google.com/drive/folders/115YcOt73tuoKtPcwKWPiAUJI2ZbxkM2D", cover: "linear-gradient(145deg,#e0c3fc,#8ec5fc 30%,#5b5b5b 60%,#111)", description: "Nhạc nền bản quyền cho vlog và quảng cáo." }
+      { id: "snd-epi", title: "Nhạc Epidemic", shortTitle: "Nhạc Epidemic", image: "", driveUrl: "https://drive.google.com/drive/folders/115YcOt73tuoKtPcwKWPiAUJI2ZbxkM2D", cover: "linear-gradient(145deg,#e0c3fc,#8ec5fc 30%,#5b5b5b 60%,#111)", description: "Nhạc nền bản quyền cho vlog và quảng cáo." },
+      { id: "snd-kitchen", title: "Kitchen & Cooking Sound", shortTitle: "Kitchen & Cooking Sound", image: "", driveUrl: "https://drive.google.com/drive/folders/1c6f8VW6BNvyK-VbzZ8KmDMIKQP5C0Zz3?usp=sharing", cover: "linear-gradient(145deg,#fbc2eb,#a6c1ee 30%,#5b5b5b 60%,#111)", description: "Âm thanh nhà bếp & nấu ăn — tiếng xào, cắt, đổ nước, ambiance bếp." }
     ]
   }
 };
@@ -55,8 +57,8 @@ const resourceGroups = {
 const resourceItems = [
   { id: 1, title: "Preset Ảnh", shortTitle: "Preset\nẢnh", category: "preset", categoryLabel: "Preset Ảnh", price: "3 thư mục", format: "LR · DNG · XMP", description: "Bấm để xem các thư mục Preset Lightroom tone film, wedding, du lịch.", cover: "linear-gradient(145deg,#ff9a9e,#fecfef 30%,#8a4b3a 55%,#111)", kind: "group", group: "preset", image: "" },
   { id: 2, title: "LUT Màu Video", shortTitle: "LUT\nMàu Video", category: "lut", categoryLabel: "LUT Màu Video", price: "2 thư mục", format: "CapCut · CUBE · LUT", description: "Bấm để xem 2 thư mục: LUT CapCut & LUT Màu Tổng Hợp (30+ bộ).", cover: "linear-gradient(145deg,#f6d365,#fda085 28%,#8a4b3a 55%,#111)", kind: "group", group: "lut", image: "" },
-  { id: 3, title: "FX Video — Hiệu Ứng", shortTitle: "FX\nVideo", category: "fx", categoryLabel: "FX Video", price: "4 thư mục", format: "Overlay · Background · Lưới", description: "Bấm để xem các thư mục hiệu ứng & background.", cover: "linear-gradient(145deg,#a8edea,#fed6e3 30%,#6b6b6b 58%,#111)", kind: "group", group: "fx", image: "" },
-  { id: 4, title: "Âm Thanh", shortTitle: "Âm Thanh", category: "sound", categoryLabel: "Âm Thanh", price: "3 thư mục", format: "WAV · MP3 · SFX", description: "Bấm để xem các thư mục âm thanh.", cover: "linear-gradient(145deg,#cfd9df,#e2ebf0 28%,#5b5b5b 58%,#111)", kind: "group", group: "sound", image: "" },
+  { id: 3, title: "FX Video — Hiệu Ứng", shortTitle: "FX\nVideo", category: "fx", categoryLabel: "FX Video", price: "5 thư mục", format: "Overlay · Background · Lưới · Chữ", description: "Bấm để xem các thư mục hiệu ứng & background.", cover: "linear-gradient(145deg,#a8edea,#fed6e3 30%,#6b6b6b 58%,#111)", kind: "group", group: "fx", image: "" },
+  { id: 4, title: "Âm Thanh", shortTitle: "Âm Thanh", category: "sound", categoryLabel: "Âm Thanh", price: "4 thư mục", format: "WAV · MP3 · SFX", description: "Bấm để xem các thư mục âm thanh.", cover: "linear-gradient(145deg,#cfd9df,#e2ebf0 28%,#5b5b5b 58%,#111)", kind: "group", group: "sound", image: "" },
 ];
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -175,7 +177,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <article class="resource-card is-child" data-category="${g.category}" data-group="${currentGroup}">
           <a class="resource-cover" href="${c.driveUrl}" target="_blank" rel="noopener" style="--cover:${c.cover}" aria-label="${c.title}">
             ${c.image ? `<img src="${c.image}" alt="${c.title}" loading="lazy">` : ""}
-            <h3>${(c.shortTitle || c.title).replace("\n", "<br>")}</h3>
+            <h3>${(c.shortTitle || c.title).replace(/\s*\n\s*/g, " ")}</h3>
           </a>
           <div class="resource-body">
             <p>${c.description || ""}</p>
@@ -199,7 +201,7 @@ document.addEventListener("DOMContentLoaded", () => {
       <article class="resource-card is-group" data-group="${item.group}">
         <div class="resource-cover" data-group="${item.group}" role="button" tabindex="0" style="--cover:${item.cover}" aria-label="${item.title}">
           ${item.image ? `<img src="${item.image}" alt="${item.title}" loading="lazy">` : ""}
-          <h3>${item.shortTitle.replace("\n", "<br>")}</h3>
+          <h3>${item.shortTitle.replace(/\s*\n\s*/g, " ")}</h3>
         </div>
         <div class="resource-body">
           <h3><a href="#" data-group="${item.group}">${item.title}</a></h3>
