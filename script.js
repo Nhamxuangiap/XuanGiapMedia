@@ -10,7 +10,7 @@ const FORM_ENDPOINT = "https://formsubmit.co/ajax/vanlongauto3@gmail.com";
 // - Cột D: Link ảnh bìa / thumbnail (link Drive, link ảnh online, hoặc để trống)
 // - Cột E: Mô tả ngắn
 // ============================================================================
-const RESOURCE_SHEET_ID = ""; // Dán ID Google Sheet của bạn vào đây
+const RESOURCE_SHEET_ID = "1KC-d70yzHh7AXXymKGfAoxTMdwfJUleK7QnQXMm_JOA";
 
 const resourceGroups = {
   preset: {
@@ -56,6 +56,7 @@ const resourceGroups = {
     description: "SFX, meme sound, nhạc nền — bấm tên để mở Drive.",
     cover: "linear-gradient(145deg,#cfd9df,#e2ebf0 28%,#5b5b5b 58%,#111)",
     children: [
+      { id: "snd-wedding-music", title: "List Nhạc Cưới", shortTitle: "List Nhạc Cưới", image: "assets/list-nhac-cuoi/list-nhac-cuoi.jpg", driveUrl: "https://drive.google.com/drive/folders/1rsc451-0AeeQtjo03PXJMiLkxEWHd2c0?usp=sharing", cover: "linear-gradient(145deg,#fbc2eb,#a6c1ee 30%,#5b5b5b 60%,#111)", description: "Bao gồm nhạc đón khách, làm lễ, đãi tiệc và dùng làm nhạc nền dựng video kỷ niệm." },
       { id: "snd-meme", title: "MEME SOUND Schannel", shortTitle: "Meme Sound", image: "assets/meme-sound/meme-sound.jpg", driveUrl: "https://drive.google.com/drive/folders/1sxQe7oBMtK2aIr_NKCuj7U4C1pDY9ryd", cover: "linear-gradient(145deg,#fbc2eb,#a6c1ee 30%,#5b5b5b 60%,#111)", description: "Âm thanh meme vui nhộn cho video giải trí." },
       { id: "snd-wedding", title: "WEDDING SOUND", shortTitle: "Wedding Sound", image: "assets/wedding-sound/wedding-sound.jpg", driveUrl: "https://drive.google.com/drive/folders/1hi9otjKUhIccGD-7ek3jCWhkkGUmp609?usp=sharing", cover: "linear-gradient(145deg,#f6d365,#fda085 28%,#6b3a2a 55%,#111)", description: "120 bản ghi âm đám cưới thực tế — tiếng chúc mừng, không gian, cái ôm, pháo hoa — cùng các kết cấu âm thanh sống động." },
       { id: "snd-kitchen", title: "Kitchen & Cooking Sound", shortTitle: "Kitchen & Cooking Sound", image: "assets/kitchen-sound/kitchen-cooking-sound.jpg", driveUrl: "https://drive.google.com/drive/folders/1c6f8VW6BNvyK-VbzZ8KmDMIKQP5C0Zz3?usp=sharing", cover: "linear-gradient(145deg,#fbc2eb,#a6c1ee 30%,#5b5b5b 60%,#111)", description: "Âm thanh nhà bếp & nấu ăn — tiếng xào, cắt, đổ nước, ambiance bếp." },
@@ -70,7 +71,7 @@ const resourceItems = [
   { id: 1, title: "Preset Ảnh", shortTitle: "Preset\nẢnh", category: "preset", categoryLabel: "Preset Ảnh", price: "3 thư mục", format: "LR · DNG · XMP", description: "Bấm để xem các thư mục Preset Lightroom tone film, wedding, du lịch.", cover: "linear-gradient(145deg,#ff9a9e,#fecfef 30%,#8a4b3a 55%,#111)", kind: "group", group: "preset", image: "" },
   { id: 2, title: "LUT Màu Video", shortTitle: "LUT\nMàu Video", category: "lut", categoryLabel: "LUT Màu Video", price: "2 thư mục", format: "CapCut · CUBE · LUT", description: "Bấm để xem 2 thư mục: LUT CapCut & LUT Màu Tổng Hợp (30+ bộ).", cover: "linear-gradient(145deg,#f6d365,#fda085 28%,#8a4b3a 55%,#111)", kind: "group", group: "lut", image: "" },
   { id: 3, title: "FX Video — Hiệu Ứng", shortTitle: "FX\nVideo", category: "fx", categoryLabel: "FX Video", price: "5 thư mục", format: "Overlay · Background · Lưới · Chữ", description: "Bấm để xem các thư mục hiệu ứng & background.", cover: "linear-gradient(145deg,#a8edea,#fed6e3 30%,#6b6b6b 58%,#111)", kind: "group", group: "fx", image: "" },
-  { id: 4, title: "Âm Thanh", shortTitle: "Âm Thanh", category: "sound", categoryLabel: "Âm Thanh", price: "6 thư mục", format: "WAV · MP3 · SFX", description: "Bấm để xem các thư mục âm thanh.", cover: "linear-gradient(145deg,#cfd9df,#e2ebf0 28%,#5b5b5b 58%,#111)", kind: "group", group: "sound", image: "" },
+  { id: 4, title: "Âm Thanh", shortTitle: "Âm Thanh", category: "sound", categoryLabel: "Âm Thanh", price: "7 thư mục", format: "WAV · MP3 · SFX", description: "Bấm để xem các thư mục âm thanh.", cover: "linear-gradient(145deg,#cfd9df,#e2ebf0 28%,#5b5b5b 58%,#111)", kind: "group", group: "sound", image: "" },
 ];
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -351,40 +352,72 @@ document.addEventListener("DOMContentLoaded", () => {
     const rows = parseCSVRows(csv);
     if (!rows.length) return;
 
-    const newChildren = { preset: [], lut: [], fx: [], sound: [] };
     const firstCell = (rows[0][0] || "").toLowerCase();
     const startIndex = (firstCell.includes("tiêu đề") || firstCell.includes("title")) ? 1 : 0;
+
+    let hasData = false;
 
     for (let i = startIndex; i < rows.length; i++) {
       const row = rows[i];
       const title = (row[0] || "").trim();
       if (!title) continue;
 
-      const cat = normalizeCategory(row[1]);
-      if (!cat || !newChildren[cat]) continue;
+      let cat = "";
+      let driveUrl = "";
+      let image = "";
+      let description = "";
 
-      const driveUrl = (row[2] || "").trim();
-      const image = formatResourceImage(row[3]);
-      const description = (row[4] || "").trim();
+      // Hỗ trợ cả 2 dạng bảng tính:
+      // Dạng 1 (4 cột): Tiêu đề, Link Drive, Thumbnail, Mô tả
+      if (row[1] && (row[1].includes("drive.google.com") || row[1].startsWith("http"))) {
+        driveUrl = (row[1] || "").trim();
+        image = formatResourceImage(row[2]);
+        description = (row[3] || "").trim();
 
-      newChildren[cat].push({
-        id: `${cat}-${i}`,
+        const lower = (title + " " + description).toLowerCase();
+        if (lower.includes("preset")) cat = "preset";
+        else if (lower.includes("lut")) cat = "lut";
+        else if (lower.includes("fx") || lower.includes("hiệu ứng") || lower.includes("background") || lower.includes("lưới")) cat = "fx";
+        else cat = "sound"; // Mặc định là nhóm Âm Thanh
+      } else {
+        // Dạng 2 (5 cột): Tiêu đề, Danh mục, Link Drive, Thumbnail, Mô tả
+        cat = normalizeCategory(row[1]) || "sound";
+        driveUrl = (row[2] || "").trim();
+        image = formatResourceImage(row[3]);
+        description = (row[4] || "").trim();
+      }
+
+      if (!resourceGroups[cat]) cat = "sound";
+
+      // Kiểm tra xem mục này đã có trong danh mục chưa (tránh trùng lặp)
+      const existingIdx = resourceGroups[cat].children.findIndex(
+        c => (driveUrl && c.driveUrl === driveUrl) || c.title.toLowerCase() === title.toLowerCase()
+      );
+
+      const sheetItem = {
+        id: `${cat}-sheet-${i}`,
         title,
         shortTitle: title,
         driveUrl,
-        image,
+        image: image,
         cover: defaultCategoryCover(cat),
         description
-      });
-    }
+      };
 
-    let hasData = false;
-    Object.keys(newChildren).forEach(cat => {
-      if (newChildren[cat].length > 0) {
-        resourceGroups[cat].children = newChildren[cat];
-        hasData = true;
+      if (existingIdx >= 0) {
+        // Cập nhật thông tin từ Sheet, ưu tiên giữ ảnh local tối ưu nếu có
+        const oldItem = resourceGroups[cat].children[existingIdx];
+        resourceGroups[cat].children[existingIdx] = {
+          ...oldItem,
+          ...sheetItem,
+          image: oldItem.image || sheetItem.image
+        };
+      } else {
+        // Thêm mới vào đầu danh mục
+        resourceGroups[cat].children.unshift(sheetItem);
       }
-    });
+      hasData = true;
+    }
 
     if (hasData) {
       updateResourceCounts();
