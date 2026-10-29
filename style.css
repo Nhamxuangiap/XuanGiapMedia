@@ -345,20 +345,6 @@ p {
   border-color: var(--white);
 }
 
-.hero-scroll {
-  position: absolute;
-  left: 50%;
-  bottom: 26px;
-  z-index: 2;
-  transform: translateX(-50%);
-  color: rgba(255,255,255,.55);
-  font-size: .65rem;
-  font-weight: 600;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-}
-
-
 /* ================= STRIP ================= */
 
 .media-strip {
@@ -1575,10 +1561,6 @@ p {
       linear-gradient(0deg, rgba(5,5,5,.9), transparent 45%);
   }
 
-  .hero-scroll {
-    display: none;
-  }
-
   .media-strip-track {
     gap: 17px;
     font-size: .68rem;
@@ -2006,64 +1988,11 @@ p {
   flex-wrap: wrap;
 }
 
-/* Định dạng và tạo khoảng cách cho chữ Cuộn để khám phá */
-.hero-scroll {
-  display: inline-block;
-  margin-top: 60px; /* Đẩy chữ cuộn cách xa 3 nút ra */
-  color: var(--muted); /* Màu xám mờ */
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  transition: color var(--ease);
-}
-
-.hero-scroll:hover {
-  color: var(--white); /* Sáng lên khi di chuột */
-}
 @media (max-width: 600px) {
   .hero-content {
     /* Thay đổi số 120px lớn hơn hoặc nhỏ hơn để đẩy cụm chữ lên/xuống cho vừa mắt */
     transform: translateY(150px) !important; 
   }
-}.hero-scroll-btn {
-  position: absolute; bottom: 40px; left: 50%;
-  transform: translateX(-50%);
-  display: flex; flex-direction: column; align-items: center; gap: 8px;
-  color: var(--muted); font-size: .75rem; font-weight: 700;
-  letter-spacing: .1em; text-transform: uppercase;
-  z-index: 10; transition: color var(--ease);
-}
-.hero-scroll-btn:hover { color: var(--white); }
-.hero-scroll-btn span{
-  white-space: nowrap;
-  text-wrap: nowrap;
-  text-align: center;
-}
-.hero-scroll-btn svg {
-  width: 28px; height: 28px;
-  animation: bounce-down 2s infinite ease-in-out; 
-}
-@keyframes bounce-down {
-  0%, 100% { transform: translateY(0); opacity: .4; }
-  50% { transform: translateY(12px); opacity: 1; }
-}
-@media (max-width: 600px){
-  .hero-scroll-btn{
-    width: max-content;
-    max-width: 92vw;
-  }
-  .hero-scroll-btn span{
-    font-size: .70rem;
-    letter-spacing: .08em;
-    white-space: nowrap;
-  }
-}
-@media (max-height: 700px) and (max-width: 600px) {
-  .hero-scroll-btn { display: none; }
-}.scroll-arrow {
-    transform: translateY(-20px); /* Số âm để dịch lên trên, điều chỉnh theo ý muốn */
-    
 }
 
 /* ================= ABOUT / GIỚI THIỆU ================= */
@@ -2350,17 +2279,6 @@ p {
   
   /* Áp dụng animation lắc lư lặp lại mỗi 3 giây */
   animation: gentleWobble 3s infinite;
-}
-
-.btn-view-all .btn-arrow {
-  display: inline-block;
-  font-size: 0.95rem;
-  line-height: 1;
-  transition: transform 0.3s ease;
-}
-
-.btn-view-all.is-expanded .btn-arrow {
-  transform: rotate(180deg);
 }
 
 /* 3. Hiệu ứng khi người dùng chạm/đưa chuột vào */

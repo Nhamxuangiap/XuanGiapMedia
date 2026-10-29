@@ -368,15 +368,10 @@ document.addEventListener("DOMContentLoaded", () => {
       if (btnViewMore) {
         btnViewMore.setAttribute("aria-expanded", String(isExpanded));
         const btnText = btnViewMore.querySelector(".btn-text");
-        const btnArrow = btnViewMore.querySelector(".btn-arrow");
         if (isExpanded) {
-          btnViewMore.classList.add("is-expanded");
           if (btnText) btnText.textContent = "THU GỌN DỰ ÁN";
-          if (btnArrow) btnArrow.textContent = "↑";
         } else {
-          btnViewMore.classList.remove("is-expanded");
           if (btnText) btnText.textContent = "XEM THÊM DỰ ÁN";
-          if (btnArrow) btnArrow.textContent = "↓";
         }
       }
     };
