@@ -2,6 +2,16 @@
 
 const FORM_ENDPOINT = "https://formsubmit.co/ajax/vanlongauto3@gmail.com";
 
+// ============================================================================
+// GOOGLE SHEET TỰ ĐỘNG CHO MỤC TÀI NGUYÊN (PRESET, LUT, FX, ÂM THANH)
+// - Cột A: Tiêu đề (Tên tài nguyên)
+// - Cột B: Danh mục (preset / lut / fx / sound)
+// - Cột C: Link Google Drive tải về
+// - Cột D: Link ảnh bìa / thumbnail (link Drive, link ảnh online, hoặc để trống)
+// - Cột E: Mô tả ngắn
+// ============================================================================
+const RESOURCE_SHEET_ID = ""; // Dán ID Google Sheet của bạn vào đây
+
 const resourceGroups = {
   preset: {
     title: "Preset Ảnh",
@@ -243,7 +253,147 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.classList.remove("dialog-open");
   };
 
+  // Cập nhật số lượng thư mục hiển thị trên từng nhóm (ví dụ: "6 thư mục")
+  const updateResourceCounts = () => {
+    Object.keys(resourceGroups).forEach(cat => {
+      const g = resourceGroups[cat];
+      const it = resourceItems.find(item => item.group === cat);
+      if (it && g && Array.isArray(g.children)) {
+        it.price = `${g.children.length} thư mục`;
+      }
+    });
+  };
+
+  // Chuẩn hóa tên danh mục từ Sheet (chấp nhận cả tiếng Anh & tiếng Việt)
+  const normalizeCategory = raw => {
+    const s = String(raw || "").trim().toLowerCase();
+    if (s.includes("preset")) return "preset";
+    if (s.includes("lut")) return "lut";
+    if (s.includes("fx") || s.includes("hiệu ứng")) return "fx";
+    if (s.includes("sound") || s.includes("âm thanh") || s.includes("sfx")) return "sound";
+    return "";
+  };
+
+  // Tự động chuyển link Google Drive sang định dạng ảnh trực tiếp
+  const formatResourceImage = raw => {
+    if (!raw) return "";
+    const s = String(raw).trim().replace(/^"+|"+$/g, "").replace(/^'+|'+$/g, "");
+    if (!s) return "";
+    const m = s.match(/\/file\/d\/([a-zA-Z0-9_-]+)/) || s.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+    if (m && m[1]) {
+      return `https://drive.google.com/thumbnail?id=${m[1]}&sz=w1000`;
+    }
+    return s;
+  };
+
+  const defaultCategoryCover = cat => {
+    switch (cat) {
+      case "preset": return "linear-gradient(145deg,#ff9a9e,#fecfef 30%,#8a4b3a 55%,#111)";
+      case "lut": return "linear-gradient(145deg,#f6d365,#fda085 28%,#8a4b3a 55%,#111)";
+      case "fx": return "linear-gradient(145deg,#a8edea,#fed6e3 30%,#6b6b6b 58%,#111)";
+      case "sound": return "linear-gradient(145deg,#fbc2eb,#a6c1ee 30%,#5b5b5b 60%,#111)";
+      default: return "linear-gradient(145deg,#333,#111)";
+    }
+  };
+
+  const parseCSVRows = csvText => {
+    const lines = csvText.split(/\r?\n/);
+    const rows = [];
+    for (let line of lines) {
+      line = line.trim();
+      if (!line) continue;
+      const cells = [];
+      let cur = "";
+      let inQuotes = false;
+      for (let i = 0; i < line.length; i++) {
+        const c = line[i];
+        if (c === '"') {
+          if (inQuotes && line[i + 1] === '"') {
+            cur += '"';
+            i++;
+          } else {
+            inQuotes = !inQuotes;
+          }
+        } else if (c === ',' && !inQuotes) {
+          cells.push(cur.trim());
+          cur = "";
+        } else {
+          cur += c;
+        }
+      }
+      cells.push(cur.trim());
+      rows.push(cells);
+    }
+    return rows;
+  };
+
+  const loadResourcesFromSheet = async () => {
+    if (!RESOURCE_SHEET_ID) return;
+    const gvizUrl = `https://docs.google.com/spreadsheets/d/${RESOURCE_SHEET_ID}/gviz/tq?tqx=out:csv`;
+    const exportUrl = `https://docs.google.com/spreadsheets/d/${RESOURCE_SHEET_ID}/export?format=csv`;
+
+    const tryFetch = async url => {
+      const r = await fetch(url, { cache: "no-store" });
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      return await r.text();
+    };
+
+    let csv = "";
+    try { csv = await tryFetch(gvizUrl); }
+    catch {
+      try { csv = await tryFetch(exportUrl); }
+      catch (e) {
+        console.warn("Không thể tải Google Sheet Tài Nguyên, dùng dữ liệu dự phòng:", e);
+        return;
+      }
+    }
+
+    const rows = parseCSVRows(csv);
+    if (!rows.length) return;
+
+    const newChildren = { preset: [], lut: [], fx: [], sound: [] };
+    const firstCell = (rows[0][0] || "").toLowerCase();
+    const startIndex = (firstCell.includes("tiêu đề") || firstCell.includes("title")) ? 1 : 0;
+
+    for (let i = startIndex; i < rows.length; i++) {
+      const row = rows[i];
+      const title = (row[0] || "").trim();
+      if (!title) continue;
+
+      const cat = normalizeCategory(row[1]);
+      if (!cat || !newChildren[cat]) continue;
+
+      const driveUrl = (row[2] || "").trim();
+      const image = formatResourceImage(row[3]);
+      const description = (row[4] || "").trim();
+
+      newChildren[cat].push({
+        id: `${cat}-${i}`,
+        title,
+        shortTitle: title,
+        driveUrl,
+        image,
+        cover: defaultCategoryCover(cat),
+        description
+      });
+    }
+
+    let hasData = false;
+    Object.keys(newChildren).forEach(cat => {
+      if (newChildren[cat].length > 0) {
+        resourceGroups[cat].children = newChildren[cat];
+        hasData = true;
+      }
+    });
+
+    if (hasData) {
+      updateResourceCounts();
+      renderResources();
+    }
+  };
+
   renderResources();
+  loadResourcesFromSheet();
 
   filters.addEventListener("click", event => {
     const button = event.target.closest("[data-filter]");
