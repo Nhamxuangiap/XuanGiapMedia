@@ -923,7 +923,9 @@ p {
 }
 
 .resource-card[data-category="sound"] .resource-cover h3,
-.resource-card[data-group="sound"] .resource-cover h3 {
+.resource-card[data-group="sound"] .resource-cover h3,
+.resource-card[data-category="app"] .resource-cover h3,
+.resource-card[data-group="app"] .resource-cover h3 {
   white-space: nowrap;
   max-width: 100%;
   font-size: clamp(.72rem, 1.4vw, 1.25rem);
@@ -1725,7 +1727,9 @@ p {
   }
 
   .resource-card[data-category="sound"] .resource-cover h3,
-  .resource-card[data-group="sound"] .resource-cover h3 {
+  .resource-card[data-group="sound"] .resource-cover h3,
+  .resource-card[data-category="app"] .resource-cover h3,
+  .resource-card[data-group="app"] .resource-cover h3 {
     white-space: nowrap;
     max-width: 100%;
     font-size: clamp(.62rem, 3.2vw, .95rem);

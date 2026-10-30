@@ -3,14 +3,14 @@
 const FORM_ENDPOINT = "https://formsubmit.co/ajax/vanlongauto3@gmail.com";
 
 // ============================================================================
-// GOOGLE SHEET TỰ ĐỘNG CHO MỤC TÀI NGUYÊN (PRESET, LUT, FX, ÂM THANH)
-// - Cột A: Tiêu đề (Tên tài nguyên)
-// - Cột B: Danh mục (preset / lut / fx / sound)
-// - Cột C: Link Google Drive tải về
-// - Cột D: Link ảnh bìa / thumbnail (link Drive, link ảnh online, hoặc để trống)
-// - Cột E: Mô tả ngắn
+// GOOGLE SHEET TỰ ĐỘNG CHO MỤC TÀI NGUYÊN (PRESET, LUT, FX, ÂM THANH, APP+PLUGIN)
+// - Sheet 1: Âm Thanh (List Nhạc Cưới, SFX...)
+// - Sheet 2: App + Plugin (WinRAR, EVKey, Office, MAS...)
 // ============================================================================
-const RESOURCE_SHEET_ID = "1KC-d70yzHh7AXXymKGfAoxTMdwfJUleK7QnQXMm_JOA";
+const RESOURCE_SHEETS = [
+  { id: "1KC-d70yzHh7AXXymKGfAoxTMdwfJUleK7QnQXMm_JOA", defaultCategory: "sound" },
+  { id: "14_g3zw0qiMAF8RosAvj8tlYk-sZ49T33aBdm0U9GXME", defaultCategory: "app" }
+];
 
 const resourceGroups = {
   preset: {
@@ -64,6 +64,24 @@ const resourceGroups = {
       { id: "snd-ef", title: "SOUND EF", shortTitle: "Sound EF", image: "", driveUrl: "https://drive.google.com/drive/folders/1fh5-xA1HHMRNSO-sCJFLOBoNqnOZEy6i", cover: "linear-gradient(145deg,#cfd9df,#e2ebf0 28%,#4a4a4a 60%,#111)", description: "Hiệu ứng whoosh, hit, riser cho chuyển cảnh." },
       { id: "snd-epi", title: "Nhạc Epidemic", shortTitle: "Nhạc Epidemic", image: "", driveUrl: "https://drive.google.com/drive/folders/115YcOt73tuoKtPcwKWPiAUJI2ZbxkM2D", cover: "linear-gradient(145deg,#e0c3fc,#8ec5fc 30%,#5b5b5b 60%,#111)", description: "Nhạc nền bản quyền cho vlog và quảng cáo." }
     ]
+  },
+  app: {
+    title: "App + Plugin",
+    category: "app",
+    categoryLabel: "App + Plugin",
+    description: "Bộ cài phần mềm, công cụ tiện ích & plugin hỗ trợ edit video, đồ họa — bấm tên để mở link tải.",
+    cover: "linear-gradient(145deg,#00f2fe,#4facfe 30%,#1b3b5f 60%,#111)",
+    children: [
+      { id: "app-winrar", title: "WinRAR", shortTitle: "WinRAR", image: "assets/app-plugin/winrar.png", driveUrl: "https://drive.google.com/file/d/155DVLRbGqPpzRwPjgrTEqLRe45W90agk/view?usp=sharing", cover: "linear-gradient(145deg,#00c6ff,#0072ff 30%,#1a365d 60%,#111)", description: "Nén và giải nén tệp tin (RAR, ZIP) nhanh chóng và tối ưu dung lượng." },
+      { id: "app-evkey", title: "EVKey", shortTitle: "EVKey", image: "assets/app-plugin/ev-key.png", driveUrl: "https://drive.google.com/file/d/1VdfeYAvvF7piwcJQplRiFf5fSZuFWW_D/view?usp=sharing", cover: "linear-gradient(145deg,#f857a6,#ff5858 30%,#4a1525 60%,#111)", description: "Bộ gõ tiếng Việt gọn nhẹ, ổn định, không lỗi gõ phím trên trình duyệt và Photoshop." },
+      { id: "app-ccleaner", title: "CCleaner Pro", shortTitle: "CCleaner Pro", image: "assets/app-plugin/ccleanerpro.png", driveUrl: "https://drive.google.com/file/d/1ooKW0gdwRnh5PkIuctaXzIjMakUbUWgJ/view?usp=drive_link", cover: "linear-gradient(145deg,#ff9966,#ff5e62 30%,#5a2020 60%,#111)", description: "Dọn dẹp tệp rác, bộ nhớ đệm và tối ưu hóa hệ thống máy tính mượt mà." },
+      { id: "app-office365", title: "Microsoft Office 365", shortTitle: "Office 365", image: "assets/app-plugin/microsoft-office-365.png", driveUrl: "https://drive.google.com/file/d/1WF5EPaqWQFvjoaMvkQ-nWQ5IRdbux3da/view?usp=drive_link", cover: "linear-gradient(145deg,#ff6a00,#ee0979 30%,#4a1020 60%,#111)", description: "Bộ ứng dụng văn phòng (Word, Excel, PowerPoint) tích hợp đám mây và cập nhật liên tục." },
+      { id: "app-office2016", title: "Microsoft Office 2016", shortTitle: "Office 2016", image: "assets/app-plugin/microsoft-office-2016.png", driveUrl: "https://drive.google.com/file/d/1taN07G3llEt_nGwxIRCD2ojQauIkwSNF/view?usp=sharing", cover: "linear-gradient(145deg,#ff758c,#ff7eb3 30%,#4a1828 60%,#111)", description: "Bộ ứng dụng văn phòng cơ bản, hoạt động ổn định cho cấu hình máy vừa và nhẹ." },
+      { id: "app-activation", title: "Activation Office & Win", shortTitle: "Kích Hoạt Office & Win", image: "assets/app-plugin/activation-office-win.png", driveUrl: "https://massgrave.dev/", cover: "linear-gradient(145deg,#11998e,#38ef7d 30%,#104028 60%,#111)", description: "Công cụ kích hoạt bản quyền Windows và Office vĩnh viễn an toàn." },
+      { id: "app-block-internet", title: "Block Internet", shortTitle: "Block Internet", image: "assets/app-plugin/block-internet.png", driveUrl: "https://drive.google.com/file/d/15mZcd1i6scO9STIY14iJW7hLs0QyuRYD/view?usp=drive_link", cover: "linear-gradient(145deg,#4facfe,#00f2fe 30%,#103550 60%,#111)", description: "Chặn kết nối mạng của các ứng dụng chỉ định qua tường lửa." },
+      { id: "app-alwaysmousewheel", title: "AlwaysMouseWheel", shortTitle: "AlwaysMouseWheel", image: "assets/app-plugin/alwaysmousewheel.png", driveUrl: "https://drive.google.com/file/d/1pM2x15aPxIVRliE_bIHhIu6mBuYGFhYX/view?usp=drive_link", cover: "linear-gradient(145deg,#fbc2eb,#a6c1ee 30%,#3b4b60 60%,#111)", description: "Tiện ích cuộn chuột thông minh mà không cần nhấp chuột lên cửa sổ." },
+      { id: "app-bandicam", title: "Bandicam Recording", shortTitle: "Bandicam Recording", image: "assets/app-plugin/bandicam-recoding.png", driveUrl: "https://drive.google.com/file/d/1yvxsJOp1IT8fDJGDqzH1SPWBiDNVKdN6/view?usp=drive_link", cover: "linear-gradient(145deg,#30cfd0,#330867 30%,#151030 60%,#111)", description: "Quay video màn hình, ghi hình trò chơi và chụp ảnh màn hình chất lượng cao." }
+    ]
   }
 };
 
@@ -72,6 +90,7 @@ const resourceItems = [
   { id: 2, title: "LUT Màu Video", shortTitle: "LUT\nMàu Video", category: "lut", categoryLabel: "LUT Màu Video", price: "2 thư mục", format: "CapCut · CUBE · LUT", description: "Bấm để xem 2 thư mục: LUT CapCut & LUT Màu Tổng Hợp (30+ bộ).", cover: "linear-gradient(145deg,#f6d365,#fda085 28%,#8a4b3a 55%,#111)", kind: "group", group: "lut", image: "" },
   { id: 3, title: "FX Video — Hiệu Ứng", shortTitle: "FX\nVideo", category: "fx", categoryLabel: "FX Video", price: "5 thư mục", format: "Overlay · Background · Lưới · Chữ", description: "Bấm để xem các thư mục hiệu ứng & background.", cover: "linear-gradient(145deg,#a8edea,#fed6e3 30%,#6b6b6b 58%,#111)", kind: "group", group: "fx", image: "" },
   { id: 4, title: "Âm Thanh", shortTitle: "Âm Thanh", category: "sound", categoryLabel: "Âm Thanh", price: "7 thư mục", format: "WAV · MP3 · SFX", description: "Bấm để xem các thư mục âm thanh.", cover: "linear-gradient(145deg,#cfd9df,#e2ebf0 28%,#5b5b5b 58%,#111)", kind: "group", group: "sound", image: "" },
+  { id: 5, title: "App + Plugin", shortTitle: "App +\nPlugin", category: "app", categoryLabel: "App + Plugin", price: "9 phần mềm", format: "EXE · ZIP · TOOL", description: "Bấm để xem các công cụ, phần mềm & plugin thiết yếu.", cover: "linear-gradient(145deg,#00f2fe,#4facfe 30%,#1b3b5f 60%,#111)", kind: "group", group: "app", image: "" },
 ];
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -272,6 +291,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (s.includes("lut")) return "lut";
     if (s.includes("fx") || s.includes("hiệu ứng")) return "fx";
     if (s.includes("sound") || s.includes("âm thanh") || s.includes("sfx")) return "sound";
+    if (s.includes("app") || s.includes("plugin") || s.includes("phần mềm") || s.includes("ứng dụng")) return "app";
     return "";
   };
 
@@ -292,7 +312,8 @@ document.addEventListener("DOMContentLoaded", () => {
       case "preset": return "linear-gradient(145deg,#ff9a9e,#fecfef 30%,#8a4b3a 55%,#111)";
       case "lut": return "linear-gradient(145deg,#f6d365,#fda085 28%,#8a4b3a 55%,#111)";
       case "fx": return "linear-gradient(145deg,#a8edea,#fed6e3 30%,#6b6b6b 58%,#111)";
-      case "sound": return "linear-gradient(145deg,#fbc2eb,#a6c1ee 30%,#5b5b5b 60%,#111)";
+      case "sound": return "linear-gradient(145deg,#cfd9df,#e2ebf0 28%,#5b5b5b 58%,#111)";
+      case "app": return "linear-gradient(145deg,#00f2fe,#4facfe 30%,#1b3b5f 60%,#111)";
       default: return "linear-gradient(145deg,#333,#111)";
     }
   };
@@ -329,9 +350,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const loadResourcesFromSheet = async () => {
-    if (!RESOURCE_SHEET_ID) return;
-    const gvizUrl = `https://docs.google.com/spreadsheets/d/${RESOURCE_SHEET_ID}/gviz/tq?tqx=out:csv`;
-    const exportUrl = `https://docs.google.com/spreadsheets/d/${RESOURCE_SHEET_ID}/export?format=csv`;
+    if (!RESOURCE_SHEETS || !RESOURCE_SHEETS.length) return;
 
     const tryFetch = async url => {
       const r = await fetch(url, { cache: "no-store" });
@@ -339,87 +358,110 @@ document.addEventListener("DOMContentLoaded", () => {
       return await r.text();
     };
 
-    let csv = "";
-    try { csv = await tryFetch(gvizUrl); }
-    catch {
-      try { csv = await tryFetch(exportUrl); }
-      catch (e) {
-        console.warn("Không thể tải Google Sheet Tài Nguyên, dùng dữ liệu dự phòng:", e);
-        return;
-      }
-    }
+    let hasAnyUpdate = false;
 
-    const rows = parseCSVRows(csv);
-    if (!rows.length) return;
+    for (const sheetCfg of RESOURCE_SHEETS) {
+      const sheetId = typeof sheetCfg === "string" ? sheetCfg : sheetCfg.id;
+      const defaultCat = (typeof sheetCfg === "object" && sheetCfg.defaultCategory) || "sound";
+      if (!sheetId) continue;
 
-    const firstCell = (rows[0][0] || "").toLowerCase();
-    const startIndex = (firstCell.includes("tiêu đề") || firstCell.includes("title")) ? 1 : 0;
+      const gvizUrl = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:csv`;
+      const exportUrl = `https://docs.google.com/spreadsheets/d/${sheetId}/export?format=csv`;
 
-    let hasData = false;
-
-    for (let i = startIndex; i < rows.length; i++) {
-      const row = rows[i];
-      const title = (row[0] || "").trim();
-      if (!title) continue;
-
-      let cat = "";
-      let driveUrl = "";
-      let image = "";
-      let description = "";
-
-      // Hỗ trợ cả 2 dạng bảng tính:
-      // Dạng 1 (4 cột): Tiêu đề, Link Drive, Thumbnail, Mô tả
-      if (row[1] && (row[1].includes("drive.google.com") || row[1].startsWith("http"))) {
-        driveUrl = (row[1] || "").trim();
-        image = formatResourceImage(row[2]);
-        description = (row[3] || "").trim();
-
-        const lower = (title + " " + description).toLowerCase();
-        if (lower.includes("preset")) cat = "preset";
-        else if (lower.includes("lut")) cat = "lut";
-        else if (lower.includes("fx") || lower.includes("hiệu ứng") || lower.includes("background") || lower.includes("lưới")) cat = "fx";
-        else cat = "sound"; // Mặc định là nhóm Âm Thanh
-      } else {
-        // Dạng 2 (5 cột): Tiêu đề, Danh mục, Link Drive, Thumbnail, Mô tả
-        cat = normalizeCategory(row[1]) || "sound";
-        driveUrl = (row[2] || "").trim();
-        image = formatResourceImage(row[3]);
-        description = (row[4] || "").trim();
+      let csv = "";
+      try { csv = await tryFetch(gvizUrl); }
+      catch {
+        try { csv = await tryFetch(exportUrl); }
+        catch (e) {
+          console.warn(`Không thể tải Google Sheet ${sheetId}, dùng dữ liệu dự phòng:`, e);
+          continue;
+        }
       }
 
-      if (!resourceGroups[cat]) cat = "sound";
+      const rows = parseCSVRows(csv);
+      if (!rows.length) continue;
 
-      // Kiểm tra xem mục này đã có trong danh mục chưa (tránh trùng lặp)
-      const existingIdx = resourceGroups[cat].children.findIndex(
-        c => (driveUrl && c.driveUrl === driveUrl) || c.title.toLowerCase() === title.toLowerCase()
-      );
+      // Nhận diện cột linh hoạt từ dòng tiêu đề
+      const headerRow = rows[0].map(h => String(h || "").toLowerCase().trim());
+      const colTitle = headerRow.findIndex(h => h.includes("tiêu đề") || h.includes("title") || h.includes("tên"));
+      const colDesc = headerRow.findIndex(h => h.includes("mô tả") || h.includes("chức năng") || h.includes("description"));
+      const colLink = headerRow.findIndex(h => h.includes("link") || h.includes("url") || h.includes("tải"));
+      const colThumb = headerRow.findIndex(h => h.includes("thumb") || h.includes("ảnh") || h.includes("hình") || h.includes("image"));
+      const colCat = headerRow.findIndex(h => h.includes("danh mục") || h.includes("category") || h.includes("nhóm"));
 
-      const sheetItem = {
-        id: `${cat}-sheet-${i}`,
-        title,
-        shortTitle: title,
-        driveUrl,
-        image: image,
-        cover: defaultCategoryCover(cat),
-        description
-      };
+      const isHeader = colTitle >= 0 || colDesc >= 0 || colLink >= 0;
+      const startIndex = isHeader ? 1 : 0;
 
-      if (existingIdx >= 0) {
-        // Cập nhật thông tin từ Sheet, ưu tiên giữ ảnh local tối ưu nếu có
-        const oldItem = resourceGroups[cat].children[existingIdx];
-        resourceGroups[cat].children[existingIdx] = {
-          ...oldItem,
-          ...sheetItem,
-          image: oldItem.image || sheetItem.image
+      for (let i = startIndex; i < rows.length; i++) {
+        const row = rows[i];
+        if (!row.some(cell => cell.trim())) continue;
+
+        let title = "";
+        let driveUrl = "";
+        let image = "";
+        let description = "";
+        let cat = defaultCat;
+
+        if (isHeader) {
+          if (colTitle >= 0 && row[colTitle]) title = row[colTitle].trim();
+          if (colDesc >= 0 && row[colDesc]) description = row[colDesc].trim();
+          if (colLink >= 0 && row[colLink]) driveUrl = row[colLink].trim();
+          if (colThumb >= 0 && row[colThumb]) image = formatResourceImage(row[colThumb]);
+          if (colCat >= 0 && row[colCat]) {
+            const parsedCat = normalizeCategory(row[colCat]);
+            if (parsedCat) cat = parsedCat;
+          }
+        } else {
+          // Fallback dạng không có header
+          title = (row[0] || "").trim();
+          driveUrl = (row[1] || "").trim();
+          image = formatResourceImage(row[2]);
+          description = (row[3] || "").trim();
+        }
+
+        if (!title) continue;
+
+        // Phân loại tự động nếu chưa có danh mục rõ ràng
+        if (!cat || !resourceGroups[cat]) {
+          const lower = (title + " " + description).toLowerCase();
+          if (lower.includes("preset")) cat = "preset";
+          else if (lower.includes("lut")) cat = "lut";
+          else if (lower.includes("fx") || lower.includes("hiệu ứng") || lower.includes("background") || lower.includes("lưới")) cat = "fx";
+          else if (lower.includes("app") || lower.includes("plugin") || lower.includes("office") || lower.includes("tool") || lower.includes("winrar")) cat = "app";
+          else cat = defaultCat;
+        }
+
+        if (!resourceGroups[cat]) cat = defaultCat;
+
+        const existingIdx = resourceGroups[cat].children.findIndex(
+          c => (driveUrl && c.driveUrl === driveUrl) || c.title.toLowerCase() === title.toLowerCase()
+        );
+
+        const sheetItem = {
+          id: `${cat}-sheet-${sheetId.substring(0, 4)}-${i}`,
+          title,
+          shortTitle: title,
+          driveUrl,
+          image: image,
+          cover: defaultCategoryCover(cat),
+          description
         };
-      } else {
-        // Thêm mới vào đầu danh mục
-        resourceGroups[cat].children.unshift(sheetItem);
+
+        if (existingIdx >= 0) {
+          const oldItem = resourceGroups[cat].children[existingIdx];
+          resourceGroups[cat].children[existingIdx] = {
+            ...oldItem,
+            ...sheetItem,
+            image: oldItem.image || sheetItem.image
+          };
+        } else {
+          resourceGroups[cat].children.push(sheetItem);
+        }
+        hasAnyUpdate = true;
       }
-      hasData = true;
     }
 
-    if (hasData) {
+    if (hasAnyUpdate) {
       updateResourceCounts();
       renderResources();
     }
