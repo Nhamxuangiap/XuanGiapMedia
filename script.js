@@ -8,8 +8,9 @@ const FORM_ENDPOINT = "https://formsubmit.co/ajax/vanlongauto3@gmail.com";
 // - Sheet 2: App + Plugin (WinRAR, EVKey, Office, MAS...)
 // ============================================================================
 const RESOURCE_SHEETS = [
-  { id: "1KC-d70yzHh7AXXymKGfAoxTMdwfJUleK7QnQXMm_JOA", defaultCategory: "sound" },
-  { id: "14_g3zw0qiMAF8RosAvj8tlYk-sZ49T33aBdm0U9GXME", defaultCategory: "app" }
+  { id: "1KC-d70yzHh7AXXymKGfAoxTMdwfJUleK7QnQXMm_JOA", gid: "0", defaultCategory: "sound" },
+  { id: "14_g3zw0qiMAF8RosAvj8tlYk-sZ49T33aBdm0U9GXME", gid: "0", defaultCategory: "app" },
+  { id: "14_g3zw0qiMAF8RosAvj8tlYk-sZ49T33aBdm0U9GXME", gid: "1961290079", defaultCategory: "app" } // Trang 2: Full Adobe
 ];
 
 const resourceGroups = {
@@ -72,15 +73,19 @@ const resourceGroups = {
     description: "Bộ cài phần mềm, công cụ tiện ích & plugin hỗ trợ edit video, đồ họa — bấm tên để mở link tải.",
     cover: "linear-gradient(145deg,#00f2fe,#4facfe 30%,#1b3b5f 60%,#111)",
     children: [
-      { id: "app-winrar", title: "WinRAR", shortTitle: "WinRAR", image: "assets/app-plugin/winrar.png", driveUrl: "https://drive.google.com/file/d/155DVLRbGqPpzRwPjgrTEqLRe45W90agk/view?usp=sharing", cover: "linear-gradient(145deg,#00c6ff,#0072ff 30%,#1a365d 60%,#111)", description: "Nén và giải nén tệp tin (RAR, ZIP) nhanh chóng và tối ưu dung lượng." },
-      { id: "app-evkey", title: "EVKey", shortTitle: "EVKey", image: "assets/app-plugin/ev-key.png", driveUrl: "https://drive.google.com/file/d/1VdfeYAvvF7piwcJQplRiFf5fSZuFWW_D/view?usp=sharing", cover: "linear-gradient(145deg,#f857a6,#ff5858 30%,#4a1525 60%,#111)", description: "Bộ gõ tiếng Việt gọn nhẹ, ổn định, không lỗi gõ phím trên trình duyệt và Photoshop." },
-      { id: "app-ccleaner", title: "CCleaner Pro", shortTitle: "CCleaner Pro", image: "assets/app-plugin/ccleanerpro.png", driveUrl: "https://drive.google.com/file/d/1ooKW0gdwRnh5PkIuctaXzIjMakUbUWgJ/view?usp=drive_link", cover: "linear-gradient(145deg,#ff9966,#ff5e62 30%,#5a2020 60%,#111)", description: "Dọn dẹp tệp rác, bộ nhớ đệm và tối ưu hóa hệ thống máy tính mượt mà." },
-      { id: "app-office365", title: "Microsoft Office 365", shortTitle: "Office 365", image: "assets/app-plugin/microsoft-office-365.png", driveUrl: "https://drive.google.com/file/d/1WF5EPaqWQFvjoaMvkQ-nWQ5IRdbux3da/view?usp=drive_link", cover: "linear-gradient(145deg,#ff6a00,#ee0979 30%,#4a1020 60%,#111)", description: "Bộ ứng dụng văn phòng (Word, Excel, PowerPoint) tích hợp đám mây và cập nhật liên tục." },
-      { id: "app-office2016", title: "Microsoft Office 2016", shortTitle: "Office 2016", image: "assets/app-plugin/microsoft-office-2016.png", driveUrl: "https://drive.google.com/file/d/1taN07G3llEt_nGwxIRCD2ojQauIkwSNF/view?usp=sharing", cover: "linear-gradient(145deg,#ff758c,#ff7eb3 30%,#4a1828 60%,#111)", description: "Bộ ứng dụng văn phòng cơ bản, hoạt động ổn định cho cấu hình máy vừa và nhẹ." },
       { id: "app-activation", title: "Activation Office & Win", shortTitle: "Kích Hoạt Office & Win", image: "assets/app-plugin/activation-office-win.png", driveUrl: "https://massgrave.dev/", cover: "linear-gradient(145deg,#11998e,#38ef7d 30%,#104028 60%,#111)", description: "Công cụ kích hoạt bản quyền Windows và Office vĩnh viễn an toàn." },
-      { id: "app-block-internet", title: "Block Internet", shortTitle: "Block Internet", image: "assets/app-plugin/block-internet.png", driveUrl: "https://drive.google.com/file/d/15mZcd1i6scO9STIY14iJW7hLs0QyuRYD/view?usp=drive_link", cover: "linear-gradient(145deg,#4facfe,#00f2fe 30%,#103550 60%,#111)", description: "Chặn kết nối mạng của các ứng dụng chỉ định qua tường lửa." },
+      { id: "app-adobe-ae-2020", title: "Adobe After Effects 2020", shortTitle: "After Effects 2020", image: "assets/app-plugin/adobe-after-effects-2020.jpg", driveUrl: "https://drive.google.com/file/d/1B6LCXl9dzU4ITUvnwET48hJgiu1_ag0F/view?usp=drive_link", cover: "linear-gradient(145deg,#9999ff,#00005b 35%,#121035 65%,#111)", description: "Làm kỹ xảo hình ảnh (VFX) và đồ họa chuyển động (Motion Graphics)." },
+      { id: "app-adobe-ai-2020", title: "Adobe Illustrator 2020", shortTitle: "Illustrator 2020", image: "assets/app-plugin/adobe-illustrator-2020.png", driveUrl: "https://drive.google.com/file/d/1q0lJ0KTkaUA53LyxzgzSxWEcN_TF9AMN/view?usp=drive_link", cover: "linear-gradient(145deg,#ff9a00,#330000 35%,#2b1200 65%,#111)", description: "Vẽ minh họa, thiết kế logo và đồ họa vector chuyên nghiệp." },
+      { id: "app-adobe-ps-2020", title: "Adobe Photoshop 2020", shortTitle: "Photoshop 2020", image: "assets/app-plugin/adobe-photoshop-2020.jpg", driveUrl: "https://drive.google.com/file/d/1pRrjhuOdfN1GzzJkK91TloKvLKBsW9U8/view?usp=drive_link", cover: "linear-gradient(145deg,#31a8ff,#001e36 35%,#051525 65%,#111)", description: "Chỉnh sửa, cắt ghép ảnh và thiết kế đồ họa 2D đỉnh cao." },
+      { id: "app-adobe-pr-2020", title: "Adobe Premiere Pro 2020", shortTitle: "Premiere Pro 2020", image: "assets/app-plugin/adobe-premiere-pro-2020.jpg", driveUrl: "https://drive.google.com/file/d/1cBqK65Fwyei9tRDkg314UlNkJJr-D7VM/view?usp=drive_link", cover: "linear-gradient(145deg,#ea77ff,#330033 35%,#220625 65%,#111)", description: "Cắt ghép, biên tập và dựng video chuyên nghiệp chuẩn điện ảnh." },
       { id: "app-alwaysmousewheel", title: "AlwaysMouseWheel", shortTitle: "AlwaysMouseWheel", image: "assets/app-plugin/alwaysmousewheel.png", driveUrl: "https://drive.google.com/file/d/1pM2x15aPxIVRliE_bIHhIu6mBuYGFhYX/view?usp=drive_link", cover: "linear-gradient(145deg,#fbc2eb,#a6c1ee 30%,#3b4b60 60%,#111)", description: "Tiện ích cuộn chuột thông minh mà không cần nhấp chuột lên cửa sổ." },
-      { id: "app-bandicam", title: "Bandicam Recording", shortTitle: "Bandicam Recording", image: "assets/app-plugin/bandicam-recoding.png", driveUrl: "https://drive.google.com/file/d/1yvxsJOp1IT8fDJGDqzH1SPWBiDNVKdN6/view?usp=drive_link", cover: "linear-gradient(145deg,#30cfd0,#330867 30%,#151030 60%,#111)", description: "Quay video màn hình, ghi hình trò chơi và chụp ảnh màn hình chất lượng cao." }
+      { id: "app-bandicam", title: "Bandicam Recording", shortTitle: "Bandicam Recording", image: "assets/app-plugin/bandicam-recoding.png", driveUrl: "https://drive.google.com/file/d/1yvxsJOp1IT8fDJGDqzH1SPWBiDNVKdN6/view?usp=drive_link", cover: "linear-gradient(145deg,#30cfd0,#330867 30%,#151030 60%,#111)", description: "Quay video màn hình, ghi hình trò chơi và chụp ảnh màn hình chất lượng cao." },
+      { id: "app-block-internet", title: "Block Internet", shortTitle: "Block Internet", image: "assets/app-plugin/block-internet.png", driveUrl: "https://drive.google.com/file/d/15mZcd1i6scO9STIY14iJW7hLs0QyuRYD/view?usp=drive_link", cover: "linear-gradient(145deg,#4facfe,#00f2fe 30%,#103550 60%,#111)", description: "Chặn kết nối mạng của các ứng dụng chỉ định qua tường lửa." },
+      { id: "app-ccleaner", title: "CCleaner Pro", shortTitle: "CCleaner Pro", image: "assets/app-plugin/ccleanerpro.png", driveUrl: "https://drive.google.com/file/d/1ooKW0gdwRnh5PkIuctaXzIjMakUbUWgJ/view?usp=drive_link", cover: "linear-gradient(145deg,#ff9966,#ff5e62 30%,#5a2020 60%,#111)", description: "Dọn dẹp tệp rác, bộ nhớ đệm và tối ưu hóa hệ thống máy tính mượt mà." },
+      { id: "app-evkey", title: "EVKey", shortTitle: "EVKey", image: "assets/app-plugin/ev-key.png", driveUrl: "https://drive.google.com/file/d/1VdfeYAvvF7piwcJQplRiFf5fSZuFWW_D/view?usp=sharing", cover: "linear-gradient(145deg,#f857a6,#ff5858 30%,#4a1525 60%,#111)", description: "Bộ gõ tiếng Việt gọn nhẹ, ổn định, không lỗi gõ phím trên trình duyệt và Photoshop." },
+      { id: "app-office2016", title: "Microsoft Office 2016", shortTitle: "Office 2016", image: "assets/app-plugin/microsoft-office-2016.png", driveUrl: "https://drive.google.com/file/d/1taN07G3llEt_nGwxIRCD2ojQauIkwSNF/view?usp=sharing", cover: "linear-gradient(145deg,#ff758c,#ff7eb3 30%,#4a1828 60%,#111)", description: "Bộ ứng dụng văn phòng cơ bản, hoạt động ổn định cho cấu hình máy vừa và nhẹ." },
+      { id: "app-office365", title: "Microsoft Office 365", shortTitle: "Office 365", image: "assets/app-plugin/microsoft-office-365.png", driveUrl: "https://drive.google.com/file/d/1WF5EPaqWQFvjoaMvkQ-nWQ5IRdbux3da/view?usp=drive_link", cover: "linear-gradient(145deg,#ff6a00,#ee0979 30%,#4a1020 60%,#111)", description: "Bộ ứng dụng văn phòng (Word, Excel, PowerPoint) tích hợp đám mây và cập nhật liên tục." },
+      { id: "app-winrar", title: "WinRAR", shortTitle: "WinRAR", image: "assets/app-plugin/winrar.png", driveUrl: "https://drive.google.com/file/d/155DVLRbGqPpzRwPjgrTEqLRe45W90agk/view?usp=sharing", cover: "linear-gradient(145deg,#00c6ff,#0072ff 30%,#1a365d 60%,#111)", description: "Nén và giải nén tệp tin (RAR, ZIP) nhanh chóng và tối ưu dung lượng." }
     ]
   }
 };
@@ -90,7 +95,7 @@ const resourceItems = [
   { id: 2, title: "LUT Màu Video", shortTitle: "LUT\nMàu Video", category: "lut", categoryLabel: "LUT Màu Video", price: "2 thư mục", format: "CapCut · CUBE · LUT", description: "Bấm để xem 2 thư mục: LUT CapCut & LUT Màu Tổng Hợp (30+ bộ).", cover: "linear-gradient(145deg,#f6d365,#fda085 28%,#8a4b3a 55%,#111)", kind: "group", group: "lut", image: "" },
   { id: 3, title: "FX Video — Hiệu Ứng", shortTitle: "FX\nVideo", category: "fx", categoryLabel: "FX Video", price: "5 thư mục", format: "Overlay · Background · Lưới · Chữ", description: "Bấm để xem các thư mục hiệu ứng & background.", cover: "linear-gradient(145deg,#a8edea,#fed6e3 30%,#6b6b6b 58%,#111)", kind: "group", group: "fx", image: "" },
   { id: 4, title: "Âm Thanh", shortTitle: "Âm Thanh", category: "sound", categoryLabel: "Âm Thanh", price: "7 thư mục", format: "WAV · MP3 · SFX", description: "Bấm để xem các thư mục âm thanh.", cover: "linear-gradient(145deg,#cfd9df,#e2ebf0 28%,#5b5b5b 58%,#111)", kind: "group", group: "sound", image: "" },
-  { id: 5, title: "App + Plugin", shortTitle: "App +\nPlugin", category: "app", categoryLabel: "App + Plugin", price: "9 phần mềm", format: "EXE · ZIP · TOOL", description: "Bấm để xem các công cụ, phần mềm & plugin thiết yếu.", cover: "linear-gradient(145deg,#00f2fe,#4facfe 30%,#1b3b5f 60%,#111)", kind: "group", group: "app", image: "" },
+  { id: 5, title: "App + Plugin", shortTitle: "App +\nPlugin", category: "app", categoryLabel: "App + Plugin", price: "13 phần mềm", format: "EXE · ZIP · TOOL", description: "Bấm để xem các công cụ, phần mềm & plugin thiết yếu.", cover: "linear-gradient(145deg,#00f2fe,#4facfe 30%,#1b3b5f 60%,#111)", kind: "group", group: "app", image: "" },
 ];
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -204,7 +209,10 @@ document.addEventListener("DOMContentLoaded", () => {
     // Trong nhóm: thẻ con giữ form cũ — cover tiêu đề góc dưới + dải đen, body có mô tả. Bấm title/cover là mở Drive.
     if (currentGroup) {
       const g = resourceGroups[currentGroup];
-      const children = g.children.filter(c => !query || c.title.toLocaleLowerCase("vi").includes(query));
+      let children = g.children.filter(c => !query || c.title.toLocaleLowerCase("vi").includes(query));
+      if (currentGroup === "app") {
+        children = [...children].sort((a, b) => a.title.localeCompare(b.title, "vi", { sensitivity: "base" }));
+      }
       grid.innerHTML = children.map(c => `
         <article class="resource-card is-child" data-category="${g.category}" data-group="${currentGroup}">
           <a class="resource-cover" href="${c.driveUrl}" target="_blank" rel="noopener" style="--cover:${c.cover}" aria-label="${c.title}">
@@ -365,8 +373,9 @@ document.addEventListener("DOMContentLoaded", () => {
       const defaultCat = (typeof sheetCfg === "object" && sheetCfg.defaultCategory) || "sound";
       if (!sheetId) continue;
 
-      const gvizUrl = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:csv`;
-      const exportUrl = `https://docs.google.com/spreadsheets/d/${sheetId}/export?format=csv`;
+      const gidParam = (sheetCfg.gid !== undefined && sheetCfg.gid !== null) ? `&gid=${sheetCfg.gid}` : "";
+      const gvizUrl = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:csv${gidParam}`;
+      const exportUrl = `https://docs.google.com/spreadsheets/d/${sheetId}/export?format=csv${gidParam}`;
 
       let csv = "";
       try { csv = await tryFetch(gvizUrl); }
@@ -462,6 +471,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (hasAnyUpdate) {
+      if (resourceGroups.app && Array.isArray(resourceGroups.app.children)) {
+        resourceGroups.app.children.sort((a, b) => a.title.localeCompare(b.title, "vi", { sensitivity: "base" }));
+      }
       updateResourceCounts();
       renderResources();
     }
