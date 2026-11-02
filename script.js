@@ -168,7 +168,7 @@ document.addEventListener("DOMContentLoaded", () => {
       statsObserver.disconnect();
     }, { threshold: .3 });
     statsObserver.observe(stats);
-  } else {
+  } else if (stats) {
     animateStats();
   }
 
