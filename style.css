@@ -1998,6 +1998,74 @@ p {
   flex-wrap: wrap;
 }
 
+/* ===== BỘ ĐẾM LƯỢT TRUY CẬP (CHỈ HIỂN THỊ TRÊN GIAO DIỆN WEB / DESKTOP) ===== */
+.hero-visitor {
+  margin-top: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 8px 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  transition: all 0.3s ease;
+}
+
+.hero-visitor:hover {
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(255, 255, 255, 0.28);
+  transform: translateY(-2px);
+}
+
+.visitor-live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 10px #10b981;
+  display: inline-block;
+  animation: pulseVisitor 2s infinite ease-in-out;
+}
+
+@keyframes pulseVisitor {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.4);
+    opacity: 0.55;
+  }
+}
+
+.visitor-label {
+  color: #a3a3a3;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.visitor-count {
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Ẩn hoàn toàn trên giao diện điện thoại và máy tính bảng nhỏ */
+@media (max-width: 768px) {
+  .hero-visitor,
+  .desktop-only {
+    display: none !important;
+  }
+}
+
 @media (max-width: 600px) {
   .hero-content {
     /* Thay đổi số 120px lớn hơn hoặc nhỏ hơn để đẩy cụm chữ lên/xuống cho vừa mắt */
