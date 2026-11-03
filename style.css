@@ -1998,20 +1998,20 @@ p {
   flex-wrap: wrap;
 }
 
-/* ===== NÚT BỘ ĐẾM LƯỢT TRUY CẬP THỰC TẾ (NẰM Ở GÓC PHẢI - CHỈ HIỂN THỊ TRÊN DESKTOP) ===== */
+/* ===== NÚT BỘ ĐẾM LƯỢT TRUY CẬP THỰC TẾ (CĂN GIỮA PHÍA DƯỚI - CHỈ HIỂN THỊ TRÊN DESKTOP) ===== */
 .hero-visitor-badge,
 .hero-visitor {
   position: absolute;
   bottom: 24px;
-  right: 32px;
-  left: auto;
-  transform: none;
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
   z-index: 10;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 9px;
-  padding: 8px 18px;
+  padding: 8px 20px;
   background: rgba(15, 15, 15, 0.72);
   border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 999px;
@@ -2027,7 +2027,7 @@ p {
 .hero-visitor:hover {
   background: rgba(26, 26, 26, 0.9);
   border-color: rgba(255, 255, 255, 0.32);
-  transform: translateY(-2px);
+  transform: translate(-50%, -2px);
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.6);
 }
 
