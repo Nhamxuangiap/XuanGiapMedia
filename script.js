@@ -172,12 +172,10 @@ document.addEventListener("DOMContentLoaded", () => {
     animateStats();
   }
 
-  // Bộ đếm lượt truy cập website thực tế (Chỉ chạy trên Desktop/Web, lưu lượt truy cập online thực tế khi click vào link)
+  // Bộ đếm lượt truy cập website thực tế (Lưu lượt truy cập online thực tế khi click vào link)
   const initVisitorCounter = () => {
     const counterEl = document.getElementById("visitorCountVal");
     if (!counterEl) return;
-
-    if (window.innerWidth <= 768) return;
 
     const CACHE_KEY = "xg_real_visitor_count";
     const SESSION_KEY = "xg_real_session_counted";

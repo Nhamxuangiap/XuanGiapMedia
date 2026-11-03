@@ -2068,12 +2068,34 @@ p {
   font-variant-numeric: tabular-nums;
 }
 
-/* Ẩn hoàn toàn trên giao diện điện thoại và máy tính bảng nhỏ */
+/* Tối ưu hiển thị nút Lượt truy cập trên giao diện điện thoại & máy tính bảng (thu nhỏ gọn gàng, vừa mắt) */
 @media (max-width: 768px) {
-  .hero-visitor-badge,
-  .hero-visitor,
   .desktop-only {
     display: none !important;
+  }
+
+  .hero-visitor-badge,
+  .hero-visitor {
+    bottom: 14px;
+    padding: 4px 13px;
+    gap: 7px;
+    background: rgba(14, 14, 14, 0.78);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+  }
+
+  .visitor-live-dot {
+    width: 6px;
+    height: 6px;
+  }
+
+  .visitor-label {
+    font-size: 0.62rem;
+    letter-spacing: 0.05em;
+  }
+
+  .visitor-count {
+    font-size: 0.76rem;
   }
 }
 
