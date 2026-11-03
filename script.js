@@ -172,52 +172,104 @@ document.addEventListener("DOMContentLoaded", () => {
     animateStats();
   }
 
-  // Bộ đếm lượt truy cập website (chỉ chạy và hiển thị trên giao diện web/desktop)
+  // Bộ đếm lượt truy cập website thực tế (Chỉ chạy trên Desktop/Web, lưu lượt truy cập online thực tế khi click vào link)
   const initVisitorCounter = () => {
     const counterEl = document.getElementById("visitorCountVal");
     if (!counterEl) return;
 
     if (window.innerWidth <= 768) return;
 
-    const STORAGE_KEY = "xg_visitor_count_total";
-    const SESSION_KEY = "xg_session_active";
-    const BASE_SEED = 16820; // Lượt truy cập cơ sở thực tế của studio
-    const LAUNCH_DATE = new Date("2024-06-01").getTime();
+    const CACHE_KEY = "xg_real_visitor_count";
+    const SESSION_KEY = "xg_real_session_counted";
+    const isNewSession = !sessionStorage.getItem(SESSION_KEY);
 
-    // Tính số lượt truy cập tích lũy tự nhiên theo số ngày hoạt động
-    const daysSince = Math.max(0, Math.floor((Date.now() - LAUNCH_DATE) / 86400000));
-    const calculatedBase = BASE_SEED + Math.floor(daysSince * 38.5);
-
-    let savedCount = parseInt(localStorage.getItem(STORAGE_KEY), 10);
-    if (isNaN(savedCount) || savedCount < calculatedBase) {
-      savedCount = calculatedBase;
+    // Hiển thị ngay số đã lưu trong cache (nếu có) để giao diện không bị giật
+    let currentDisplay = parseInt(localStorage.getItem(CACHE_KEY), 10);
+    if (!isNaN(currentDisplay) && currentDisplay > 0) {
+      counterEl.textContent = currentDisplay.toLocaleString("vi-VN");
+    } else {
+      counterEl.textContent = "1";
     }
 
-    // Tăng lượt truy cập cho phiên duyệt web mới
-    if (!sessionStorage.getItem(SESSION_KEY)) {
-      savedCount += 1;
-      sessionStorage.setItem(SESSION_KEY, "true");
-      localStorage.setItem(STORAGE_KEY, String(savedCount));
-    }
+    // Hiệu ứng tăng số mượt mà
+    const animateTo = targetVal => {
+      if (typeof targetVal !== "number" || isNaN(targetVal)) return;
+      const startVal = parseInt(counterEl.textContent.replace(/\./g, "").replace(/,/g, ""), 10) || 0;
+      if (startVal === targetVal) {
+        counterEl.textContent = targetVal.toLocaleString("vi-VN");
+        return;
+      }
+      const duration = 1000;
+      const startTime = performance.now();
+      const frame = now => {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const cur = Math.floor(startVal + (targetVal - startVal) * (1 - (1 - progress) ** 3));
+        counterEl.textContent = cur.toLocaleString("vi-VN");
+        if (progress < 1) {
+          requestAnimationFrame(frame);
+        } else {
+          counterEl.textContent = targetVal.toLocaleString("vi-VN");
+        }
+      };
+      requestAnimationFrame(frame);
+    };
 
-    // Hiệu ứng cuộn số mượt mà (smooth counter roll-up)
-    const startNum = Math.max(0, savedCount - 35);
-    const duration = 1200;
-    const startTime = performance.now();
+    // Gọi API đếm lượt truy cập toàn cầu thực tế (lưu trữ trực tuyến cho tất cả mọi người click vào web)
+    const recordAndFetchCount = async () => {
+      const action = isNewSession ? "hit" : "get";
+      let count = null;
 
-    const animateCount = now => {
-      const elapsed = now - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      const current = Math.floor(startNum + (savedCount - startNum) * (1 - (1 - progress) ** 3));
-      counterEl.textContent = current.toLocaleString("vi-VN");
-      if (progress < 1) {
-        requestAnimationFrame(animateCount);
+      // 1. Thử dịch vụ Abacus API
+      try {
+        const res = await fetch(`https://abacus.jasoncameron.dev/${action}/xuangiapmedia.vn/total_visits`, {
+          cache: "no-store"
+        });
+        if (res.ok) {
+          const data = await res.json();
+          if (data && typeof data.value === "number") {
+            count = data.value;
+          }
+        }
+      } catch (e) {
+        // Fallback sang endpoint dự phòng
+      }
+
+      // 2. Dự phòng: CountAPI API
+      if (count === null) {
+        try {
+          const endpoint = isNewSession
+            ? "https://countapi.mileshilliard.com/api/v1/hit/xuangiapmedia_total_visits"
+            : "https://countapi.mileshilliard.com/api/v1/get/xuangiapmedia_total_visits";
+          const res = await fetch(endpoint, { cache: "no-store" });
+          if (res.ok) {
+            const data = await res.json();
+            if (data && typeof data.value === "number") {
+              count = data.value;
+            }
+          }
+        } catch (e) {
+          // Xử lý khi offline
+        }
+      }
+
+      if (count !== null && count > 0) {
+        sessionStorage.setItem(SESSION_KEY, "true");
+        localStorage.setItem(CACHE_KEY, String(count));
+        animateTo(count);
       } else {
-        counterEl.textContent = savedCount.toLocaleString("vi-VN");
+        // Nếu không có mạng hoặc API gặp sự cố, tăng đếm cục bộ đảm bảo luôn hiển thị
+        let localTotal = parseInt(localStorage.getItem(CACHE_KEY), 10) || 1;
+        if (isNewSession) {
+          localTotal += 1;
+          sessionStorage.setItem(SESSION_KEY, "true");
+          localStorage.setItem(CACHE_KEY, String(localTotal));
+        }
+        animateTo(localTotal);
       }
     };
 
-    requestAnimationFrame(animateCount);
+    recordAndFetchCount();
   };
 
   initVisitorCounter();

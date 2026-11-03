@@ -1998,27 +1998,37 @@ p {
   flex-wrap: wrap;
 }
 
-/* ===== BỘ ĐẾM LƯỢT TRUY CẬP (CHỈ HIỂN THỊ TRÊN GIAO DIỆN WEB / DESKTOP) ===== */
+/* ===== NÚT BỘ ĐẾM LƯỢT TRUY CẬP THỰC TẾ (NẰM Ở GÓC PHẢI - CHỈ HIỂN THỊ TRÊN DESKTOP) ===== */
+.hero-visitor-badge,
 .hero-visitor {
-  margin-top: 22px;
+  position: absolute;
+  bottom: 24px;
+  right: 32px;
+  left: auto;
+  transform: none;
+  z-index: 10;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  padding: 8px 20px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  gap: 9px;
+  padding: 8px 18px;
+  background: rgba(15, 15, 15, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 999px;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
-  transition: all 0.3s ease;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  transition: all 0.25s ease;
+  white-space: nowrap;
+  user-select: none;
 }
 
+.hero-visitor-badge:hover,
 .hero-visitor:hover {
-  background: rgba(255, 255, 255, 0.09);
-  border-color: rgba(255, 255, 255, 0.28);
+  background: rgba(26, 26, 26, 0.9);
+  border-color: rgba(255, 255, 255, 0.32);
   transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.6);
 }
 
 .visitor-live-dot {
@@ -2060,6 +2070,7 @@ p {
 
 /* Ẩn hoàn toàn trên giao diện điện thoại và máy tính bảng nhỏ */
 @media (max-width: 768px) {
+  .hero-visitor-badge,
   .hero-visitor,
   .desktop-only {
     display: none !important;
