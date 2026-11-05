@@ -1,67 +1,40 @@
 "use strict";
 
 /* =========================================================
-   CHỈ SỬA DANH SÁCH PROJECT Ở ĐÂY
-   - Dán link YouTube đầy đủ vào youtube
-   - Không cần tự lấy ID video
+   BRAND FILM — DANH SÁCH DỰ ÁN VIDEO THƯƠNG HIỆU
 ========================================================= */
 
 const projects = [
   {
-    title: " LẶNG - PHIM NGẮN TÂM LÝ HỌC ĐƯỜNG ",
-    client: "Quay - Dựng bởi Xuân Giáp Media",
-    year: "2026",
-    description: "Phim Ngắn.",
-    youtube: "https://youtu.be/HwXagQNv7bA?si=7Vy8ZwU2v0xPhAXr"
+    title: "LẶNG - PHIM NGẮN TÂM LÝ HỌC ĐƯỜNG",
+    youtube: "https://youtu.be/HwXagQNv7bA"
   },
   {
     title: "NGÀY MAI - Ranh Giới Giữa Sự Sống Và Cái Chết | Phim Ngắn Ý Nghĩa Về Sức Khỏe",
-    client: "Quay - Dựng bởi Xuân Giáp Media",
-    year: "2026",
-    description: "Phim Ngắn",
-    youtube: "https://youtu.be/xG8-qqAaGdI?si=cTNvgeUiTNBDSPtm"
+    youtube: "https://youtu.be/xG8-qqAaGdI"
   },
   {
     title: "NHÀ - PHIM NGẮN TÂM LÝ TÌNH CẢM GIA ĐÌNH",
-    client: "Quay - Dựng bởi Xuân Giáp Media",
-    year: "2026",
-    description: "Phim Ngắn",
-    youtube: "https://youtu.be/-LjA282FEZE?si=3LlL19lJVb0Cawnu"
+    youtube: "https://youtu.be/-LjA282FEZE"
   },
   {
     title: "Phim Ngắn - Người Bạn Bí Ẩn",
-    client: "Dựng bởi Xuân Giáp Media",
-    year: "2025",
-    description: "Commercial / social film.",
-    youtube: "https://youtu.be/nhzk1gaBHsY?si=bdkJODTVxnCrYB02"
+    youtube: "https://youtu.be/nhzk1gaBHsY"
   }
 ];
-  
-
-
-/* =========================================================
-   PHẦN CHẠY WEBSITE — KHÔNG CẦN SỬA
-========================================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
-  const $ = (s, r=document) => r.querySelector(s);
-  const $$ = (s, r=document) => [...r.querySelectorAll(s)];
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 
   const grid = $("#projectGrid");
-  const dialog = $("#videoDialog");
-  const dialogVideo = $("#dialogVideo");
-  const dialogTitle = $("#dialogTitle");
-  const dialogMeta = $("#dialogMeta");
-  const youtubeLink = $("#youtubeLink");
   const menu = $("#mainNav");
   const menuBtn = $("#menuToggle");
 
   const getYouTubeId = value => {
     if (!value) return "";
-    const v = value.trim();
-
+    const v = String(value).trim();
     if (/^[a-zA-Z0-9_-]{11}$/.test(v)) return v;
-
     try {
       const url = new URL(v);
       if (url.hostname.includes("youtu.be")) return url.pathname.split("/").filter(Boolean)[0] || "";
@@ -74,115 +47,54 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const thumb = id => `https://img.youtube.com/vi/${id}/maxresdefault.jpg`;
-  const previewSrc = id =>
-    `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&mute=1&controls=0&loop=1&playlist=${id}&modestbranding=1&rel=0&playsinline=1`;
-  const dialogSrc = id =>
-    `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&controls=1&modestbranding=1&rel=0&playsinline=1`;
+  const esc = str => String(str || "").replace(/[&<>"']/g, m => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+  })[m]);
 
-  const list = projects.map((p, i) => ({...p, index:i+1, id:getYouTubeId(p.youtube)}));
+  const list = projects.map((p, i) => ({
+    ...p,
+    index: i + 1,
+    id: getYouTubeId(p.youtube)
+  }));
 
-  grid.innerHTML = list.map(p => `
-    <article class="project-card" data-video="${p.id}">
-      <div class="project-preview" tabindex="0" role="button" aria-label="Xem ${p.title}">
-        ${p.id
-          ? `<img src="${thumb(p.id)}" alt="${p.title}" loading="lazy">`
-          : `<div style="position:absolute;inset:0;display:grid;place-items:center;color:#777;font-size:.75rem">DÁN LINK YOUTUBE VÀO brand-film.js</div>`
-        }
-        <span class="project-no">${String(p.index).padStart(2,"0")}</span>
-        <span class="project-play">PLAY ↗</span>
-      </div>
-
-      <div class="project-info">
-        <div class="project-meta">
-          <span>${p.client}</span>
-          <span>${p.year}</span>
+  if (grid) {
+    grid.innerHTML = list.map(p => `
+      <article class="project-card">
+        <a class="project-preview" href="${esc(p.youtube)}" target="_blank" rel="noopener" aria-label="Xem ${esc(p.title)}">
+          ${p.id
+            ? `<img src="${thumb(p.id)}" alt="${esc(p.title)}" loading="lazy" onerror="if(!this.dataset.fb){this.dataset.fb=1;this.src='https://img.youtube.com/vi/${p.id}/hqdefault.jpg';}else if(this.dataset.fb==1){this.dataset.fb=2;this.src='https://img.youtube.com/vi/${p.id}/mqdefault.jpg';}">`
+            : `<div style="position:absolute;inset:0;display:grid;place-items:center;color:#777;font-size:.75rem">LINK LỖI</div>`
+          }
+          <span class="project-no">${String(p.index).padStart(2, "0")}</span>
+          <span class="project-play">PLAY ↗</span>
+        </a>
+        <div class="project-info">
+          <h3><a href="${esc(p.youtube)}" target="_blank" rel="noopener">${esc(p.title)}</a></h3>
         </div>
-        <h3>${p.title}</h3>
-        <p>${p.description}</p>
-      </div>
-    </article>
-  `).join("");
+      </article>
+    `).join("");
+  }
 
-  $$(".project-card").forEach(card => {
-    const preview = $(".project-preview", card);
-    const id = card.dataset.video;
-
-    const startPreview = () => {
-      if (!id || matchMedia("(hover:none)").matches || $("iframe", preview)) return;
-
-      const iframe = document.createElement("iframe");
-      iframe.src = previewSrc(id);
-      iframe.allow = "autoplay; encrypted-media; picture-in-picture";
-      iframe.title = "YouTube preview";
-      preview.appendChild(iframe);
-      card.classList.add("is-playing");
+  // Điều khiển menu mobile
+  if (menu && menuBtn) {
+    const closeMenu = () => {
+      menu.classList.remove("open");
+      menuBtn.classList.remove("open");
+      document.body.classList.remove("menu-open");
     };
 
-    const stopPreview = () => {
-      $("iframe", preview)?.remove();
-      card.classList.remove("is-playing");
+    menuBtn.onclick = () => {
+      const open = menu.classList.toggle("open");
+      menuBtn.classList.toggle("open", open);
+      document.body.classList.toggle("menu-open", open);
     };
 
-    const openProject = () => {
-      if (!id) return;
+    $$("a", menu).forEach(a => a.onclick = closeMenu);
+    addEventListener("resize", () => innerWidth > 800 && closeMenu());
+  }
 
-      stopPreview();
-      const project = list.find(p => p.id === id);
-
-      dialogVideo.innerHTML = `
-        <iframe
-          src="${dialogSrc(id)}"
-          title="${project.title}"
-          allow="autoplay; encrypted-media; picture-in-picture"
-          allowfullscreen>
-        </iframe>`;
-
-      dialogTitle.textContent = project.title;
-      dialogMeta.textContent = `${project.client} · ${project.year}`;
-      youtubeLink.href = project.youtube;
-
-      dialog.showModal();
-      document.body.classList.add("dialog-open");
-    };
-
-    preview.addEventListener("mouseenter", startPreview);
-    preview.addEventListener("mouseleave", stopPreview);
-    preview.addEventListener("click", openProject);
-    preview.addEventListener("keydown", e => {
-      if (e.key === "Enter" || e.key === " ") {
-        e.preventDefault();
-        openProject();
-      }
-    });
-  });
-
-  const closeDialog = () => {
-    if (dialog.open) dialog.close();
-    dialogVideo.innerHTML = "";
-    document.body.classList.remove("dialog-open");
-  };
-
-  $("#dialogClose").onclick = closeDialog;
-  dialog.addEventListener("click", e => e.target === dialog && closeDialog());
-  dialog.addEventListener("close", () => {
-    dialogVideo.innerHTML = "";
-    document.body.classList.remove("dialog-open");
-  });
-
-  const closeMenu = () => {
-    menu.classList.remove("open");
-    menuBtn.classList.remove("open");
-    document.body.classList.remove("menu-open");
-  };
-
-  menuBtn.onclick = () => {
-    const open = menu.classList.toggle("open");
-    menuBtn.classList.toggle("open", open);
-    document.body.classList.toggle("menu-open", open);
-  };
-
-  $$("a", menu).forEach(a => a.onclick = closeMenu);
-  addEventListener("resize", () => innerWidth > 800 && closeMenu());
-
-  $("#currentYear").textContent = new Date().getFullYear();
+  const currentYear = $("#currentYear");
+  if (currentYear) {
+    currentYear.textContent = new Date().getFullYear();
+  }
 });

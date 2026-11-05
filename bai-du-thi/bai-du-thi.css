@@ -145,3 +145,16 @@ footer{border-top:1px solid var(--line);background:#080808}
   .float-icon svg{ width:20px; height:20px; }
 }
 
+.back-link {
+  display: inline-block;
+  margin-bottom: 35px;
+  color: var(--muted, #888);
+  font-size: .74rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color .2s;
+}
+.back-link:hover {
+  color: #fff;
+}
+

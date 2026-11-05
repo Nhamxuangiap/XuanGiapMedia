@@ -23,6 +23,6 @@ script.js
 
 Lưu ý:
 Email FormSubmit vẫn đang là:
-vanlongauto3@gmail.com
+sweetkid2909@gmail.com
 
 Muốn đổi chỉ sửa FORM_ENDPOINT ở đầu script.js.
