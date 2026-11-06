@@ -716,7 +716,7 @@ document.addEventListener("DOMContentLoaded", () => {
             folderId: "plugins",
             title: "Plugin",
             shortTitle: "Plugin",
-            image: "",
+            image: "assets/app-plugin/plugin-cover.jpg",
             price: `${pluginItems.length} sản phẩm`,
             description: "Kho plugin & preset mở rộng cho Premiere, After Effects, Photoshop, CapCut.",
             cover: "linear-gradient(145deg,#a18cd1,#fbc2eb 30%,#301f4a 60%,#111)"
