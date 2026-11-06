@@ -1638,6 +1638,16 @@ p {
   max-width: 100%;
 }
 
+.contact-updating {
+  margin: 0;
+  padding: 32px;
+  border: 1px solid var(--line);
+  color: #d2d2d2;
+  font-size: .92rem;
+  line-height: 1.6;
+  text-align: center;
+}
+
 .contact-grid {
   display: grid;
   grid-template-columns: minmax(0,1.12fr) minmax(0,.88fr);
