@@ -564,7 +564,7 @@ p {
   transform: scale(1.5);
 }
 
-/* Chân trang Sidebar (Avatar cá nhân & Bản quyền) */
+/* Chân trang Sidebar (Avatar cá nhân, Socials & Bản quyền) */
 .sidebar-footer {
   margin-top: auto;
   padding-top: 18px;
@@ -624,8 +624,42 @@ p {
   white-space: nowrap;
 }
 
+.sidebar-socials {
+  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.sidebar-socials a {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--line);
+  display: grid;
+  place-items: center;
+  color: #b3b3b3;
+  transition: all 0.22s ease;
+  flex-shrink: 0;
+}
+
+.sidebar-socials a:hover {
+  background: #ffffff;
+  color: #000000;
+  transform: translateY(-2px);
+  border-color: #ffffff;
+}
+
+.sidebar-socials svg {
+  width: 18px;
+  height: 18px;
+}
+
 .sidebar-copyright {
-  margin: 16px 0 0;
+  margin: 15px 0 0;
   font-family: inherit;
   font-size: 12px;
   font-weight: 400;
