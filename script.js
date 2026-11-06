@@ -148,7 +148,6 @@ const resourceGroups = {
     image: "assets/lut/lut-cover.jpg",
     description: "Kho LUT CapCut, GradeFruit, Phantom, Leeming, Luxe, Delog & LUT tổng hợp — bấm để tải về.",
     cover: "linear-gradient(145deg,#f6d365,#fda085 28%,#8a4b3a 55%,#111)",
-    driveUrl: "https://drive.google.com/drive/folders/1TH1B_JZfYXiz_Rgn7mQfcGk33OyhV0sP?usp=sharing",
     children: [
       { id: "lut-capcut", title: "LUT CapCut", shortTitle: "LUT\nCapCut", image: "", driveUrl: "https://drive.google.com/drive/folders/1ZI9uw761IQLxjuS5NF00KA8qljiZIsh8?usp=drive_link", cover: "linear-gradient(145deg,#f6d365,#fda085 28%,#6b3a2a 55%,#111)", description: "Bộ LUT dựng sẵn cho CapCut: wedding, du lịch, film — tải về dùng ngay." },
       { id: "lut-tonghop", title: "LUT Màu Tổng Hợp", shortTitle: "LUT\nTổng Hợp", image: "", driveUrl: "https://drive.google.com/drive/folders/1UQngPUlbDHo-L4fIOlu95V_MrHW4u3hp?usp=drive_link", cover: "linear-gradient(145deg,#a8edea,#fed6e3 30%,#6b6b6b 58%,#111)", description: "30+ bộ LUT tổng hợp: cinematic, HDR, wedding, drone, fashion..." },
@@ -156,8 +155,7 @@ const resourceGroups = {
       { id: "lut-phantom", title: "PHANTOM LUTS", shortTitle: "PHANTOM\nLUTS", image: "", driveUrl: "https://drive.google.com/file/d/1YHtDUErSv_DFv4CII4ty-ZA7fSSrGv8f/view?usp=sharing", cover: "linear-gradient(145deg,#43e97b,#38f9d7 30%,#1b4d3e 60%,#111)", description: "Bộ Phantom LUTs cao cấp giả lập ARRI film look cho máy ảnh Sony và máy quay chuyên nghiệp." },
       { id: "lut-leeming", title: "Leeming LUT", shortTitle: "Leeming\nLUT", image: "", driveUrl: "https://drive.google.com/file/d/1VHJxzNaoFB7sdXY1u42qf1-iVGbAirdj/view?usp=sharing", cover: "linear-gradient(145deg,#fa709a,#fee140 30%,#5a2b1b 60%,#111)", description: "Bộ Leeming LUT Pro cân chỉnh chuẩn màu xác thực Rec.709 cho máy ảnh chuyên nghiệp." },
       { id: "lut-luxe", title: "Luxe LUT", shortTitle: "Luxe\nLUT", image: "", driveUrl: "https://drive.google.com/file/d/17acN_ChfQI_BssxcvJxvj_qivhPf6cqN/view?usp=sharing", cover: "linear-gradient(145deg,#a18cd1,#fbc2eb 30%,#3b2042 60%,#111)", description: "Gói LUT tone màu sang trọng thời thượng cho MV, video thời trang, sự kiện và commercial." },
-      { id: "lut-delog-slog3", title: "Delog Slog 3", shortTitle: "Delog\nSlog 3", image: "", driveUrl: "https://drive.google.com/file/d/1jkN5qmAFZYPs9mcW1jg0W8fxPG-l-S7u/view?usp=sharing", cover: "linear-gradient(145deg,#667eea,#764ba2 30%,#2b1b42 60%,#111)", description: "Bộ LUT chuyển đổi Delog chuẩn cho Sony S-Log3 / S-Gamut3.Cine nhanh chóng và giữ tương phản chuẩn." },
-      { id: "lut-master-folder", title: "Kho Drive LUT Tổng Hợp", shortTitle: "Kho Drive\nLUT Tổng", image: "", driveUrl: "https://drive.google.com/drive/folders/1TH1B_JZfYXiz_Rgn7mQfcGk33OyhV0sP?usp=sharing", cover: "linear-gradient(145deg,#f6d365,#fda085 28%,#8a4b3a 55%,#111)", description: "Toàn bộ thư mục Google Drive chứa đầy đủ các bộ LUT màu video và tài nguyên dựng phim." }
+      { id: "lut-delog-slog3", title: "Delog Slog 3", shortTitle: "Delog\nSlog 3", image: "", driveUrl: "https://drive.google.com/file/d/1jkN5qmAFZYPs9mcW1jg0W8fxPG-l-S7u/view?usp=sharing", cover: "linear-gradient(145deg,#667eea,#764ba2 30%,#2b1b42 60%,#111)", description: "Bộ LUT chuyển đổi Delog chuẩn cho Sony S-Log3 / S-Gamut3.Cine nhanh chóng và giữ tương phản chuẩn." }
     ]
   },
   fx: {
@@ -222,7 +220,7 @@ const resourceGroups = {
 
 const resourceItems = [
   { id: 1, title: "Preset Ảnh", shortTitle: "PRESET ẢNH", category: "preset", categoryLabel: "Preset Ảnh", price: "13 tệp tin", format: "LR · DNG · XMP", description: "Bấm để xem 13 bộ Preset Lightroom: tone film, wedding, du lịch, kỷ yếu, chân dung, ảnh cưới...", cover: "linear-gradient(145deg,#ff9a9e,#fecfef 30%,#8a4b3a 55%,#111)", kind: "group", group: "preset", image: "assets/preset-anh/preset-cover.jpg" },
-  { id: 2, title: "LUT Màu Video", shortTitle: "LUT MÀU VIDEO", category: "lut", categoryLabel: "LUT Màu Video", price: "8 thư mục", format: "CapCut · CUBE · S-Log · 3D LUT", description: "Bấm để xem các bộ: LUT CapCut, LUT Tổng Hợp, GradeFruit (500+), Phantom LUTs, Leeming LUT, Luxe LUT, Delog S-Log3...", cover: "linear-gradient(145deg,#f6d365,#fda085 28%,#8a4b3a 55%,#111)", kind: "group", group: "lut", image: "assets/lut/lut-cover.jpg", driveUrl: "https://drive.google.com/drive/folders/1TH1B_JZfYXiz_Rgn7mQfcGk33OyhV0sP?usp=sharing" },
+  { id: 2, title: "LUT Màu Video", shortTitle: "LUT MÀU VIDEO", category: "lut", categoryLabel: "LUT Màu Video", price: "7 thư mục", format: "CapCut · CUBE · S-Log · 3D LUT", description: "Bấm để xem các bộ: LUT CapCut, LUT Tổng Hợp, GradeFruit (500+), Phantom LUTs, Leeming LUT, Luxe LUT, Delog S-Log3...", cover: "linear-gradient(145deg,#f6d365,#fda085 28%,#8a4b3a 55%,#111)", kind: "group", group: "lut", image: "assets/lut/lut-cover.jpg" },
   { id: 3, title: "FX Video — Hiệu Ứng", shortTitle: "FX VIDEO", category: "fx", categoryLabel: "FX Video", price: "5 thư mục", format: "Overlay · Background · Lưới · Chữ", description: "Bấm để xem các thư mục hiệu ứng & background.", cover: "linear-gradient(145deg,#a8edea,#fed6e3 30%,#6b6b6b 58%,#111)", kind: "group", group: "fx", image: "assets/fx-cover.jpg" },
   { id: 4, title: "Âm Thanh", shortTitle: "ÂM THANH", category: "sound", categoryLabel: "Âm Thanh", price: "8 thư mục", format: "WAV · MP3 · SFX", description: "Bấm để xem các thư mục âm thanh.", cover: "linear-gradient(145deg,#cfd9df,#e2ebf0 28%,#5b5b5b 58%,#111)", kind: "group", group: "sound", image: "assets/sound/sound-cover.jpg" },
   { id: 5, title: "App + Plugin", shortTitle: "APP + PLUGIN", category: "app", categoryLabel: "App + Plugin", price: "16 phần mềm", format: "EXE · ZIP · TOOL", description: "Bấm để xem các công cụ, phần mềm & plugin thiết yếu.", cover: "linear-gradient(145deg,#00f2fe,#4facfe 30%,#1b3b5f 60%,#111)", kind: "group", group: "app", image: "assets/app-plugin/app-cover.png" },
@@ -530,6 +528,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const search = $("#resourceSearch");
   const empty = $("#catalogEmpty");
   const dialog = $("#resourceDialog");
+  const resourceUpdatingBadge = '<span class="resource-updating-badge">Đang cập nhật</span>';
   const dialogFields = {
     cover: $("#dialogCover"),
     category: $("#dialogCategory"),
@@ -737,6 +736,7 @@ document.addEventListener("DOMContentLoaded", () => {
                   <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
                 </svg>
               </span>
+              ${resourceUpdatingBadge}
               <h3>${f.shortTitle}</h3>
             </div>
             <div class="resource-body">
@@ -762,6 +762,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <article class="resource-card is-child" data-category="app" data-group="app">
             <a class="resource-cover" href="${c.driveUrl}" target="_blank" rel="noopener" style="--cover:${c.cover}" aria-label="${c.title}">
               ${c.image ? `<img src="${c.image}" alt="${c.title}" loading="lazy">` : ""}
+              ${resourceUpdatingBadge}
               <h3>${(c.shortTitle || c.title).replace(/\s*\n\s*/g, " ")}</h3>
             </a>
             <div class="resource-body">
@@ -802,6 +803,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <article class="resource-card is-child" data-category="app" data-group="app">
             <a class="resource-cover" href="${c.driveUrl}" target="_blank" rel="noopener" style="--cover:${c.cover}" aria-label="${c.title}">
               ${c.image ? `<img src="${c.image}" alt="${c.title}" loading="lazy">` : ""}
+              ${resourceUpdatingBadge}
               <h3>${(c.shortTitle || c.title).replace(/\s*\n\s*/g, " ")}</h3>
             </a>
             <div class="resource-body">
@@ -823,6 +825,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <article class="resource-card is-child" data-category="${g.category}" data-group="${currentGroup}">
           <a class="resource-cover" href="${c.driveUrl}" target="_blank" rel="noopener" style="--cover:${c.cover}" aria-label="${c.title}">
             ${c.image ? `<img src="${c.image}" alt="${c.title}" loading="lazy">` : ""}
+            ${resourceUpdatingBadge}
             <h3>${(c.shortTitle || c.title).replace(/\s*\n\s*/g, " ")}</h3>
           </a>
           <div class="resource-body">
@@ -857,6 +860,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <article class="resource-card is-group is-overview-folder" data-group="${item.group}">
           <div class="resource-cover" data-group="${item.group}" role="button" tabindex="0" style="--cover:${item.cover}" aria-label="${item.title}">
             ${item.image ? `<img src="${item.image}" alt="${item.title}" loading="lazy">` : ""}
+            ${resourceUpdatingBadge}
             <h3>${coverTitle}</h3>
           </div>
           <div class="resource-body">

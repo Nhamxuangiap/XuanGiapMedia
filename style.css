@@ -1363,6 +1363,38 @@ p {
   letter-spacing: .09em;
 }
 
+.resource-cover > .resource-updating-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 9px;
+  border: 1px solid rgba(255, 202, 40, .35);
+  border-radius: 999px;
+  background: rgba(15, 15, 15, .82);
+  color: #ffe082;
+  font-size: .58rem;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+  pointer-events: none;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.resource-cover > .resource-updating-badge::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  flex: 0 0 7px;
+  border-radius: 50%;
+  background: #ffca28;
+  box-shadow: 0 0 8px rgba(255, 202, 40, .75);
+}
+
 .resource-cover h3 {
   max-width: 100%;
   margin: 0;
