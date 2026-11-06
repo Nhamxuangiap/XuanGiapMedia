@@ -145,6 +145,7 @@ const resourceGroups = {
     title: "LUT Màu Video",
     category: "lut",
     categoryLabel: "LUT Màu Video",
+    image: "assets/lut/lut-cover.jpg",
     description: "Kho LUT CapCut, GradeFruit, Phantom, Leeming, Luxe, Delog & LUT tổng hợp — bấm để tải về.",
     cover: "linear-gradient(145deg,#f6d365,#fda085 28%,#8a4b3a 55%,#111)",
     driveUrl: "https://drive.google.com/drive/folders/1TH1B_JZfYXiz_Rgn7mQfcGk33OyhV0sP?usp=sharing",
@@ -219,7 +220,7 @@ const resourceGroups = {
 
 const resourceItems = [
   { id: 1, title: "Preset Ảnh", shortTitle: "PRESET ẢNH", category: "preset", categoryLabel: "Preset Ảnh", price: "13 tệp tin", format: "LR · DNG · XMP", description: "Bấm để xem 13 bộ Preset Lightroom: tone film, wedding, du lịch, kỷ yếu, chân dung, ảnh cưới...", cover: "linear-gradient(145deg,#ff9a9e,#fecfef 30%,#8a4b3a 55%,#111)", kind: "group", group: "preset", image: "assets/preset-anh/preset-cover.jpg" },
-  { id: 2, title: "LUT Màu Video", shortTitle: "LUT MÀU VIDEO", category: "lut", categoryLabel: "LUT Màu Video", price: "8 thư mục", format: "CapCut · CUBE · S-Log · 3D LUT", description: "Bấm để xem các bộ: LUT CapCut, LUT Tổng Hợp, GradeFruit (500+), Phantom LUTs, Leeming LUT, Luxe LUT, Delog S-Log3...", cover: "linear-gradient(145deg,#f6d365,#fda085 28%,#8a4b3a 55%,#111)", kind: "group", group: "lut", image: "", driveUrl: "https://drive.google.com/drive/folders/1TH1B_JZfYXiz_Rgn7mQfcGk33OyhV0sP?usp=sharing" },
+  { id: 2, title: "LUT Màu Video", shortTitle: "LUT MÀU VIDEO", category: "lut", categoryLabel: "LUT Màu Video", price: "8 thư mục", format: "CapCut · CUBE · S-Log · 3D LUT", description: "Bấm để xem các bộ: LUT CapCut, LUT Tổng Hợp, GradeFruit (500+), Phantom LUTs, Leeming LUT, Luxe LUT, Delog S-Log3...", cover: "linear-gradient(145deg,#f6d365,#fda085 28%,#8a4b3a 55%,#111)", kind: "group", group: "lut", image: "assets/lut/lut-cover.jpg", driveUrl: "https://drive.google.com/drive/folders/1TH1B_JZfYXiz_Rgn7mQfcGk33OyhV0sP?usp=sharing" },
   { id: 3, title: "FX Video — Hiệu Ứng", shortTitle: "FX VIDEO", category: "fx", categoryLabel: "FX Video", price: "5 thư mục", format: "Overlay · Background · Lưới · Chữ", description: "Bấm để xem các thư mục hiệu ứng & background.", cover: "linear-gradient(145deg,#a8edea,#fed6e3 30%,#6b6b6b 58%,#111)", kind: "group", group: "fx", image: "" },
   { id: 4, title: "Âm Thanh", shortTitle: "ÂM THANH", category: "sound", categoryLabel: "Âm Thanh", price: "8 thư mục", format: "WAV · MP3 · SFX", description: "Bấm để xem các thư mục âm thanh.", cover: "linear-gradient(145deg,#cfd9df,#e2ebf0 28%,#5b5b5b 58%,#111)", kind: "group", group: "sound", image: "" },
   { id: 5, title: "App + Plugin", shortTitle: "APP + PLUGIN", category: "app", categoryLabel: "App + Plugin", price: "16 phần mềm", format: "EXE · ZIP · TOOL", description: "Bấm để xem các công cụ, phần mềm & plugin thiết yếu.", cover: "linear-gradient(145deg,#00f2fe,#4facfe 30%,#1b3b5f 60%,#111)", kind: "group", group: "app", image: "assets/app-plugin/app-cover.png" },
