@@ -576,7 +576,7 @@ p {
 }
 
 .sidebar-profile {
-  display: flex;
+  display: none !important; /* Tắt hiển thị phần tên & profile góc dưới bên trái theo yêu cầu */
   align-items: center;
   gap: 10px;
   width: 100%;
@@ -617,13 +617,13 @@ p {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 12px;
   width: 100%;
 }
 
 .sidebar-socials a {
-  width: 32px;
-  height: 32px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid var(--line);
@@ -641,8 +641,8 @@ p {
 }
 
 .sidebar-socials svg {
-  width: 15px;
-  height: 15px;
+  width: 19px;
+  height: 19px;
 }
 
 .sidebar-copyright {
@@ -2766,7 +2766,7 @@ p {
 .social-links {
   display: flex;
   align-items: center;
-  gap: 16px; /* Khoảng cách giữa từng icon */
+  gap: 18px; /* Khoảng cách giữa từng icon */
 }
 
 /* Định dạng từng icon */
@@ -2775,8 +2775,8 @@ p {
   align-items: center;
   justify-content: center;
   color: #fff; /* Màu trắng nguyên bản */
-  width: 24px; /* Kích thước icon */
-  height: 24px;
+  width: 28px; /* Kích thước icon to hơn một chút */
+  height: 28px;
   transition: all 0.3s ease;
 }
 
