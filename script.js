@@ -678,7 +678,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const renderClickMeta = id => {
     const raw = resourceClickCounts[id];
-    const text = typeof raw === "number" ? `${raw.toLocaleString("vi-VN")} lượt nhấp` : "— lượt nhấp";
+    const text = typeof raw === "number" ? `${raw.toLocaleString("vi-VN")} lượt xem` : "— lượt xem";
     return `
       <div class="resource-meta">
         <span class="resource-clicks" data-click-id="${id}">
@@ -691,7 +691,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const updateClickDisplays = (id, count) => {
     resourceClickCounts[id] = count;
-    const countText = `${count.toLocaleString("vi-VN")} lượt nhấp`;
+    const countText = `${count.toLocaleString("vi-VN")} lượt xem`;
     const elements = document.querySelectorAll(".resource-clicks[data-click-id]");
     elements.forEach(el => {
       if (el.getAttribute("data-click-id") === id) {
@@ -859,7 +859,6 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
             <div class="resource-body">
               <h3><a href="#" data-app-folder="${f.folderId}">${f.title}</a></h3>
-              ${renderClickMeta("app-folder:" + f.folderId)}
               <p>${f.description}</p>
               <button class="resource-btn" type="button" data-app-folder="${f.folderId}">Mở thư mục <span aria-hidden="true">↗</span></button>
             </div>
@@ -868,7 +867,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         empty.hidden = filteredFolders.length > 0;
         if (!filteredFolders.length) empty.textContent = "Không tìm thấy thư mục phù hợp.";
-        scheduleBatchClickFetch();
         return;
       }
 
@@ -879,13 +877,12 @@ document.addEventListener("DOMContentLoaded", () => {
         children = [...children].sort((a, b) => a.title.localeCompare(b.title, "vi", { sensitivity: "base" }));
 
         grid.innerHTML = children.map(c => `
-          <article class="resource-card is-child" data-resource-id="${c.id}" data-category="app" data-group="app">
+          <article class="resource-card is-child" data-category="app" data-group="app">
             <a class="resource-cover" href="${c.driveUrl}" target="_blank" rel="noopener" style="--cover:${c.cover}" aria-label="${c.title}">
               ${c.image ? `<img src="${c.image}" alt="${c.title}" loading="lazy">` : ""}
               <h3>${(c.shortTitle || c.title).replace(/\s*\n\s*/g, " ")}</h3>
             </a>
             <div class="resource-body">
-              ${renderClickMeta(c.id)}
               <p>${c.description || ""}</p>
               <a class="resource-btn" href="${c.driveUrl}" target="_blank" rel="noopener">${c.btnText || "Tải ngay"} <span aria-hidden="true">↗</span></a>
             </div>
@@ -894,7 +891,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         empty.hidden = children.length > 0;
         if (!children.length) empty.textContent = "Không tìm thấy phần mềm phù hợp.";
-        scheduleBatchClickFetch();
         return;
       }
 
@@ -921,20 +917,18 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         grid.innerHTML = plugins.map(c => `
-          <article class="resource-card is-child" data-resource-id="${c.id}" data-category="app" data-group="app">
+          <article class="resource-card is-child" data-category="app" data-group="app">
             <a class="resource-cover" href="${c.driveUrl}" target="_blank" rel="noopener" style="--cover:${c.cover}" aria-label="${c.title}">
               ${c.image ? `<img src="${c.image}" alt="${c.title}" loading="lazy">` : ""}
               <h3>${(c.shortTitle || c.title).replace(/\s*\n\s*/g, " ")}</h3>
             </a>
             <div class="resource-body">
-              ${renderClickMeta(c.id)}
               <p>${c.description || ""}</p>
               <a class="resource-btn" href="${c.driveUrl}" target="_blank" rel="noopener">${c.btnText || "Tải ngay"} <span aria-hidden="true">↗</span></a>
             </div>
           </article>
         `).join("");
         empty.hidden = true;
-        scheduleBatchClickFetch();
         return;
       }
     }
@@ -944,13 +938,12 @@ document.addEventListener("DOMContentLoaded", () => {
       const g = resourceGroups[currentGroup];
       let children = g.children.filter(c => !query || c.title.toLocaleLowerCase("vi").includes(query));
       grid.innerHTML = children.map(c => `
-        <article class="resource-card is-child" data-resource-id="${c.id}" data-category="${g.category}" data-group="${currentGroup}">
+        <article class="resource-card is-child" data-category="${g.category}" data-group="${currentGroup}">
           <a class="resource-cover" href="${c.driveUrl}" target="_blank" rel="noopener" style="--cover:${c.cover}" aria-label="${c.title}">
             ${c.image ? `<img src="${c.image}" alt="${c.title}" loading="lazy">` : ""}
             <h3>${(c.shortTitle || c.title).replace(/\s*\n\s*/g, " ")}</h3>
           </a>
           <div class="resource-body">
-            ${renderClickMeta(c.id)}
             <p>${c.description || ""}</p>
             <a class="resource-btn" href="${c.driveUrl}" target="_blank" rel="noopener">Tải ngay <span aria-hidden="true">↗</span></a>
           </div>
@@ -958,7 +951,6 @@ document.addEventListener("DOMContentLoaded", () => {
       `).join("");
       empty.hidden = children.length > 0;
       if (!children.length) empty.textContent = "Không tìm thấy mục con.";
-      scheduleBatchClickFetch();
       return;
     }
 
@@ -978,7 +970,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     grid.innerHTML = items.map(item => {
-      // Thẻ sản phẩm VIP độc lập (Bộ Text VIP Capcut)
+      // Thẻ sản phẩm VIP độc lập (Bộ Text VIP Capcut) - duy nhất hiển thị số lượt xem
       if (item.isVip || item.kind === "product") {
         return `
           <article class="resource-card is-vip-product" data-id="${item.id}" data-resource-id="${item.id}" data-category="${item.category}">
@@ -1011,7 +1003,6 @@ document.addEventListener("DOMContentLoaded", () => {
             <h3>${coverTitle}</h3>
           </div>
           <div class="resource-body">
-            ${renderClickMeta("group:" + item.group)}
             <p>${item.description}</p>
             <button class="resource-btn" type="button" data-group="${item.group}">Mở thư mục <span aria-hidden="true">↗</span></button>
           </div>
@@ -1305,12 +1296,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (grid) {
     grid.addEventListener("click", event => {
-      // 1. Ghi nhận lượt click thật khi bấm vào link tải hoặc cover của card tài nguyên
+      // 1. Ghi nhận lượt xem/lượt tải thật khi bấm vào thẻ hoặc nút tải của Bộ Text VIP Capcut
       const linkEl = event.target.closest("a.resource-cover[href], a.resource-btn[href], a[target='_blank']");
       if (linkEl) {
         const cardEl = linkEl.closest(".resource-card");
         const resId = cardEl ? (cardEl.dataset.resourceId || cardEl.dataset.id) : null;
-        if (resId) {
+        if (resId === "fx-text-capcut") {
           recordResourceClick(resId);
         }
         return;
@@ -1330,7 +1321,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const folderId = folderEl.dataset.appFolder;
         if (folderId === "apps" || folderId === "plugins") {
           event.preventDefault();
-          recordResourceClick(`app-folder:${folderId}`);
           selectResourceView("app", true, folderId);
           return;
         }
@@ -1342,7 +1332,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const groupKey = groupEl.dataset.group;
         if (groupKey && resourceGroups[groupKey]) {
           event.preventDefault();
-          recordResourceClick(`group:${groupKey}`);
           selectResourceView(groupKey, true, null);
         }
       }
@@ -1355,7 +1344,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (linkEl) {
         const cardEl = linkEl.closest(".resource-card");
         const resId = cardEl ? (cardEl.dataset.resourceId || cardEl.dataset.id) : null;
-        if (resId) {
+        if (resId === "fx-text-capcut") {
           recordResourceClick(resId);
         }
         return;
@@ -1373,7 +1362,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const folderId = folderEl.dataset.appFolder;
         if (folderId === "apps" || folderId === "plugins") {
           event.preventDefault();
-          recordResourceClick(`app-folder:${folderId}`);
           selectResourceView("app", true, folderId);
           return;
         }
@@ -1384,7 +1372,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const groupKey = groupEl.dataset.group;
         if (groupKey && resourceGroups[groupKey]) {
           event.preventDefault();
-          recordResourceClick(`group:${groupKey}`);
           selectResourceView(groupKey, true, null);
         }
       }
