@@ -37,7 +37,7 @@ const resourceGroups = {
         image: "",
         driveUrl: "https://drive.google.com/file/d/19q04egsyZr5rVi1p9BJn9Og7w88nUAQJ/view?usp=drivesdk",
         cover: "linear-gradient(145deg,#a1c4fd,#c2e9fb 30%,#3a4a6b 58%,#111)",
-        description: "Bộ màu preset NDK chuyên nghiệp cho ảnh chân dung & phong cảnh."
+        description: "Bộ màu preset chuyên nghiệp bản quyền của Nguyễn ĐÌnh Khánh"
       },
       {
         id: "preset-hp-premium",
@@ -1371,4 +1371,3 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => scrollToHashSection(false), 60);
   });
 });
-
