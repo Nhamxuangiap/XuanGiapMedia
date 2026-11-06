@@ -706,16 +706,6 @@ p {
 }
 
 .hero-content {
-  position: static;
-  width: 100%;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-
-.hero-inner-wrap {
   position: relative;
   z-index: 2;
   width: 100%;
@@ -724,8 +714,8 @@ p {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  transform: translateY(130px);
-}
+  transform: translateY(180px); 
+  }
 
 
 .hero h1 {
@@ -2054,14 +2044,13 @@ p {
   }
 
   .hero {
-    height: auto;
-    min-height: 100svh;
+    min-height: max(620px, 100svh);
     align-items: center;
   }
 
   .hero-content {
     margin-top: 0;
-    padding-inline: 0;
+    padding-inline: 12px;
   }
 
   .hero .eyebrow {
@@ -2453,7 +2442,8 @@ p {
 }
 .hero{
   width:100%;
-  min-height:max(680px, 100svh);
+  height:100svh;
+  min-height:100svh;
   padding:0;
 }
 
@@ -2472,6 +2462,22 @@ p {
   max-width:none;
   object-fit:cover;
   object-position:center;
+}.hero-content{
+  position:relative;
+  z-index:2;
+  width:100%;
+  margin:0 auto;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  transform:translateY(130px);
+}
+
+@media(max-width:600px){
+  .hero-content{
+    transform:translateY(20px);
+  }
 }
 @media(max-width:768px){
   .hero-overlay{
@@ -2586,102 +2592,19 @@ p {
   font-variant-numeric: tabular-nums;
 }
 
-/* Tối ưu hiển thị Hero, Nhóm nút CTA và Bộ đếm lượt truy cập trên mobile / tablet */
+/* Tối ưu hiển thị nút Lượt truy cập trên giao diện điện thoại & máy tính bảng (thu nhỏ gọn gàng, vừa mắt) */
 @media (max-width: 768px) {
   .desktop-only {
     display: none !important;
   }
 
-  .hero {
-    height: auto;
-    min-height: 100svh;
-    min-height: 100dvh;
-    padding: 24px 16px calc(24px + env(safe-area-inset-bottom, 0px));
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    overflow: visible;
-  }
-
-  .hero-content {
-    position: static;
-    width: 100%;
-    max-width: 100%;
-    margin: 0 auto;
-    padding: 0;
-    transform: none !important;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .hero-inner-wrap {
-    position: static;
-    width: 100%;
-    margin: 0 auto;
-    transform: none !important;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .hero-actions {
-    width: 100%;
-    max-width: 360px;
-    margin: 24px auto 0;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 10px;
-    box-sizing: border-box;
-  }
-
-  .hero-actions .btn {
-    min-height: 44px;
-    padding: 8px 10px;
-    font-size: 12.5px;
-    font-weight: 600;
-    letter-spacing: 0.03em;
-    white-space: nowrap;
-    width: 100%;
-    box-sizing: border-box;
-    text-align: center;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .hero-actions .btn:nth-child(3) {
-    grid-column: 1 / -1;
-  }
-
   .hero-visitor-badge,
   .hero-visitor {
-    position: static;
-    inset: auto;
-    bottom: auto;
-    left: auto;
-    right: auto;
-    transform: none;
-    align-self: center;
-    margin-top: 24px;
-    margin-inline: auto;
-    padding: 6px 14px;
+    bottom: 14px;
+    padding: 4px 13px;
     gap: 7px;
     background: rgba(14, 14, 14, 0.78);
     border: 1px solid rgba(255, 255, 255, 0.14);
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
-    pointer-events: auto;
-  }
-
-  .hero-visitor-badge:hover,
-  .hero-visitor-badge:active,
-  .hero-visitor:hover,
-  .hero-visitor:active {
-    transform: none;
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
   }
 
@@ -2691,22 +2614,19 @@ p {
   }
 
   .visitor-label {
-    font-size: 0.64rem;
+    font-size: 0.62rem;
     letter-spacing: 0.05em;
   }
 
   .visitor-count {
-    font-size: 0.78rem;
+    font-size: 0.76rem;
   }
 }
 
-@media (max-width: 340px) {
-  .hero-actions {
-    grid-template-columns: 1fr;
-  }
-
-  .hero-actions .btn:nth-child(3) {
-    grid-column: auto;
+@media (max-width: 600px) {
+  .hero-content {
+    /* Thay đổi số 120px lớn hơn hoặc nhỏ hơn để đẩy cụm chữ lên/xuống cho vừa mắt */
+    transform: translateY(150px) !important; 
   }
 }
 
