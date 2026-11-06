@@ -168,8 +168,7 @@ const resourceGroups = {
     children: [
       { id: "fx-bg", title: "BackGround Colorful", shortTitle: "BackGround\nColorful", image: "assets/fx-bg/background-colorful.jpg", driveUrl: "https://drive.google.com/drive/folders/1e8OkXH2hP8t-z6WkZKMcz5afuFtl9PVC", cover: "linear-gradient(145deg,#a8edea,#fed6e3 30%,#6b6b6b 58%,#111)", description: "Background màu chuyển động làm nền chữ và intro." },
       { id: "fx-film", title: "Hiệu ứng Film", shortTitle: "Hiệu ứng\nFilm", image: "assets/fx-film/hieu-ung-film.jpg", driveUrl: "https://drive.google.com/drive/folders/1yqr0mXLY2y06_G9AsyVy9-hEVBRAooiB", cover: "linear-gradient(145deg,#f6d365,#fda085 28%,#6b3a2a 55%,#111)", description: "Khung Super 8mm, film burn, hạt grain & texture bụi xước cổ điển." },
-      { id: "fx-doc", title: "LƯỚI EDIT VIDEO DỌC", shortTitle: "Lưới Edit\nVideo Dọc", image: "assets/fx-doc/luoi-edit-video-doc.jpg", driveUrl: "https://drive.google.com/drive/folders/14Pvzl8gNKtw6ZU108IXDmLN3910P_SyS", cover: "linear-gradient(145deg,#fddb92,#d1fdff 30%,#5b5b5b 60%,#111)", description: "Lưới căn khung video dọc 9:16 cho TikTok / Reels." },
-      { id: "fx-text-capcut", title: "Text FX CapCut", shortTitle: "Text FX CapCut", image: "assets/fx-capcut/text-fx-capcut.jpg", driveUrl: "https://drive.google.com/drive/folders/1A6h-5iVi0T0noG9tiZmNdNGvIq9OjYLW?usp=sharing", cover: "linear-gradient(145deg,#e0c3fc,#8ec5fc 30%,#5b5b5b 60%,#111)", description: "Bộ hiệu ứng text animation cho capcut. Bản quyền thuộc Bảo Dạy Edit" }
+      { id: "fx-doc", title: "LƯỚI EDIT VIDEO DỌC", shortTitle: "Lưới Edit\nVideo Dọc", image: "assets/fx-doc/luoi-edit-video-doc.jpg", driveUrl: "https://drive.google.com/drive/folders/14Pvzl8gNKtw6ZU108IXDmLN3910P_SyS", cover: "linear-gradient(145deg,#fddb92,#d1fdff 30%,#5b5b5b 60%,#111)", description: "Lưới căn khung video dọc 9:16 cho TikTok / Reels." }
     ]
   },
   sound: {
@@ -219,9 +218,25 @@ const resourceGroups = {
 };
 
 const resourceItems = [
+  {
+    id: "fx-text-capcut",
+    title: "Bộ Text VIP Capcut",
+    shortTitle: "BỘ TEXT VIP CAPCUT",
+    category: "capcut",
+    categoryLabel: "CapCut",
+    price: "VIP FREE",
+    format: "CapCut",
+    description: "Bộ hiệu ứng text animation cho capcut. Bản quyền thuộc Bảo Dạy Edit",
+    cover: "linear-gradient(145deg,#e0c3fc,#8ec5fc 30%,#5b5b5b 60%,#111)",
+    kind: "product",
+    image: "assets/fx-capcut/text-fx-capcut.jpg",
+    driveUrl: "https://drive.google.com/drive/folders/1A6h-5iVi0T0noG9tiZmNdNGvIq9OjYLW?usp=sharing",
+    isVip: true,
+    btnText: "Tải ngay"
+  },
   { id: 1, title: "Preset Ảnh", shortTitle: "PRESET ẢNH", category: "preset", categoryLabel: "Preset Ảnh", price: "13 tệp tin", format: "LR · DNG · XMP", description: "Bấm để xem 13 bộ Preset Lightroom: tone film, wedding, du lịch, kỷ yếu, chân dung, ảnh cưới...", cover: "linear-gradient(145deg,#ff9a9e,#fecfef 30%,#8a4b3a 55%,#111)", kind: "group", group: "preset", image: "assets/preset-anh/preset-cover.jpg" },
   { id: 2, title: "LUT Màu Video", shortTitle: "LUT MÀU VIDEO", category: "lut", categoryLabel: "LUT Màu Video", price: "7 thư mục", format: "CapCut · CUBE · S-Log · 3D LUT", description: "Bấm để xem các bộ: LUT CapCut, LUT Tổng Hợp, GradeFruit (500+), Phantom LUTs, Leeming LUT, Luxe LUT, Delog S-Log3...", cover: "linear-gradient(145deg,#f6d365,#fda085 28%,#8a4b3a 55%,#111)", kind: "group", group: "lut", image: "assets/lut/lut-cover.jpg" },
-  { id: 3, title: "FX Video — Hiệu Ứng", shortTitle: "FX VIDEO", category: "fx", categoryLabel: "FX Video", price: "5 thư mục", format: "Overlay · Background · Lưới · Chữ", description: "Bấm để xem các thư mục hiệu ứng & background.", cover: "linear-gradient(145deg,#a8edea,#fed6e3 30%,#6b6b6b 58%,#111)", kind: "group", group: "fx", image: "assets/fx-cover.jpg" },
+  { id: 3, title: "FX Video — Hiệu Ứng", shortTitle: "FX VIDEO", category: "fx", categoryLabel: "FX Video", price: "3 thư mục", format: "Overlay · Background · Lưới", description: "Bấm để xem các thư mục hiệu ứng & background.", cover: "linear-gradient(145deg,#a8edea,#fed6e3 30%,#6b6b6b 58%,#111)", kind: "group", group: "fx", image: "assets/fx-cover.jpg" },
   { id: 4, title: "Âm Thanh", shortTitle: "ÂM THANH", category: "sound", categoryLabel: "Âm Thanh", price: "8 thư mục", format: "WAV · MP3 · SFX", description: "Bấm để xem các thư mục âm thanh.", cover: "linear-gradient(145deg,#cfd9df,#e2ebf0 28%,#5b5b5b 58%,#111)", kind: "group", group: "sound", image: "assets/sound/sound-cover.jpg" },
   { id: 5, title: "App + Plugin", shortTitle: "APP + PLUGIN", category: "app", categoryLabel: "App + Plugin", price: "16 phần mềm", format: "EXE · ZIP · TOOL", description: "Bấm để xem các công cụ, phần mềm & plugin thiết yếu.", cover: "linear-gradient(145deg,#00f2fe,#4facfe 30%,#1b3b5f 60%,#111)", kind: "group", group: "app", image: "assets/app-plugin/app-cover.png" },
 ];
@@ -652,6 +667,110 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // --- BỘ ĐẾM LƯỢT NHẤP THỰC TẾ CHO TÀI NGUYÊN (ATOMIC & PERSISTENT) ---
+  const CLICKS_API_ENDPOINT = window.CLICK_COUNTER_API_ENDPOINT || "/api/clicks";
+  const resourceClickCounts = {};
+  let clickFetchTimer = null;
+  let lastRecordedClickTime = 0;
+  let lastRecordedClickId = "";
+
+  const EYE_ICON_SVG = `<svg class="resource-eye-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>`;
+
+  const renderClickMeta = id => {
+    const raw = resourceClickCounts[id];
+    const text = typeof raw === "number" ? `${raw.toLocaleString("vi-VN")} lượt nhấp` : "— lượt nhấp";
+    return `
+      <div class="resource-meta">
+        <span class="resource-clicks" data-click-id="${id}">
+          ${EYE_ICON_SVG}
+          <span class="click-count-val">${text}</span>
+        </span>
+      </div>
+    `;
+  };
+
+  const updateClickDisplays = (id, count) => {
+    resourceClickCounts[id] = count;
+    const countText = `${count.toLocaleString("vi-VN")} lượt nhấp`;
+    const elements = document.querySelectorAll(".resource-clicks[data-click-id]");
+    elements.forEach(el => {
+      if (el.getAttribute("data-click-id") === id) {
+        const valEl = el.querySelector(".click-count-val");
+        if (valEl) valEl.textContent = countText;
+      }
+    });
+  };
+
+  const fetchClickCountsBatch = async ids => {
+    if (!ids || !ids.length) return;
+    try {
+      const url = `${CLICKS_API_ENDPOINT}?ids=${encodeURIComponent(ids.join(","))}`;
+      const res = await fetch(url, { cache: "no-store" });
+      if (!res.ok) return;
+      const data = await res.json();
+      if (data && data.counts && typeof data.counts === "object") {
+        Object.entries(data.counts).forEach(([id, count]) => {
+          updateClickDisplays(id, count);
+        });
+      }
+    } catch {
+      // Offline hoặc API serverless chưa được kết nối: giữ nguyên hiển thị trung thực "— lượt nhấp"
+    }
+  };
+
+  const scheduleBatchClickFetch = () => {
+    if (clickFetchTimer) clearTimeout(clickFetchTimer);
+    clickFetchTimer = setTimeout(() => {
+      const visibleClickEls = document.querySelectorAll(".resource-clicks[data-click-id]");
+      const idsToFetch = [];
+      visibleClickEls.forEach(el => {
+        const id = el.getAttribute("data-click-id");
+        if (id && resourceClickCounts[id] === undefined && !idsToFetch.includes(id)) {
+          idsToFetch.push(id);
+        }
+      });
+      if (idsToFetch.length > 0) {
+        fetchClickCountsBatch(idsToFetch);
+      }
+    }, 150);
+  };
+
+  const recordResourceClick = resourceId => {
+    if (!resourceId) return;
+    const now = Date.now();
+    if (lastRecordedClickId === resourceId && now - lastRecordedClickTime < 600) {
+      return;
+    }
+    lastRecordedClickId = resourceId;
+    lastRecordedClickTime = now;
+
+    const payload = JSON.stringify({ id: resourceId });
+
+    if (window.fetch) {
+      fetch(CLICKS_API_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: payload,
+        keepalive: true
+      })
+      .then(res => {
+        if (res.ok) return res.json();
+        throw new Error("HTTP " + res.status);
+      })
+      .then(data => {
+        if (data && typeof data.count === "number") {
+          updateClickDisplays(resourceId, data.count);
+        }
+      })
+      .catch(() => {
+        // Giữ nguyên số liệu, không tăng số ảo nếu server lỗi
+      });
+    } else if (navigator.sendBeacon) {
+      const blob = new Blob([payload], { type: "application/json" });
+      navigator.sendBeacon(CLICKS_API_ENDPOINT, blob);
+    }
+  };
+
   function renderResources() {
     const query = keyword.trim().toLocaleLowerCase("vi");
 
@@ -728,7 +847,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const filteredFolders = subFolders.filter(f => !query || `${f.title} ${f.description}`.toLocaleLowerCase("vi").includes(query));
 
         grid.innerHTML = filteredFolders.map(f => `
-          <article class="resource-card is-group is-app-folder" data-app-folder="${f.folderId}">
+          <article class="resource-card is-group is-app-folder" data-resource-id="app-folder:${f.folderId}" data-app-folder="${f.folderId}">
             <div class="resource-cover" data-app-folder="${f.folderId}" role="button" tabindex="0" style="--cover:${f.cover}" aria-label="Mở thư mục ${f.title}">
               ${f.image ? `<img src="${f.image}" alt="${f.title}" loading="lazy">` : ""}
               <span class="resource-folder-badge" aria-hidden="true">
@@ -740,6 +859,7 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
             <div class="resource-body">
               <h3><a href="#" data-app-folder="${f.folderId}">${f.title}</a></h3>
+              ${renderClickMeta("app-folder:" + f.folderId)}
               <p>${f.description}</p>
               <button class="resource-btn" type="button" data-app-folder="${f.folderId}">Mở thư mục <span aria-hidden="true">↗</span></button>
             </div>
@@ -748,6 +868,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         empty.hidden = filteredFolders.length > 0;
         if (!filteredFolders.length) empty.textContent = "Không tìm thấy thư mục phù hợp.";
+        scheduleBatchClickFetch();
         return;
       }
 
@@ -758,12 +879,13 @@ document.addEventListener("DOMContentLoaded", () => {
         children = [...children].sort((a, b) => a.title.localeCompare(b.title, "vi", { sensitivity: "base" }));
 
         grid.innerHTML = children.map(c => `
-          <article class="resource-card is-child" data-category="app" data-group="app">
+          <article class="resource-card is-child" data-resource-id="${c.id}" data-category="app" data-group="app">
             <a class="resource-cover" href="${c.driveUrl}" target="_blank" rel="noopener" style="--cover:${c.cover}" aria-label="${c.title}">
               ${c.image ? `<img src="${c.image}" alt="${c.title}" loading="lazy">` : ""}
               <h3>${(c.shortTitle || c.title).replace(/\s*\n\s*/g, " ")}</h3>
             </a>
             <div class="resource-body">
+              ${renderClickMeta(c.id)}
               <p>${c.description || ""}</p>
               <a class="resource-btn" href="${c.driveUrl}" target="_blank" rel="noopener">${c.btnText || "Tải ngay"} <span aria-hidden="true">↗</span></a>
             </div>
@@ -772,6 +894,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         empty.hidden = children.length > 0;
         if (!children.length) empty.textContent = "Không tìm thấy phần mềm phù hợp.";
+        scheduleBatchClickFetch();
         return;
       }
 
@@ -798,18 +921,20 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         grid.innerHTML = plugins.map(c => `
-          <article class="resource-card is-child" data-category="app" data-group="app">
+          <article class="resource-card is-child" data-resource-id="${c.id}" data-category="app" data-group="app">
             <a class="resource-cover" href="${c.driveUrl}" target="_blank" rel="noopener" style="--cover:${c.cover}" aria-label="${c.title}">
               ${c.image ? `<img src="${c.image}" alt="${c.title}" loading="lazy">` : ""}
               <h3>${(c.shortTitle || c.title).replace(/\s*\n\s*/g, " ")}</h3>
             </a>
             <div class="resource-body">
+              ${renderClickMeta(c.id)}
               <p>${c.description || ""}</p>
               <a class="resource-btn" href="${c.driveUrl}" target="_blank" rel="noopener">${c.btnText || "Tải ngay"} <span aria-hidden="true">↗</span></a>
             </div>
           </article>
         `).join("");
         empty.hidden = true;
+        scheduleBatchClickFetch();
         return;
       }
     }
@@ -819,12 +944,13 @@ document.addEventListener("DOMContentLoaded", () => {
       const g = resourceGroups[currentGroup];
       let children = g.children.filter(c => !query || c.title.toLocaleLowerCase("vi").includes(query));
       grid.innerHTML = children.map(c => `
-        <article class="resource-card is-child" data-category="${g.category}" data-group="${currentGroup}">
+        <article class="resource-card is-child" data-resource-id="${c.id}" data-category="${g.category}" data-group="${currentGroup}">
           <a class="resource-cover" href="${c.driveUrl}" target="_blank" rel="noopener" style="--cover:${c.cover}" aria-label="${c.title}">
             ${c.image ? `<img src="${c.image}" alt="${c.title}" loading="lazy">` : ""}
             <h3>${(c.shortTitle || c.title).replace(/\s*\n\s*/g, " ")}</h3>
           </a>
           <div class="resource-body">
+            ${renderClickMeta(c.id)}
             <p>${c.description || ""}</p>
             <a class="resource-btn" href="${c.driveUrl}" target="_blank" rel="noopener">Tải ngay <span aria-hidden="true">↗</span></a>
           </div>
@@ -832,13 +958,14 @@ document.addEventListener("DOMContentLoaded", () => {
       `).join("");
       empty.hidden = children.length > 0;
       if (!children.length) empty.textContent = "Không tìm thấy mục con.";
+      scheduleBatchClickFetch();
       return;
     }
 
-    // Cấp tổng quan: hiển thị đủ 5 card thư mục mẹ từ resourceItems
+    // Cấp tổng quan: hiển thị danh sách thẻ từ resourceItems (thẻ VIP đầu tiên + các card thư mục mẹ)
     const items = resourceItems.filter(item => {
       const matchesCategory = activeFilter === "all" || item.category === activeFilter;
-      const searchable = `${item.title} ${item.categoryLabel} ${item.description}`.toLocaleLowerCase("vi");
+      const searchable = `${item.title} ${item.categoryLabel || ""} ${item.description || ""}`.toLocaleLowerCase("vi");
       return matchesCategory && (!query || searchable.includes(query));
     });
 
@@ -851,15 +978,40 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     grid.innerHTML = items.map(item => {
+      // Thẻ sản phẩm VIP độc lập (Bộ Text VIP Capcut)
+      if (item.isVip || item.kind === "product") {
+        return `
+          <article class="resource-card is-vip-product" data-id="${item.id}" data-resource-id="${item.id}" data-category="${item.category}">
+            <a class="resource-cover" href="${item.driveUrl}" target="_blank" rel="noopener" style="--cover:${item.cover}" aria-label="${item.title}">
+              ${item.image ? `<img src="${item.image}" alt="${item.title}" loading="lazy">` : ""}
+              <span class="resource-vip-badge" aria-label="VIP FREE">
+                <svg class="vip-crown-icon" viewBox="0 0 24 24" fill="currentColor" width="13" height="13" aria-hidden="true">
+                  <path d="M2 19h20v2H2v-2zm1-8.5l4 4.5 5-8 5 8 4-4.5V17H3v-6.5zM5 9c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm14 0c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm-7-3c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"/>
+                </svg>
+                <span>VIP FREE</span>
+              </span>
+              <h3>${(item.shortTitle || "BỘ TEXT VIP CAPCUT").toUpperCase()}</h3>
+            </a>
+            <div class="resource-body">
+              ${renderClickMeta(item.id)}
+              <p>${item.description || ""}</p>
+              <a class="resource-btn" href="${item.driveUrl}" target="_blank" rel="noopener">${item.btnText || "Tải ngay"} <span aria-hidden="true">↗</span></a>
+            </div>
+          </article>
+        `;
+      }
+
+      // Thẻ nhóm thư mục mẹ (Preset, LUT, FX, Sound, App)
       const coverTitle = OVERVIEW_TITLES[item.group] || (item.shortTitle || item.title).toUpperCase();
       return `
-        <article class="resource-card is-group is-overview-folder" data-group="${item.group}">
+        <article class="resource-card is-group is-overview-folder" data-resource-id="group:${item.group}" data-group="${item.group}">
           <div class="resource-cover" data-group="${item.group}" role="button" tabindex="0" style="--cover:${item.cover}" aria-label="${item.title}">
             ${item.image ? `<img src="${item.image}" alt="${item.title}" loading="lazy">` : ""}
             ${resourceUpdatingBadge}
             <h3>${coverTitle}</h3>
           </div>
           <div class="resource-body">
+            ${renderClickMeta("group:" + item.group)}
             <p>${item.description}</p>
             <button class="resource-btn" type="button" data-group="${item.group}">Mở thư mục <span aria-hidden="true">↗</span></button>
           </div>
@@ -869,6 +1021,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     empty.hidden = items.length > 0;
     empty.textContent = "Chưa có tài nguyên phù hợp.";
+    scheduleBatchClickFetch();
   }
 
   const openDialog = item => {
@@ -1051,6 +1204,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (!title) continue;
 
+        // Bỏ qua / đồng bộ sản phẩm VIP CapCut độc lập ở cấp ngoài cùng (không đưa vào children của FX)
+        const CAPCUT_VIP_ID = "fx-text-capcut";
+        const CAPCUT_VIP_DRIVE_URL = "https://drive.google.com/drive/folders/1A6h-5iVi0T0noG9tiZmNdNGvIq9OjYLW?usp=sharing";
+        const lowerTitle = title.toLowerCase();
+        if (
+          (driveUrl && driveUrl.trim() === CAPCUT_VIP_DRIVE_URL) ||
+          lowerTitle.includes("bộ text vip capcut") ||
+          lowerTitle.includes("text fx capcut")
+        ) {
+          const vipItem = resourceItems.find(it => it.id === CAPCUT_VIP_ID);
+          if (vipItem) {
+            if (driveUrl) vipItem.driveUrl = driveUrl;
+            if (image) vipItem.image = image;
+            if (description) vipItem.description = description;
+          }
+          hasAnyUpdate = true;
+          continue;
+        }
+
         // Phân loại tự động nếu chưa có danh mục rõ ràng
         if (!cat || !resourceGroups[cat]) {
           const lower = (title + " " + description).toLowerCase();
@@ -1093,6 +1265,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (hasAnyUpdate) {
+      if (resourceGroups.fx && Array.isArray(resourceGroups.fx.children)) {
+        resourceGroups.fx.children = resourceGroups.fx.children.filter(
+          c => c.id !== "fx-text-capcut" && c.driveUrl !== "https://drive.google.com/drive/folders/1A6h-5iVi0T0noG9tiZmNdNGvIq9OjYLW?usp=sharing"
+        );
+      }
       if (resourceGroups.app && Array.isArray(resourceGroups.app.children)) {
         resourceGroups.app.children.sort((a, b) => a.title.localeCompare(b.title, "vi", { sensitivity: "base" }));
       }
@@ -1110,7 +1287,11 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!button) return;
       const cat = button.dataset.filter;
       if (cat && resourceGroups[cat]) {
-        selectResourceView(cat, false);
+        if (cat === currentGroup) {
+          selectResourceView(null, false);
+        } else {
+          selectResourceView(cat, false);
+        }
       }
     });
   }
@@ -1124,8 +1305,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (grid) {
     grid.addEventListener("click", event => {
-      // 1. Cho phép link tải và cover của card con mở tab mới bình thường, không re-render
-      if (event.target.closest("a.resource-cover[href], a.resource-btn[href], a[target='_blank']")) {
+      // 1. Ghi nhận lượt click thật khi bấm vào link tải hoặc cover của card tài nguyên
+      const linkEl = event.target.closest("a.resource-cover[href], a.resource-btn[href], a[target='_blank']");
+      if (linkEl) {
+        const cardEl = linkEl.closest(".resource-card");
+        const resId = cardEl ? (cardEl.dataset.resourceId || cardEl.dataset.id) : null;
+        if (resId) {
+          recordResourceClick(resId);
+        }
         return;
       }
 
@@ -1143,6 +1330,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const folderId = folderEl.dataset.appFolder;
         if (folderId === "apps" || folderId === "plugins") {
           event.preventDefault();
+          recordResourceClick(`app-folder:${folderId}`);
           selectResourceView("app", true, folderId);
           return;
         }
@@ -1154,6 +1342,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const groupKey = groupEl.dataset.group;
         if (groupKey && resourceGroups[groupKey]) {
           event.preventDefault();
+          recordResourceClick(`group:${groupKey}`);
           selectResourceView(groupKey, true, null);
         }
       }
@@ -1161,7 +1350,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
     grid.addEventListener("keydown", event => {
       if (event.key !== "Enter" && event.key !== " ") return;
-      if (event.target.closest("a[href]")) return;
+
+      const linkEl = event.target.closest("a.resource-cover[href], a.resource-btn[href]");
+      if (linkEl) {
+        const cardEl = linkEl.closest(".resource-card");
+        const resId = cardEl ? (cardEl.dataset.resourceId || cardEl.dataset.id) : null;
+        if (resId) {
+          recordResourceClick(resId);
+        }
+        return;
+      }
 
       const backAppBtn = event.target.closest("[data-action='back-to-app-folders']");
       if (backAppBtn) {
@@ -1175,6 +1373,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const folderId = folderEl.dataset.appFolder;
         if (folderId === "apps" || folderId === "plugins") {
           event.preventDefault();
+          recordResourceClick(`app-folder:${folderId}`);
           selectResourceView("app", true, folderId);
           return;
         }
@@ -1185,6 +1384,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const groupKey = groupEl.dataset.group;
         if (groupKey && resourceGroups[groupKey]) {
           event.preventDefault();
+          recordResourceClick(`group:${groupKey}`);
           selectResourceView(groupKey, true, null);
         }
       }
@@ -1384,4 +1584,153 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("load", () => {
     setTimeout(() => scrollToHashSection(false), 60);
   });
+
+  // ============================================================================
+  // POPUP GIỚI THIỆU SẢN PHẨM NỔI BẬT: BỘ TEXT VIP CAPCUT
+  // ============================================================================
+  const vipPromoDialog = document.getElementById("vipPromoDialog");
+  const vipPromoClose = document.getElementById("vipPromoClose");
+  const vipPromoLater = document.getElementById("vipPromoLater");
+  const vipPromoCta = document.getElementById("vipPromoCta");
+  let vipPromoShown = false;
+  let lastFocusedBeforeVipPromo = null;
+
+  const openVipPromoPopup = () => {
+    if (vipPromoShown || !vipPromoDialog) return;
+    vipPromoShown = true;
+    lastFocusedBeforeVipPromo = document.activeElement;
+
+    // Tự động đồng bộ ảnh thumbnail từ thẻ VIP ID nếu có
+    const capcutItem = resourceItems.find(it => it.id === "fx-text-capcut");
+    if (capcutItem && capcutItem.image) {
+      const thumbEl = document.getElementById("vipPromoThumb");
+      if (thumbEl && thumbEl.getAttribute("src") !== capcutItem.image) {
+        thumbEl.src = capcutItem.image;
+      }
+    }
+
+    if (typeof vipPromoDialog.showModal === "function") {
+      try {
+        vipPromoDialog.showModal();
+      } catch {
+        vipPromoDialog.setAttribute("open", "");
+      }
+    } else {
+      vipPromoDialog.setAttribute("open", "");
+    }
+
+    document.body.classList.add("dialog-open");
+
+    // Chuyển focus vào nút CTA chính trong popup
+    if (vipPromoCta) {
+      setTimeout(() => {
+        try { vipPromoCta.focus(); } catch {}
+      }, 60);
+    }
+  };
+
+  const closeVipPromoPopup = (restoreFocus = true) => {
+    if (!vipPromoDialog) return;
+
+    if (vipPromoDialog.open || vipPromoDialog.hasAttribute("open")) {
+      if (typeof vipPromoDialog.close === "function") {
+        vipPromoDialog.close();
+      } else {
+        vipPromoDialog.removeAttribute("open");
+      }
+    }
+
+    document.body.classList.remove("dialog-open");
+
+    if (restoreFocus && lastFocusedBeforeVipPromo && typeof lastFocusedBeforeVipPromo.focus === "function") {
+      try {
+        lastFocusedBeforeVipPromo.focus({ preventScroll: true });
+      } catch {}
+    }
+  };
+
+  const handleVipPromoCta = () => {
+    closeVipPromoPopup(false);
+
+    // Đưa khu vực Tài Nguyên về cấp tổng quan (chứa thẻ CapCut VIP đứng đầu)
+    if (typeof selectResourceView === "function") {
+      selectResourceView(null, false);
+    }
+
+    // Cuộn tới thẻ "Bộ Text VIP Capcut", nổi bật viền thẻ trong 2 giây và focus
+    setTimeout(() => {
+      const vipCard = document.querySelector('.resource-card[data-id="fx-text-capcut"]');
+      if (vipCard) {
+        vipCard.scrollIntoView({ behavior: "smooth", block: "center" });
+        vipCard.classList.add("is-card-highlighted");
+
+        const targetFocus = vipCard.querySelector("a.resource-cover") || vipCard.querySelector("a.resource-btn") || vipCard;
+        if (targetFocus && typeof targetFocus.focus === "function") {
+          targetFocus.focus({ preventScroll: true });
+        }
+
+        setTimeout(() => {
+          vipCard.classList.remove("is-card-highlighted");
+        }, 2000);
+      } else {
+        const resourceSec = document.getElementById("tai-nguyen");
+        if (resourceSec) {
+          resourceSec.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }
+    }, 120);
+  };
+
+  if (vipPromoDialog) {
+    if (vipPromoClose) {
+      vipPromoClose.addEventListener("click", () => closeVipPromoPopup(true));
+    }
+    if (vipPromoLater) {
+      vipPromoLater.addEventListener("click", () => closeVipPromoPopup(true));
+    }
+    if (vipPromoCta) {
+      vipPromoCta.addEventListener("click", handleVipPromoCta);
+    }
+
+    // Bắt sự kiện cancel bản địa của thẻ dialog (Escape trên bàn phím hoặc phím back Android)
+    vipPromoDialog.addEventListener("cancel", event => {
+      event.preventDefault();
+      closeVipPromoPopup(true);
+    });
+
+    // Bấm vùng backdrop bên ngoài để đóng
+    vipPromoDialog.addEventListener("click", event => {
+      if (event.target === vipPromoDialog) {
+        closeVipPromoPopup(true);
+      }
+    });
+
+    // Bắt phím Escape và giữ Tab trap trong popup
+    vipPromoDialog.addEventListener("keydown", event => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        closeVipPromoPopup(true);
+        return;
+      }
+
+      if (event.key === "Tab") {
+        const focusableSelectors = 'button:not([disabled]), [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+        const focusables = [...vipPromoDialog.querySelectorAll(focusableSelectors)];
+        if (!focusables.length) return;
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      }
+    });
+
+    // Hẹn giờ hiển thị popup sau 1 giây kể từ khi trang chính sẵn sàng (chạy ổn định trên cả desktop & mobile)
+    setTimeout(openVipPromoPopup, 1000);
+  }
 });

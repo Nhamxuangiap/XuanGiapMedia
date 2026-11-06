@@ -3325,14 +3325,28 @@ p {
   transform: translateY(-2px);
 }
 
-/* ===== 5 Card thư mục mẹ tổng quan trong mục Tài Nguyên ===== */
-.resource-card.is-overview-folder {
+/* ===== Thẻ nổi bật VIP Bộ Text VIP Capcut & 5 Card thư mục mẹ tổng quan ===== */
+.resource-card.is-overview-folder,
+.resource-card.is-vip-product {
   display: flex;
   flex-direction: column;
   height: 100%;
 }
 
-.resource-card.is-overview-folder .resource-cover {
+.resource-card.is-vip-product {
+  border: 1px solid rgba(255, 204, 0, 0.42);
+  box-shadow: 0 0 16px rgba(255, 204, 0, 0.08);
+  transition: transform var(--ease), border-color var(--ease), box-shadow var(--ease);
+}
+
+.resource-card.is-vip-product:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 204, 0, 0.85);
+  box-shadow: 0 6px 22px rgba(255, 204, 0, 0.22);
+}
+
+.resource-card.is-overview-folder .resource-cover,
+.resource-card.is-vip-product .resource-cover {
   position: relative;
   width: 100%;
   aspect-ratio: 1 / 1;
@@ -3347,7 +3361,8 @@ p {
   background: var(--cover);
 }
 
-.resource-card.is-overview-folder .resource-cover img {
+.resource-card.is-overview-folder .resource-cover img,
+.resource-card.is-vip-product .resource-cover img {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -3357,7 +3372,8 @@ p {
   z-index: 0;
 }
 
-.resource-card.is-overview-folder .resource-cover::after {
+.resource-card.is-overview-folder .resource-cover::after,
+.resource-card.is-vip-product .resource-cover::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -3366,7 +3382,8 @@ p {
   pointer-events: none;
 }
 
-.resource-card.is-overview-folder .resource-cover h3 {
+.resource-card.is-overview-folder .resource-cover h3,
+.resource-card.is-vip-product .resource-cover h3 {
   position: relative;
   z-index: 2;
   font-family: inherit;
@@ -3391,7 +3408,8 @@ p {
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.75);
 }
 
-.resource-card.is-overview-folder .resource-body {
+.resource-card.is-overview-folder .resource-body,
+.resource-card.is-vip-product .resource-body {
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -3399,7 +3417,8 @@ p {
   box-sizing: border-box;
 }
 
-.resource-card.is-overview-folder .resource-body p {
+.resource-card.is-overview-folder .resource-body p,
+.resource-card.is-vip-product .resource-body p {
   margin: 0;
   color: var(--muted);
   font-size: 0.68rem;
@@ -3412,20 +3431,69 @@ p {
   overflow: hidden;
 }
 
-.resource-card.is-overview-folder .resource-body .resource-btn {
+.resource-card.is-overview-folder .resource-body .resource-btn,
+.resource-card.is-vip-product .resource-body .resource-btn {
   margin-top: auto;
 }
 
+/* Badge VIP FREE góc trên bên phải thumbnail */
+.resource-cover > .resource-vip-badge {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #FFE259 0%, #FFA751 100%);
+  color: #000;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), 0 0 10px rgba(255, 204, 0, 0.35);
+  font-family: inherit;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.resource-cover > .resource-vip-badge .vip-crown-icon {
+  width: 13px;
+  height: 13px;
+  flex: 0 0 13px;
+  color: #000;
+}
+
 @media (max-width: 800px) {
-  .resource-card.is-overview-folder .resource-cover {
+  .resource-card.is-overview-folder .resource-cover,
+  .resource-card.is-vip-product .resource-cover {
     padding: 16px;
   }
 
-  .resource-card.is-overview-folder .resource-cover h3 {
+  .resource-card.is-overview-folder .resource-cover h3,
+  .resource-card.is-vip-product .resource-cover h3 {
     font-size: 18px;
     font-weight: 700;
     line-height: 1.2;
     letter-spacing: -0.02em;
+  }
+
+  .resource-cover > .resource-vip-badge {
+    top: 10px;
+    right: 10px;
+    padding: 4px 8px;
+    gap: 4px;
+    font-size: 0.56rem;
+  }
+
+  .resource-cover > .resource-vip-badge .vip-crown-icon {
+    width: 11px;
+    height: 11px;
+    flex: 0 0 11px;
   }
 }
 
@@ -3516,4 +3584,398 @@ p {
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
+}
+
+/* ================= POPUP GIỚI THIỆU BỘ TEXT VIP CAPCUT ================= */
+.vip-promo-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  width: calc(100vw - 32px);
+  max-width: 440px;
+  max-height: calc(100vh - 32px);
+  max-height: calc(100dvh - 32px);
+  max-height: calc(100dvh - 32px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+  margin: auto;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #ffffff;
+  outline: none;
+  overflow: visible;
+  box-sizing: border-box;
+}
+
+.vip-promo-modal::backdrop {
+  background: rgba(0, 0, 0, 0.78);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.vip-promo-modal:not([open]) {
+  display: none !important;
+}
+
+.vip-promo-modal[open] {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+.vip-promo-card {
+  position: relative;
+  width: 100%;
+  max-height: calc(100vh - 32px);
+  max-height: calc(100dvh - 32px);
+  max-height: calc(100dvh - 32px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+  background: #121212;
+  border: 1px solid rgba(255, 204, 0, 0.4);
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8), 0 0 25px rgba(255, 204, 0, 0.12);
+  animation: vipPromoFadeIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  box-sizing: border-box;
+}
+
+@keyframes vipPromoFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Nút đóng (×) có vùng chạm tối thiểu 44 × 44px */
+.vip-promo-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 50%;
+  color: #ffffff;
+  cursor: pointer;
+  padding: 0;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease, color 0.2s ease;
+}
+
+.vip-promo-close:hover {
+  background: rgba(255, 255, 255, 0.95);
+  color: #000000;
+  border-color: #ffffff;
+  transform: rotate(90deg);
+}
+
+.vip-promo-close:focus-visible {
+  outline: 2px solid #ffca28;
+  outline-offset: 2px;
+}
+
+/* Media: Thumbnail vuông 1:1, giới hạn kích thước hợp lý */
+.vip-promo-media {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0a0a0a;
+  padding: 20px 20px 10px;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.vip-promo-thumb-wrapper {
+  position: relative;
+  width: min(190px, 46vw);
+  aspect-ratio: 1 / 1;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 204, 0, 0.35);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+  background: #181818;
+}
+
+.vip-promo-thumb-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.vip-promo-thumb-wrapper::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.55) 100%);
+  pointer-events: none;
+}
+
+/* Badge VIP FREE */
+.vip-promo-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 4;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 9px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #FFE259 0%, #FFA751 100%);
+  color: #000000;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), 0 0 10px rgba(255, 204, 0, 0.35);
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  text-transform: uppercase;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.vip-promo-badge .vip-crown-icon {
+  width: 12px;
+  height: 12px;
+  flex: 0 0 12px;
+  color: #000000;
+}
+
+/* Nội dung popup */
+.vip-promo-content {
+  padding: 12px 22px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  box-sizing: border-box;
+}
+
+.vip-promo-title {
+  margin: 0 0 8px;
+  font-family: inherit;
+  font-size: 1.25rem;
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+
+.vip-promo-desc {
+  margin: 0 0 16px;
+  color: #a3a3a3;
+  font-size: 0.82rem;
+  font-weight: 400;
+  line-height: 1.5;
+  max-width: 340px;
+}
+
+/* Nút hành động */
+.vip-promo-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+.vip-promo-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 12px 18px;
+  border: 1px solid #ffd54f;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #FFE259 0%, #FFA751 100%);
+  color: #000000;
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(255, 193, 7, 0.28);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.vip-promo-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 193, 7, 0.45);
+  filter: brightness(1.05);
+}
+
+.vip-promo-btn-primary:active {
+  transform: scale(0.98);
+}
+
+.vip-promo-btn-primary:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}
+
+.vip-promo-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  padding: 6px 12px;
+  background: transparent;
+  border: none;
+  color: #a3a3a3;
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.vip-promo-btn-secondary:hover {
+  color: #ffffff;
+}
+
+.vip-promo-btn-secondary:focus-visible {
+  outline: 2px solid #ffca28;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Hiệu ứng viền nổi bật thẻ Bộ Text VIP Capcut trong 2 giây */
+.resource-card.is-card-highlighted {
+  border-color: #ffd54f !important;
+  box-shadow: 0 0 24px rgba(255, 213, 79, 0.7), 0 0 48px rgba(255, 167, 81, 0.35) !important;
+  transform: translateY(-5px) scale(1.02);
+  transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+  z-index: 10;
+}
+
+/* Thống kê lượt nhấp thật với icon mắt */
+.resource-meta {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 6px 0 8px;
+  min-height: 16px;
+}
+
+.resource-clicks {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #9e9ea3;
+  font-size: 0.64rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  user-select: none;
+  pointer-events: none;
+}
+
+.resource-eye-icon {
+  width: 13px;
+  height: 13px;
+  flex: 0 0 13px;
+  color: #ffca28;
+  opacity: 0.88;
+}
+
+/* Responsive mobile (màn hình hẹp 320px - 480px) */
+@media (max-width: 480px) {
+  .vip-promo-modal {
+    width: calc(100vw - 24px);
+    max-width: calc(100vw - 24px);
+    max-height: calc(100vh - 24px);
+    max-height: calc(100dvh - 24px);
+    max-height: calc(100dvh - 24px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+  }
+
+  .vip-promo-card {
+    border-radius: 14px;
+    max-height: calc(100vh - 24px);
+    max-height: calc(100dvh - 24px);
+    max-height: calc(100dvh - 24px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+  }
+
+  .vip-promo-media {
+    padding: 16px 16px 8px;
+  }
+
+  .vip-promo-thumb-wrapper {
+    width: min(140px, 42vw);
+    border-radius: 10px;
+  }
+
+  .vip-promo-content {
+    padding: 10px 14px 16px;
+  }
+
+  .vip-promo-title {
+    font-size: 1.05rem;
+    margin-bottom: 6px;
+  }
+
+  .vip-promo-desc {
+    font-size: 0.75rem;
+    margin-bottom: 12px;
+    line-height: 1.45;
+  }
+
+  .vip-promo-btn-primary {
+    padding: 11px 14px;
+    font-size: 0.75rem;
+  }
+
+  .vip-promo-btn-secondary {
+    font-size: 0.72rem;
+  }
+
+  .resource-meta {
+    margin: 4px 0 6px;
+  }
+
+  .resource-clicks {
+    font-size: 0.58rem;
+    gap: 4px;
+  }
+
+  .resource-eye-icon {
+    width: 11px;
+    height: 11px;
+    flex: 0 0 11px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vip-promo-card {
+    animation: none !important;
+  }
+  .vip-promo-close,
+  .vip-promo-btn-primary,
+  .resource-card.is-card-highlighted {
+    transition: none !important;
+    transform: none !important;
+  }
 }

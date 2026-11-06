@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Xuân Giáp Media — Creative Studio</title>
+  <title>Xuân Giáp Media — Kho Tài Nguyên VIP Free</title>
   <meta name="description" content="NHÂM XUÂN GIÁP — chụp ảnh, sản xuất video, hậu kỳ và tài nguyên sáng tạo.">
   <meta name="theme-color" content="#050505">
 
@@ -861,8 +861,6 @@ khác nhau, từ video quảng cáo, MV Ca Nhạc, Phim Ngắn, Phóng Sự Cư�
 
   </dialog>
 
-
-  
   <!-- Floating CTA: Call / Messenger / Zalo -->
   <div class="floating-cta" aria-label="Liên hệ nhanh">
     <a class="float-btn float-call" href="tel:+84345055487" aria-label="Gọi 0345055487">
@@ -882,6 +880,52 @@ khác nhau, từ video quảng cáo, MV Ca Nhạc, Phim Ngắn, Phóng Sự Cư�
       <span class="float-label">Zalo: 0335559690</span>
     </a>
   </div>
+
+  <!-- Popup giới thiệu sản phẩm nổi bật "Bộ Text VIP Capcut" -->
+  <dialog id="vipPromoDialog" class="vip-promo-modal" role="dialog" aria-modal="true" aria-labelledby="vipPromoTitle" aria-describedby="vipPromoDesc">
+    <div class="vip-promo-card">
+      <button type="button" class="vip-promo-close" id="vipPromoClose" aria-label="Đóng popup giới thiệu">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+
+      <div class="vip-promo-media">
+        <div class="vip-promo-thumb-wrapper">
+          <img
+            id="vipPromoThumb"
+            src="assets/fx-capcut/text-fx-capcut.jpg"
+            alt="Bộ Text VIP Capcut"
+            loading="eager"
+          >
+          <span class="vip-promo-badge" aria-label="VIP FREE">
+            <svg class="vip-crown-icon" viewBox="0 0 24 24" fill="currentColor" width="13" height="13" aria-hidden="true">
+              <path d="M2 19h20v2H2v-2zm1-8.5l4 4.5 5-8 5 8 4-4.5V17H3v-6.5zM5 9c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm14 0c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm-7-3c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"/>
+            </svg>
+            VIP FREE
+          </span>
+        </div>
+      </div>
+
+      <div class="vip-promo-content">
+        <h2 id="vipPromoTitle" class="vip-promo-title">BỘ TEXT VIP CAPCUT</h2>
+        <p id="vipPromoDesc" class="vip-promo-desc">
+          Khám phá bộ hiệu ứng chữ dành cho CapCut — tải miễn phí tại Xuân Giáp Media.
+        </p>
+
+        <div class="vip-promo-actions">
+          <button type="button" class="vip-promo-btn-primary" id="vipPromoCta">
+            <span>KHÁM PHÁ NGAY</span>
+            <span aria-hidden="true">↗</span>
+          </button>
+          <button type="button" class="vip-promo-btn-secondary" id="vipPromoLater">
+            Để sau
+          </button>
+        </div>
+      </div>
+    </div>
+  </dialog>
 
   <script src="script.js"></script>
 
