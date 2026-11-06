@@ -736,7 +736,6 @@ document.addEventListener("DOMContentLoaded", () => {
                   <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
                 </svg>
               </span>
-              ${resourceUpdatingBadge}
               <h3>${f.shortTitle}</h3>
             </div>
             <div class="resource-body">
@@ -762,7 +761,6 @@ document.addEventListener("DOMContentLoaded", () => {
           <article class="resource-card is-child" data-category="app" data-group="app">
             <a class="resource-cover" href="${c.driveUrl}" target="_blank" rel="noopener" style="--cover:${c.cover}" aria-label="${c.title}">
               ${c.image ? `<img src="${c.image}" alt="${c.title}" loading="lazy">` : ""}
-              ${resourceUpdatingBadge}
               <h3>${(c.shortTitle || c.title).replace(/\s*\n\s*/g, " ")}</h3>
             </a>
             <div class="resource-body">
@@ -803,7 +801,6 @@ document.addEventListener("DOMContentLoaded", () => {
           <article class="resource-card is-child" data-category="app" data-group="app">
             <a class="resource-cover" href="${c.driveUrl}" target="_blank" rel="noopener" style="--cover:${c.cover}" aria-label="${c.title}">
               ${c.image ? `<img src="${c.image}" alt="${c.title}" loading="lazy">` : ""}
-              ${resourceUpdatingBadge}
               <h3>${(c.shortTitle || c.title).replace(/\s*\n\s*/g, " ")}</h3>
             </a>
             <div class="resource-body">
@@ -825,7 +822,6 @@ document.addEventListener("DOMContentLoaded", () => {
         <article class="resource-card is-child" data-category="${g.category}" data-group="${currentGroup}">
           <a class="resource-cover" href="${c.driveUrl}" target="_blank" rel="noopener" style="--cover:${c.cover}" aria-label="${c.title}">
             ${c.image ? `<img src="${c.image}" alt="${c.title}" loading="lazy">` : ""}
-            ${resourceUpdatingBadge}
             <h3>${(c.shortTitle || c.title).replace(/\s*\n\s*/g, " ")}</h3>
           </a>
           <div class="resource-body">
