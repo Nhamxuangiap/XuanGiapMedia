@@ -11,8 +11,9 @@ const SHEET_ID = "19r3mUZXa0hfIoS8gpPqFswLuvTFDJBex7fExUP8OZn0";
 const SHEET_CSV_GVIZ = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv`;
 const SHEET_CSV_EXPORT = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv`;
 
-// Fallback 19 link cứng (khi offline / Sheet chưa public) — sẽ bị thay bằng Sheet khi tải được
+// Fallback 21 link cứng (khi offline / Sheet chưa public) — sẽ bị thay bằng Sheet khi tải được
 const FALLBACK_LINKS = [
+  "https://youtu.be/Bsbp5Q8ZpPM",
   "https://youtu.be/DDMa5JEoG6w",
   "https://youtu.be/kpu5wlC6Hf0",
   "https://youtu.be/hgnN0BrwkiU",
@@ -32,6 +33,7 @@ const FALLBACK_LINKS = [
   "https://youtu.be/tnONm0YTJeE",
   "https://youtu.be/dvsQzuOydik",
   "https://youtu.be/daE1XpxcsiU",
+  "https://youtu.be/XoKQwDICX5s",
 ];
 
 document.addEventListener("DOMContentLoaded", async () => {
