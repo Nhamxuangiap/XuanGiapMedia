@@ -98,7 +98,7 @@ const resourceGroups = {
         id: "preset-100-chan-dung",
         title: "100 Preset chân dung",
         shortTitle: "100 Preset chân dung",
-        image: "",
+        image: "assets/preset-anh/100-preset-chan-dung.jpg",
         driveUrl: "https://drive.google.com/file/d/1SabfV0QdtffY-IgbHgZU_tUNZPrLrxkN/view?usp=drivesdk",
         cover: "linear-gradient(145deg,#4facfe,#00f2fe 30%,#103550 60%,#111)",
         description: "Trọn bộ 100 preset làm đẹp da, cân bằng sáng chuyên cho chụp chân dung."
