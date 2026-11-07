@@ -667,18 +667,21 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // --- BỘ ĐẾM LƯỢT NHẤP THỰC TẾ CHO TÀI NGUYÊN (ATOMIC & PERSISTENT) ---
-  const CLICKS_API_ENDPOINT = window.CLICK_COUNTER_API_ENDPOINT || "/api/clicks";
-  const resourceClickCounts = {};
-  let clickFetchTimer = null;
-  let lastRecordedClickTime = 0;
-  let lastRecordedClickId = "";
+  // --- BỘ ĐẾM LƯỢT TRUY CẬP THỰC TẾ CHO BỘ TEXT VIP CAPCUT (GIỐNG BỘ ĐẾM LƯỢT TRUY CẬP WEBSITE) ---
+  const CAPCUT_VIP_CACHE_KEY = "xg_capcut_vip_views";
+  const CAPCUT_VIP_SESSION_KEY = "xg_capcut_vip_accessed";
+
+  // Hiển thị ngay số đã lưu trong cache (nếu có) để giao diện không bị giật, tối thiểu là 1
+  const initialCapcutVipCached = parseInt(localStorage.getItem(CAPCUT_VIP_CACHE_KEY), 10);
+  const resourceClickCounts = {
+    "fx-text-capcut": (!isNaN(initialCapcutVipCached) && initialCapcutVipCached > 0) ? initialCapcutVipCached : 1
+  };
 
   const EYE_ICON_SVG = `<svg class="resource-eye-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>`;
 
   const renderClickMeta = id => {
-    const raw = resourceClickCounts[id];
-    const text = typeof raw === "number" ? `${raw.toLocaleString("vi-VN")} lượt xem` : "— lượt xem";
+    const raw = resourceClickCounts[id] || 1;
+    const text = `${raw.toLocaleString("vi-VN")} lượt xem`;
     return `
       <div class="resource-meta">
         <span class="resource-clicks" data-click-id="${id}">
@@ -689,85 +692,128 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
   };
 
-  const updateClickDisplays = (id, count) => {
-    resourceClickCounts[id] = count;
-    const countText = `${count.toLocaleString("vi-VN")} lượt xem`;
-    const elements = document.querySelectorAll(".resource-clicks[data-click-id]");
-    elements.forEach(el => {
-      if (el.getAttribute("data-click-id") === id) {
-        const valEl = el.querySelector(".click-count-val");
-        if (valEl) valEl.textContent = countText;
-      }
-    });
-  };
+  // Hiệu ứng tăng số mượt mà giống hệt bộ đếm lượt truy cập website
+  const updateClickDisplays = (id, targetVal) => {
+    if (typeof targetVal !== "number" || isNaN(targetVal)) return;
+    const startVal = resourceClickCounts[id] || 1;
+    resourceClickCounts[id] = targetVal;
 
-  const fetchClickCountsBatch = async ids => {
-    if (!ids || !ids.length) return;
-    try {
-      const url = `${CLICKS_API_ENDPOINT}?ids=${encodeURIComponent(ids.join(","))}`;
-      const res = await fetch(url, { cache: "no-store" });
-      if (!res.ok) return;
-      const data = await res.json();
-      if (data && data.counts && typeof data.counts === "object") {
-        Object.entries(data.counts).forEach(([id, count]) => {
-          updateClickDisplays(id, count);
-        });
-      }
-    } catch {
-      // Offline hoặc API serverless chưa được kết nối: giữ nguyên hiển thị trung thực "— lượt nhấp"
-    }
-  };
+    const elements = document.querySelectorAll(`.resource-clicks[data-click-id="${id}"] .click-count-val`);
+    if (!elements.length) return;
 
-  const scheduleBatchClickFetch = () => {
-    if (clickFetchTimer) clearTimeout(clickFetchTimer);
-    clickFetchTimer = setTimeout(() => {
-      const visibleClickEls = document.querySelectorAll(".resource-clicks[data-click-id]");
-      const idsToFetch = [];
-      visibleClickEls.forEach(el => {
-        const id = el.getAttribute("data-click-id");
-        if (id && resourceClickCounts[id] === undefined && !idsToFetch.includes(id)) {
-          idsToFetch.push(id);
-        }
+    if (startVal === targetVal) {
+      elements.forEach(el => {
+        el.textContent = `${targetVal.toLocaleString("vi-VN")} lượt xem`;
       });
-      if (idsToFetch.length > 0) {
-        fetchClickCountsBatch(idsToFetch);
-      }
-    }, 150);
-  };
-
-  const recordResourceClick = resourceId => {
-    if (!resourceId) return;
-    const now = Date.now();
-    if (lastRecordedClickId === resourceId && now - lastRecordedClickTime < 600) {
       return;
     }
-    lastRecordedClickId = resourceId;
-    lastRecordedClickTime = now;
 
-    const payload = JSON.stringify({ id: resourceId });
-
-    if (window.fetch) {
-      fetch(CLICKS_API_ENDPOINT, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: payload,
-        keepalive: true
-      })
-      .then(res => {
-        if (res.ok) return res.json();
-        throw new Error("HTTP " + res.status);
-      })
-      .then(data => {
-        if (data && typeof data.count === "number") {
-          updateClickDisplays(resourceId, data.count);
-        }
-      })
-      .catch(() => {
-        // Giữ nguyên số liệu, không tăng số ảo nếu server lỗi
+    const duration = 1000;
+    const startTime = performance.now();
+    const frame = now => {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const cur = Math.floor(startVal + (targetVal - startVal) * (1 - (1 - progress) ** 3));
+      elements.forEach(el => {
+        el.textContent = `${cur.toLocaleString("vi-VN")} lượt xem`;
       });
-    } else if (navigator.sendBeacon) {
-      const blob = new Blob([payload], { type: "application/json" });
-      navigator.sendBeacon(CLICKS_API_ENDPOINT, blob);
+      if (progress < 1) {
+        requestAnimationFrame(frame);
+      } else {
+        elements.forEach(el => {
+          el.textContent = `${targetVal.toLocaleString("vi-VN")} lượt xem`;
+        });
+      }
+    };
+    requestAnimationFrame(frame);
+  };
+
+  // Gọi API lấy số lượt truy cập online thực tế khi tải trang
+  const fetchCapcutVipViews = async () => {
+    let count = null;
+
+    // 1. Thử dịch vụ Abacus API
+    try {
+      const res = await fetch("https://abacus.jasoncameron.dev/get/xuangiapmedia.vn/capcut_vip", {
+        cache: "no-store"
+      });
+      if (res.ok) {
+        const data = await res.json();
+        if (data && typeof data.value === "number") {
+          count = data.value;
+        }
+      }
+    } catch (e) {}
+
+    // 2. Dự phòng: CountAPI API
+    if (count === null) {
+      try {
+        const res = await fetch("https://countapi.mileshilliard.com/api/v1/get/xuangiapmedia_capcut_vip", {
+          cache: "no-store"
+        });
+        if (res.ok) {
+          const data = await res.json();
+          if (data && typeof data.value === "number") {
+            count = data.value;
+          }
+        }
+      } catch (e) {}
+    }
+
+    if (count !== null && count > 0) {
+      localStorage.setItem(CAPCUT_VIP_CACHE_KEY, String(count));
+      updateClickDisplays("fx-text-capcut", count);
+    }
+  };
+
+  // Ghi nhận lượt truy cập vào link của người dùng thực tế (hit API trực tuyến)
+  const recordCapcutVipAccess = async () => {
+    const isNewAccess = !sessionStorage.getItem(CAPCUT_VIP_SESSION_KEY);
+    const action = isNewAccess ? "hit" : "get";
+    let count = null;
+
+    // 1. Thử dịch vụ Abacus API
+    try {
+      const res = await fetch(`https://abacus.jasoncameron.dev/${action}/xuangiapmedia.vn/capcut_vip`, {
+        cache: "no-store",
+        keepalive: true
+      });
+      if (res.ok) {
+        const data = await res.json();
+        if (data && typeof data.value === "number") {
+          count = data.value;
+        }
+      }
+    } catch (e) {}
+
+    // 2. Dự phòng: CountAPI API
+    if (count === null) {
+      try {
+        const res = await fetch(`https://countapi.mileshilliard.com/api/v1/${action}/xuangiapmedia_capcut_vip`, {
+          cache: "no-store",
+          keepalive: true
+        });
+        if (res.ok) {
+          const data = await res.json();
+          if (data && typeof data.value === "number") {
+            count = data.value;
+          }
+        }
+      } catch (e) {}
+    }
+
+    if (count !== null && count > 0) {
+      sessionStorage.setItem(CAPCUT_VIP_SESSION_KEY, "true");
+      localStorage.setItem(CAPCUT_VIP_CACHE_KEY, String(count));
+      updateClickDisplays("fx-text-capcut", count);
+    } else {
+      let localTotal = parseInt(localStorage.getItem(CAPCUT_VIP_CACHE_KEY), 10) || 1;
+      if (isNewAccess) {
+        localTotal += 1;
+        sessionStorage.setItem(CAPCUT_VIP_SESSION_KEY, "true");
+        localStorage.setItem(CAPCUT_VIP_CACHE_KEY, String(localTotal));
+      }
+      updateClickDisplays("fx-text-capcut", localTotal);
     }
   };
 
@@ -1012,7 +1058,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     empty.hidden = items.length > 0;
     empty.textContent = "Chưa có tài nguyên phù hợp.";
-    scheduleBatchClickFetch();
+    fetchCapcutVipViews();
   }
 
   const openDialog = item => {
@@ -1296,13 +1342,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (grid) {
     grid.addEventListener("click", event => {
-      // 1. Ghi nhận lượt xem/lượt tải thật khi bấm vào thẻ hoặc nút tải của Bộ Text VIP Capcut
+      // 1. Ghi nhận lượt truy cập vào link của Bộ Text VIP Capcut (giống bộ đếm lượt truy cập website)
       const linkEl = event.target.closest("a.resource-cover[href], a.resource-btn[href], a[target='_blank']");
       if (linkEl) {
         const cardEl = linkEl.closest(".resource-card");
         const resId = cardEl ? (cardEl.dataset.resourceId || cardEl.dataset.id) : null;
         if (resId === "fx-text-capcut") {
-          recordResourceClick(resId);
+          recordCapcutVipAccess();
         }
         return;
       }
@@ -1345,7 +1391,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const cardEl = linkEl.closest(".resource-card");
         const resId = cardEl ? (cardEl.dataset.resourceId || cardEl.dataset.id) : null;
         if (resId === "fx-text-capcut") {
-          recordResourceClick(resId);
+          recordCapcutVipAccess();
         }
         return;
       }
