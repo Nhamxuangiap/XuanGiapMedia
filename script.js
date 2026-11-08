@@ -233,7 +233,7 @@ const resourceItems = [
     image: "assets/fx-capcut/text-fx-capcut.jpg",
     driveUrl: "https://drive.google.com/drive/folders/1A6h-5iVi0T0noG9tiZmNdNGvIq9OjYLW?usp=sharing",
     isVip: true,
-    btnText: "Tải ngay"
+    btnText: "Tôi Muốn Free"
   },
   { id: 1, title: "Preset Ảnh", shortTitle: "PRESET ẢNH", category: "preset", categoryLabel: "Preset Ảnh", price: "13 tệp tin", format: "LR · DNG · XMP", description: "Bấm để xem 13 bộ Preset Lightroom: tone film, wedding, du lịch, kỷ yếu, chân dung, ảnh cưới...", cover: "linear-gradient(145deg,#ff9a9e,#fecfef 30%,#8a4b3a 55%,#111)", kind: "group", group: "preset", image: "assets/preset-anh/preset-cover.jpg" },
   { id: 2, title: "LUT Màu Video", shortTitle: "LUT MÀU VIDEO", category: "lut", categoryLabel: "LUT Màu Video", price: "7 thư mục", format: "CapCut · CUBE · S-Log · 3D LUT", description: "Bấm để xem các bộ: LUT CapCut, LUT Tổng Hợp, GradeFruit (500+), Phantom LUTs, Leeming LUT, Luxe LUT, Delog S-Log3...", cover: "linear-gradient(145deg,#f6d365,#fda085 28%,#8a4b3a 55%,#111)", kind: "group", group: "lut", image: "assets/lut/lut-cover.jpg" },
