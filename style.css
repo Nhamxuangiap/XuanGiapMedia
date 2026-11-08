@@ -1537,6 +1537,23 @@ p {
   background: #090909;
 }
 
+.resource-card.is-course .resource-cover h3 {
+  white-space: normal;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  line-height: 1.15;
+  font-size: clamp(0.85rem, 1.25vw, 1.15rem);
+  letter-spacing: -0.02em;
+}
+
+@media (max-width: 800px) {
+  .resource-card.is-course .resource-cover h3 {
+    font-size: clamp(0.78rem, 3.4vw, 0.95rem);
+    line-height: 1.2;
+  }
+}
+
 .courses-card {
   margin-top: 28px;
   padding: clamp(24px, 4vw, 42px);
