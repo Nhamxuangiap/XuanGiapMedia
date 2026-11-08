@@ -215,6 +215,15 @@ const resourceGroups = {
       { id: "app-voice-ai", title: "Phần mềm tạo Voice AI", shortTitle: "Tạo Voice AI", image: "assets/app-plugin/voice-ai.png", driveUrl: "https://drive.google.com/file/d/1KIjs_61FarZnuEpgJ90KG-TAhXjz8Xt5/view?usp=sharing", cover: "linear-gradient(145deg,#30cfd0,#330867 30%,#151030 60%,#111)", description: "Chuyển văn bản tiếng Việt thành giọng nói tự nhiên, nhanh chóng và dễ sử dụng trên máy tính." },
       { id: "app-winrar", title: "WinRAR", shortTitle: "WinRAR", image: "assets/app-plugin/winrar.png", driveUrl: "https://drive.google.com/file/d/155DVLRbGqPpzRwPjgrTEqLRe45W90agk/view?usp=sharing", cover: "linear-gradient(145deg,#00c6ff,#0072ff 30%,#1a365d 60%,#111)", description: "Nén và giải nén tệp tin (RAR, ZIP) nhanh chóng và tối ưu dung lượng." }
     ]
+  },
+  course: {
+    title: "Khóa Học",
+    category: "course",
+    categoryLabel: "Khóa Học",
+    image: "",
+    description: "Bấm để xem các khóa học quay dựng video, hậu kỳ đồ họa và kỹ năng chuyên sâu.",
+    cover: "linear-gradient(145deg,#ff758c,#ff7eb3 30%,#4a1828 60%,#111)",
+    children: []
   }
 };
 
@@ -240,6 +249,7 @@ const resourceItems = [
   { id: 3, title: "FX Video — Hiệu Ứng", shortTitle: "FX VIDEO", category: "fx", categoryLabel: "FX Video", price: "4 thư mục", format: "Overlay · Background · Lưới · Meme", description: "Bấm để xem các thư mục hiệu ứng & background.", cover: "linear-gradient(145deg,#a8edea,#fed6e3 30%,#6b6b6b 58%,#111)", kind: "group", group: "fx", image: "assets/fx-cover.jpg" },
   { id: 4, title: "Âm Thanh", shortTitle: "ÂM THANH", category: "sound", categoryLabel: "Âm Thanh", price: "8 thư mục", format: "WAV · MP3 · SFX", description: "Bấm để xem các thư mục âm thanh.", cover: "linear-gradient(145deg,#cfd9df,#e2ebf0 28%,#5b5b5b 58%,#111)", kind: "group", group: "sound", image: "assets/sound/sound-cover.jpg" },
   { id: 5, title: "App + Plugin", shortTitle: "APP + PLUGIN", category: "app", categoryLabel: "App + Plugin", price: "16 phần mềm", format: "EXE · ZIP · TOOL", description: "Bấm để xem các công cụ, phần mềm & plugin thiết yếu.", cover: "linear-gradient(145deg,#00f2fe,#4facfe 30%,#1b3b5f 60%,#111)", kind: "group", group: "app", image: "assets/app-plugin/app-cover.png" },
+  { id: 6, title: "Khóa Học", shortTitle: "KHÓA HỌC", category: "course", categoryLabel: "Khóa Học", price: "Đang cập nhật", format: "VIDEO · ONLINE · DRIVE", description: "Bấm để xem các khóa học quay dựng video, hậu kỳ đồ họa và kỹ năng chuyên sâu.", cover: "linear-gradient(145deg,#ff758c,#ff7eb3 30%,#4a1828 60%,#111)", kind: "group", group: "course", image: "" },
 ];
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -980,6 +990,48 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
 
+    // Nhóm khóa học (course)
+    if (currentGroup === "course") {
+      const g = resourceGroups.course;
+      let children = (g && Array.isArray(g.children))
+        ? g.children.filter(c => !query || c.title.toLocaleLowerCase("vi").includes(query))
+        : [];
+
+      if (children.length === 0) {
+        grid.innerHTML = `
+          <div class="empty-plugin-state">
+            <div class="empty-plugin-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+              </svg>
+            </div>
+            <p class="empty-plugin-text">Các khóa học đang được cập nhật liên tục.</p>
+            <button type="button" class="btn-back-app-plugin" data-action="back-to-overview">
+              ← Quay lại danh mục Tài Nguyên
+            </button>
+          </div>
+        `;
+        empty.hidden = true;
+        return;
+      }
+
+      grid.innerHTML = children.map(c => `
+        <article class="resource-card is-child" data-category="course" data-group="course">
+          <a class="resource-cover" href="${c.driveUrl}" target="_blank" rel="noopener" style="--cover:${c.cover}" aria-label="${c.title}">
+            ${c.image ? `<img src="${c.image}" alt="${c.title}" loading="lazy">` : ""}
+            <h3>${(c.shortTitle || c.title).replace(/\s*\n\s*/g, " ")}</h3>
+          </a>
+          <div class="resource-body">
+            <p>${c.description || ""}</p>
+            <a class="resource-btn" href="${c.driveUrl}" target="_blank" rel="noopener">Xem khóa học <span aria-hidden="true">↗</span></a>
+          </div>
+        </article>
+      `).join("");
+      empty.hidden = true;
+      return;
+    }
+
     // Các nhóm khác: preset, lut, fx, sound
     if (currentGroup && resourceGroups[currentGroup]) {
       const g = resourceGroups[currentGroup];
@@ -1013,7 +1065,8 @@ document.addEventListener("DOMContentLoaded", () => {
       lut: "LUT MÀU VIDEO",
       fx: "FX VIDEO",
       sound: "ÂM THANH",
-      app: "APP + PLUGIN"
+      app: "APP + PLUGIN",
+      course: "KHÓA HỌC"
     };
 
     grid.innerHTML = items.map(item => {
@@ -1107,6 +1160,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (s.includes("fx") || s.includes("hiệu ứng")) return "fx";
     if (s.includes("sound") || s.includes("âm thanh") || s.includes("sfx")) return "sound";
     if (s.includes("app") || s.includes("plugin") || s.includes("phần mềm") || s.includes("ứng dụng")) return "app";
+    if (s.includes("course") || s.includes("khóa học") || s.includes("khoa hoc") || s.includes("học")) return "course";
     return "";
   };
 
@@ -1129,6 +1183,7 @@ document.addEventListener("DOMContentLoaded", () => {
       case "fx": return "linear-gradient(145deg,#a8edea,#fed6e3 30%,#6b6b6b 58%,#111)";
       case "sound": return "linear-gradient(145deg,#cfd9df,#e2ebf0 28%,#5b5b5b 58%,#111)";
       case "app": return "linear-gradient(145deg,#00f2fe,#4facfe 30%,#1b3b5f 60%,#111)";
+      case "course": return "linear-gradient(145deg,#ff758c,#ff7eb3 30%,#4a1828 60%,#111)";
       default: return "linear-gradient(145deg,#333,#111)";
     }
   };
@@ -1354,7 +1409,14 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      // 2. Nút quay lại từ thông báo của thư mục Plugin
+      // 2. Nút quay lại từ thông báo của thư mục Plugin hoặc các danh mục rỗng
+      const backOverviewBtn = event.target.closest("[data-action='back-to-overview'], [data-action='back']");
+      if (backOverviewBtn) {
+        event.preventDefault();
+        selectResourceView(null, true);
+        return;
+      }
+
       const backAppBtn = event.target.closest("[data-action='back-to-app-folders']");
       if (backAppBtn) {
         event.preventDefault();
